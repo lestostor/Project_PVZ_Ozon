@@ -14,4 +14,4 @@
 4.	Автоматически распределяет товары по нужным ячейкам
 5.	Возможность оформить возврат товаров
 
-Исследование векторов - file:///C:/Users/user/PVZ/Project_PVZ_Ozon/source/vectors.pdf
+Исследование векторов - https://github.com/lestostor/Project_PVZ_Ozon/blob/main/source/vectors.pdf
