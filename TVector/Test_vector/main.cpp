@@ -99,7 +99,7 @@ bool test3_try_convert_mass_to_vector() {
     bool expected_result = true;
     bool actual_result = true;
     try {
-        TVector<int> vec(5, { 1,2,3,4,5 });
+        TVector<int> vec({ 1,2,3,4,5 });
     }
     catch (const std::exception& ex) {
         actual_result = false;
@@ -132,12 +132,21 @@ bool test5_try_get_size() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test6_try_get_capacity() {
+    size_t expected_result = 5;
+    TVector<int> vec(5);
+    size_t actual_result = vec.capacity();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector, "test1_try_create_empty_vector");
     TestSystem::start_test(test2_try_create_vector, "test2_try_create_vector");
     TestSystem::start_test(test3_try_convert_mass_to_vector, "test3_try_convert_mass_to_vector");
     TestSystem::start_test(test4_try_copy_vector, "test4_try_copy_vector");
     TestSystem::start_test(test5_try_get_size, "test5_try_get_size");
+    TestSystem::start_test(test6_try_get_capacity, "test6_try_get_capacity");
 
     TestSystem::print_final_info();
 

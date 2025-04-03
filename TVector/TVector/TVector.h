@@ -14,13 +14,16 @@ public:
 	//констуркторы
 	TVector();
 	TVector(int);  //инициализация - принимает количество элементов
-	TVector(int, std::initializer_list<T>);  //преобразование массива в вектор
+	TVector(std::initializer_list<T>);  //преобразование массива в вектор
 	TVector(const TVector<T>&);  //копирование
 	~TVector();  //деструктор
 
 	//геттеры
 	inline size_t size() const noexcept {
 		return this->_size;
+	}
+	inline size_t capacity() const noexcept {
+		return this->_capacity;
 	}
 };
 
@@ -44,16 +47,15 @@ TVector<T>::TVector(int size) {
 }
 
 template <class T>
-TVector<T>::TVector(int size, std::initializer_list<T> mass) {
-	_size = size;
+TVector<T>::TVector(std::initializer_list<T> mass) {
+	_size = mass.size();
 	_capacity = (_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
-	_vec = new T[size];
+	_vec = new T[_size];
 	_status = new Status[_capacity];
 
 	auto it = mass.begin();
-
 	for (int i = 0; i < _capacity; i++, it++) {
-		if (i < size) {
+		if (i < _size) {
 			_vec[i] = *it;
 			_status[i] = Status::Busy;
 		}
