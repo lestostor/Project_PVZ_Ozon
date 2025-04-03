@@ -11,14 +11,14 @@ class TVector {
 	size_t _size;
 	size_t _capacity;
 public:
-	//констуркторы
+	//constructors
 	TVector();
-	TVector(int);  //инициализация - принимает количество элементов
-	TVector(std::initializer_list<T>);  //преобразование массива в вектор
-	TVector(const TVector<T>&);  //копирование
-	~TVector();  //деструктор
+	TVector(int);  //empty vector
+	TVector(std::initializer_list<T>);  //convert list to vector
+	TVector(const TVector<T>&);  //copy
+	~TVector();  //destructor
 
-	//геттеры
+	//getters
 	inline size_t size() const noexcept {
 		return this->_size;
 	}
