@@ -133,11 +133,23 @@ bool test5_try_get_size() {
 }
 
 bool test6_try_get_capacity() {
-    size_t expected_result = 5;
+    size_t expected_result = 15;
     TVector<int> vec(5);
     size_t actual_result = vec.capacity();
 
     return TestSystem::check(expected_result, actual_result);
+}
+
+bool test7_try_get_data() {
+    int* expected_result = new int[5];
+    for (int i = 0; i < 5; i++) expected_result[i] = i + 1;
+    TVector<int> vec({1,2,3,4,5});
+    int* actual_result = vec.data();
+
+    for (int i = 0; i < 5; i++){
+        if (!TestSystem::check(expected_result[i], actual_result[i])) return false;
+    }
+    return true;
 }
 
 int main() {
@@ -147,6 +159,7 @@ int main() {
     TestSystem::start_test(test4_try_copy_vector, "test4_try_copy_vector");
     TestSystem::start_test(test5_try_get_size, "test5_try_get_size");
     TestSystem::start_test(test6_try_get_capacity, "test6_try_get_capacity");
+    TestSystem::start_test(test7_try_get_data, "test7_try_get_data");
 
     TestSystem::print_final_info();
 

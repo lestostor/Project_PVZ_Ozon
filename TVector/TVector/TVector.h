@@ -22,9 +22,18 @@ public:
 	inline size_t size() const noexcept {
 		return this->_size;
 	}
+
 	inline size_t capacity() const noexcept {
 		return this->_capacity;
 	}
+
+	inline T* data() {
+		return _vec;
+	}
+
+	//inline T* begin() {
+	//	return &_vec[0];
+	//}
 };
 
 template <class T>
