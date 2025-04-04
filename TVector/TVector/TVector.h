@@ -27,13 +27,17 @@ public:
 		return this->_capacity;
 	}
 
-	inline T* data() {
+	inline T* data() const noexcept {
 		return _vec;
 	}
 
-	//inline T* begin() {
-	//	return &_vec[0];
-	//}
+	inline T* begin() const noexcept {
+		return _vec;
+	}
+
+	inline T* end() const noexcept {
+		return _vec + _size;
+	}
 };
 
 template <class T>

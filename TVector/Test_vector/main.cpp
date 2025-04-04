@@ -1,6 +1,7 @@
 #include "TVector.h"
 #include <iostream>
 #include <cstdlib>
+#include <iterator>
 #include <windows.h>
 
 void set_color(int text_color, int bg_color) {
@@ -152,6 +153,24 @@ bool test7_try_get_data() {
     return true;
 }
 
+bool test8_try_get_iterator_begin() {
+    TVector<int> vec({ 1,2,3,4,5 });
+    int mass[5] = { 1,2,3,4,5 };
+    auto expected_result = std::begin(mass);
+    auto actual_result = vec.begin();
+
+    return TestSystem::check(*expected_result, *actual_result);
+}
+
+bool test9_try_get_iterator_end() {
+    TVector<int> vec({ 1,2,3,4,5 });
+    int mass[5] = { 1,2,3,4,5 };
+    auto expected_result = std::end(mass) - 1;
+    auto actual_result = vec.end() - 1;
+
+    return TestSystem::check(*expected_result, *actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector, "test1_try_create_empty_vector");
     TestSystem::start_test(test2_try_create_vector, "test2_try_create_vector");
@@ -160,6 +179,8 @@ int main() {
     TestSystem::start_test(test5_try_get_size, "test5_try_get_size");
     TestSystem::start_test(test6_try_get_capacity, "test6_try_get_capacity");
     TestSystem::start_test(test7_try_get_data, "test7_try_get_data");
+    TestSystem::start_test(test8_try_get_iterator_begin, "test8_try_get_iterator_begin");
+    TestSystem::start_test(test9_try_get_iterator_end, "test9_try_get_iterator_end");
 
     TestSystem::print_final_info();
 
