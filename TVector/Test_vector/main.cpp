@@ -187,6 +187,22 @@ bool test11_try_get_back() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test12_try_check_is_empty_if_full() {
+    TVector<int> vec({ 1,2,3,4,5 });
+    bool expected_result = false;
+    bool actual_result = vec.is_empty();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test13_try_check_is_empty_if_empty() {
+    TVector<int> vec;
+    bool expected_result = true;
+    bool actual_result = vec.is_empty();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector, "test1_try_create_empty_vector");
     TestSystem::start_test(test2_try_create_vector, "test2_try_create_vector");
@@ -199,6 +215,8 @@ int main() {
     TestSystem::start_test(test9_try_get_iterator_end, "test9_try_get_iterator_end");
     TestSystem::start_test(test10_try_get_front, "test10_try_get_front");
     TestSystem::start_test(test11_try_get_back, "test11_try_get_back");
+    TestSystem::start_test(test12_try_check_is_empty_if_full, "test12_try_check_is_empty_if_full");
+    TestSystem::start_test(test13_try_check_is_empty_if_empty, "test13_try_check_is_empty_if_empty");
 
     TestSystem::print_final_info();
 

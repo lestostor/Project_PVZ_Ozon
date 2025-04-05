@@ -46,6 +46,13 @@ public:
 	inline T& back() const noexcept {
 		return *(_vec + _size - 1);
 	}
+
+	inline bool is_empty() const noexcept {
+		for (int i = 0; i < _size; i++) {
+			if (_status[i] == Status::Busy) return false;
+		}
+		return true;
+	}
 };
 
 template <class T>
