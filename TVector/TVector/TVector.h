@@ -38,6 +38,14 @@ public:
 	inline T* end() const noexcept {
 		return _vec + _size;
 	}
+
+	inline T& front() const noexcept {
+		return *_vec;
+	}
+
+	inline T& back() const noexcept {
+		return *(_vec + _size - 1);
+	}
 };
 
 template <class T>

@@ -171,6 +171,22 @@ bool test9_try_get_iterator_end() {
     return TestSystem::check(*expected_result, *actual_result);
 }
 
+bool test10_try_get_front() {
+    TVector<int> vec({ 1,2,3,4,5 });
+    int expected_result = 1;
+    int actual_result = vec.front();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test11_try_get_back() {
+    TVector<int> vec({ 1,2,3,4,5 });
+    int expected_result = 5;
+    int actual_result = vec.back();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector, "test1_try_create_empty_vector");
     TestSystem::start_test(test2_try_create_vector, "test2_try_create_vector");
@@ -181,6 +197,8 @@ int main() {
     TestSystem::start_test(test7_try_get_data, "test7_try_get_data");
     TestSystem::start_test(test8_try_get_iterator_begin, "test8_try_get_iterator_begin");
     TestSystem::start_test(test9_try_get_iterator_end, "test9_try_get_iterator_end");
+    TestSystem::start_test(test10_try_get_front, "test10_try_get_front");
+    TestSystem::start_test(test11_try_get_back, "test11_try_get_back");
 
     TestSystem::print_final_info();
 
