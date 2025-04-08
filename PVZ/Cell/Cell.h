@@ -1,6 +1,6 @@
 #pragma once
 
 class Cell {
-	int _num;
-	int _sum = 0;
+    int _num;
+    int _sum = 0;
 };

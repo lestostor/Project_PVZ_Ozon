@@ -3,7 +3,7 @@
 #include "Address.h"
 
 class Worker {
-	FIO _worker;
-	char* _mail;
-	Address _address;
+    FIO _worker;
+    char* _mail;
+    Address _address;
 };
