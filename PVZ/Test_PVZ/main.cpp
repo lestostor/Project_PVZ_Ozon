@@ -4,6 +4,8 @@
 #include "FIO.h"
 #include "Product.h"
 #include "Worker.h"
+//Copyright 2025 Shcherbakova Olesya
+
 
 int main() {
     return 0;
