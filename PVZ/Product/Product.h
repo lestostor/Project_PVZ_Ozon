@@ -4,10 +4,10 @@
 
 
 class Product {
-    int _code;  //код
-    int _price;  //цена
-    bool _prepay;  //предоплата
-    int _age_limit = 0;  //возрастное ограничение (0 - без ограничений)
+    int _code;
+    int _price;
+    bool _prepay;
+    int _age_limit = 0;  //0 - without limit
     bool _returnability = true;
     Date _date;
 };
