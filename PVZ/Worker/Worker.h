@@ -1,7 +1,7 @@
 #pragma once
 #include "FIO.h"
 #include "Address.h"
-  //Copyright 2025 Shcherbakova Olesya
+//  Copyright 2025 Shcherbakova Olesya
 
 
 class Worker {
