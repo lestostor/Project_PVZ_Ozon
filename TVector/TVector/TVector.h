@@ -14,9 +14,10 @@ class TVector {
     Status* _status;
     size_t _size;
     size_t _capacity;
-public:
+
+public: 
     //  constructors
-    TVector();
+    TVector();  //  explicit
     TVector(int);  //  empty vector
     TVector(std::initializer_list<T>);  //  convert list to vector
     TVector(const TVector<T>&);  //  copy

@@ -25,8 +25,7 @@ namespace TestSystem {
             set_color(2, 0);
             std::cout << "[       OK ]" << std::endl;
             count_success++;
-        }
-        else {
+        } else {
             set_color(4, 0);
             std::cout << "[  FAILED  ]" << std::endl;
             count_failed++;
@@ -38,8 +37,7 @@ namespace TestSystem {
     bool check(const T& expected, const T& actual) {
         if (expected == actual) {
             return true;
-        }
-        else {
+        } else {
             std::cerr << "Expected result is " << expected << ", but actual is " << actual << "." << std::endl;
             return false;
         }
@@ -145,7 +143,7 @@ bool test6_try_get_capacity() {
 bool test7_try_get_data() {
     int* expected_result = new int[5];
     for (int i = 0; i < 5; i++) expected_result[i] = i + 1;
-    TVector<int> vec({ 1,2,3,4,5 });
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
     int* actual_result = vec.data();
 
     for (int i = 0; i < 5; i++) {
@@ -155,8 +153,8 @@ bool test7_try_get_data() {
 }
 
 bool test8_try_get_iterator_begin() {
-    TVector<int> vec({ 1,2,3,4,5 });
-    int mass[5] = { 1,2,3,4,5 };
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int mass[5] = { 1, 2, 3, 4, 5 };
     auto expected_result = std::begin(mass);
     auto actual_result = vec.begin();
 
@@ -164,8 +162,8 @@ bool test8_try_get_iterator_begin() {
 }
 
 bool test9_try_get_iterator_end() {
-    TVector<int> vec({ 1,2,3,4,5 });
-    int mass[5] = { 1,2,3,4,5 };
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int mass[5] = { 1, 2, 3, 4, 5 };
     auto expected_result = std::end(mass) - 1;
     auto actual_result = vec.end() - 1;
 
@@ -189,7 +187,7 @@ bool test11_try_get_back() {
 }
 
 bool test12_try_check_is_empty_if_full() {
-    TVector<int> vec({ 1,2,3,4,5 });
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
     bool expected_result = false;
     bool actual_result = vec.is_empty();
 
@@ -205,19 +203,24 @@ bool test13_try_check_is_empty_if_empty() {
 }
 
 int main() {
-    TestSystem::start_test(test1_try_create_empty_vector, "test1_try_create_empty_vector");
+    TestSystem::start_test(test1_try_create_empty_vector, 
+        "test1_try_create_empty_vector");
     TestSystem::start_test(test2_try_create_vector, "test2_try_create_vector");
-    TestSystem::start_test(test3_try_convert_mass_to_vector, "test3_try_convert_mass_to_vector");
+    TestSystem::start_test(test3_try_convert_mass_to_vector, 
+        "test3_try_convert_mass_to_vector");
     TestSystem::start_test(test4_try_copy_vector, "test4_try_copy_vector");
     TestSystem::start_test(test5_try_get_size, "test5_try_get_size");
     TestSystem::start_test(test6_try_get_capacity, "test6_try_get_capacity");
     TestSystem::start_test(test7_try_get_data, "test7_try_get_data");
-    TestSystem::start_test(test8_try_get_iterator_begin, "test8_try_get_iterator_begin");
+    TestSystem::start_test(test8_try_get_iterator_begin, 
+        "test8_try_get_iterator_begin");
     TestSystem::start_test(test9_try_get_iterator_end, "test9_try_get_iterator_end");
     TestSystem::start_test(test10_try_get_front, "test10_try_get_front");
     TestSystem::start_test(test11_try_get_back, "test11_try_get_back");
-    TestSystem::start_test(test12_try_check_is_empty_if_full, "test12_try_check_is_empty_if_full");
-    TestSystem::start_test(test13_try_check_is_empty_if_empty, "test13_try_check_is_empty_if_empty");
+    TestSystem::start_test(test12_try_check_is_empty_if_full, 
+        "test12_try_check_is_empty_if_full");
+    TestSystem::start_test(test13_try_check_is_empty_if_empty, 
+        "test13_try_check_is_empty_if_empty");
 
     TestSystem::print_final_info();
 
