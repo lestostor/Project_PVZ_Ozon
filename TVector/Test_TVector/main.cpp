@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <iterator>
 #include <windows.h>
+//  Copyright 2025 Shcherbakova Olesya
 
 void set_color(int text_color, int bg_color) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
