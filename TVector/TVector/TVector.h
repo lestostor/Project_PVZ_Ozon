@@ -15,11 +15,10 @@ class TVector {
     size_t _size;
     size_t _capacity;
 
-public:
-
+ public:
     //  constructors
     explicit TVector();
-    TVector(int);  //  empty vector
+    explicit TVector(int);  //  empty vector
     TVector(std::initializer_list<T>);  //  convert list to vector
     TVector(const TVector<T>&);  //  copy
     ~TVector();  //  destructor
@@ -35,7 +34,7 @@ public:
 
     inline T* data() const noexcept {
         return _vec;
-	}
+    }
 
     inline T* begin() const noexcept {
         return _vec;
