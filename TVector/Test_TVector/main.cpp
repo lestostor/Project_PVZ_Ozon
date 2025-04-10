@@ -160,8 +160,8 @@ bool test7_try_get_data() {
 bool test8_try_get_iterator_begin() {
     TVector<int> vec({ 1, 2, 3, 4, 5 });
     int mass[5] = { 1, 2, 3, 4, 5 };
-    auto expected_result = std::begin(mass);
-    auto actual_result = vec.begin();
+    int* expected_result = std::begin(mass);
+    int* actual_result = vec.begin();
 
     return TestSystem::check(*expected_result, *actual_result);
 }
@@ -169,8 +169,8 @@ bool test8_try_get_iterator_begin() {
 bool test9_try_get_iterator_end() {
     TVector<int> vec({ 1, 2, 3, 4, 5 });
     int mass[5] = { 1, 2, 3, 4, 5 };
-    auto expected_result = std::end(mass) - 1;
-    auto actual_result = vec.end() - 1;
+    int* expected_result = std::end(mass) - 1;
+    int* actual_result = vec.end() - 1;
 
     return TestSystem::check(*expected_result, *actual_result);
 }
@@ -207,6 +207,15 @@ bool test13_try_check_is_empty_if_empty() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test14_try_clear_vector() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    bool expected_result = true;
+    vec.clear();
+    bool actual_result = vec.is_empty();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -227,6 +236,8 @@ int main() {
         "test12_try_check_is_empty_if_full");
     TestSystem::start_test(test13_try_check_is_empty_if_empty,
         "test13_try_check_is_empty_if_empty");
+    TestSystem::start_test(test14_try_clear_vector, 
+        "test14_try_clear_vector");
 
     TestSystem::print_final_info();
 

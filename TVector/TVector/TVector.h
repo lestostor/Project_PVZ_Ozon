@@ -1,10 +1,8 @@
 #pragma once
 #include <iterator>
-#include <climits>
 //  Copyright 2025 Shcherbakova Olesya
 
 #define STEP_OF_CAPACITY 15
-#define DELETED INT_MAX
 
 enum Status { Busy, Deleted, Empty };
 template <class T>
@@ -116,10 +114,8 @@ TVector<T>::TVector(const TVector& other) {
 
 template <class T>
 void TVector<T>::clear() {
-    for (int i = 0; i < _size; i++) {
-        _vec[i] = DELETED;
-        _status[i] = Status::Deleted;
-    }
+    for (int i = 0; i < _size; i++)
+        _status[i] = Status::Empty;
 }
 
 template <class T>
