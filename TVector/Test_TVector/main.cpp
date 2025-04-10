@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <iterator>
-#include <windows.h>
+#include <Windows.h>
 //  Copyright 2025 Shcherbakova Olesya
 
 void set_color(int text_color, int bg_color) {
@@ -103,7 +103,7 @@ bool test3_try_convert_mass_to_vector() {
     bool expected_result = true;
     bool actual_result = true;
     try {
-        TVector<int> vec({ 1,2,3,4,5 });
+        TVector<int> vec({ 1, 2, 3, 4, 5 });
     }
     catch (const std::exception& ex) {
         actual_result = false;
@@ -151,7 +151,7 @@ bool test7_try_get_data() {
     int* actual_result = vec.data();
 
     for (int i = 0; i < 5; i++) {
-        if (!TestSystem::check(expected_result[i], actual_result[i])) 
+        if (!TestSystem::check(expected_result[i], actual_result[i]))
             return false;
     }
     return true;
@@ -176,7 +176,7 @@ bool test9_try_get_iterator_end() {
 }
 
 bool test10_try_get_front() {
-    TVector<int> vec({ 1,2,3,4,5 });
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
     int expected_result = 1;
     int actual_result = vec.front();
 
@@ -184,7 +184,7 @@ bool test10_try_get_front() {
 }
 
 bool test11_try_get_back() {
-    TVector<int> vec({ 1,2,3,4,5 });
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
     int expected_result = 5;
     int actual_result = vec.back();
 
