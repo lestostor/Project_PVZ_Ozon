@@ -11,61 +11,65 @@ void set_color(int text_color, int bg_color) {
 }
 
 namespace TestSystem {
-    int count_success = 0, count_failed = 0;
+int count_success = 0, count_failed = 0;
 
-    void start_test(bool(*test)(), const char* name_of_test) {
+void start_test(bool(*test)(), const char* name_of_test) {
+    set_color(2, 0);
+    std::cout << "[ RUN      ]";
+    set_color(7, 0);
+    std::cout << name_of_test << std::endl;
+
+    bool status = test();
+
+    if (status == true) {
         set_color(2, 0);
-        std::cout << "[ RUN      ]";
-        set_color(7, 0);
-        std::cout << name_of_test << std::endl;
-
-        bool status = test();
-
-        if (status == true) {
-            set_color(2, 0);
-            std::cout << "[       OK ]" << std::endl;
-            count_success++;
-        } else {
-            set_color(4, 0);
-            std::cout << "[  FAILED  ]" << std::endl;
-            count_failed++;
-        }
-        set_color(7, 0);
+        std::cout << "[       OK ]" << std::endl;
+        count_success++;
+    } else {
+        set_color(4, 0);
+        std::cout << "[  FAILED  ]" << std::endl;
+        count_failed++;
     }
+    set_color(7, 0);
+}
 
-    template <class T>
-    bool check(const T& expected, const T& actual) {
-        if (expected == actual) {
-            return true;
-        } else {
-            std::cerr << "Expected result is " << expected << ", but actual is " << actual << "." << std::endl;
-            return false;
-        }
+template <class T>
+bool check(const T& expected, const T& actual) {
+    if (expected == actual) {
+        return true;
+    } else {
+        std::cerr << "Expected result is " << expected <<
+            ", but actual is " << actual << "." << std::endl;
+        return false;
     }
+}
 
-    void print_init_info() {
-        set_color(2, 0);
-        std::cout << "[==========] " << std::endl;
-        set_color(7, 0);
-    }
+void print_init_info() {
+    set_color(2, 0);
+    std::cout << "[==========] " << std::endl;
+    set_color(7, 0);
+}
 
-    void print_final_info() {
-        set_color(2, 0);
-        std::cout << "[==========] ";
+void print_final_info() {
+    set_color(2, 0);
+    std::cout << "[==========] ";
+    set_color(7, 0);
+    std::cout << count_success + count_failed << " test" <<
+    (count_success + count_failed > 1 ? "s" : "") << " ran." << std::endl;
+    set_color(2, 0);
+    std::cout << "[  PASSED  ] ";
+    set_color(7, 0);
+    std::cout << count_success << " test" <<
+        (count_success > 1 ? "s" : "") << std::endl;
+    if (count_failed > 0) {
+        set_color(4, 0);
+        std::cout << "[  FAILED  ] ";
         set_color(7, 0);
-        std::cout << count_success + count_failed << " test" << (count_success + count_failed > 1 ? "s" : "") << " ran." << std::endl;
-        set_color(2, 0);
-        std::cout << "[  PASSED  ] ";
-        set_color(7, 0);
-        std::cout << count_success << " test" << (count_success > 1 ? "s" : "") << std::endl;
-        if (count_failed > 0) {
-            set_color(4, 0);
-            std::cout << "[  FAILED  ] ";
-            set_color(7, 0);
-            std::cout << count_failed << " test" << (count_failed > 1 ? "s." : ".") << std::endl;
-        }
+        std::cout << count_failed << " test" <<
+            (count_failed > 1 ? "s." : ".") << std::endl;
     }
-};
+}
+};  // namespace TestSystem
 
 bool test1_try_create_empty_vector() {
     bool expected_result = true;
@@ -147,7 +151,8 @@ bool test7_try_get_data() {
     int* actual_result = vec.data();
 
     for (int i = 0; i < 5; i++) {
-        if (!TestSystem::check(expected_result[i], actual_result[i])) return false;
+        if (!TestSystem::check(expected_result[i], actual_result[i])) 
+            return false;
     }
     return true;
 }
@@ -203,23 +208,24 @@ bool test13_try_check_is_empty_if_empty() {
 }
 
 int main() {
-    TestSystem::start_test(test1_try_create_empty_vector, 
+    TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
     TestSystem::start_test(test2_try_create_vector, "test2_try_create_vector");
-    TestSystem::start_test(test3_try_convert_mass_to_vector, 
+    TestSystem::start_test(test3_try_convert_mass_to_vector,
         "test3_try_convert_mass_to_vector");
     TestSystem::start_test(test4_try_copy_vector, "test4_try_copy_vector");
     TestSystem::start_test(test5_try_get_size, "test5_try_get_size");
     TestSystem::start_test(test6_try_get_capacity, "test6_try_get_capacity");
     TestSystem::start_test(test7_try_get_data, "test7_try_get_data");
-    TestSystem::start_test(test8_try_get_iterator_begin, 
+    TestSystem::start_test(test8_try_get_iterator_begin,
         "test8_try_get_iterator_begin");
-    TestSystem::start_test(test9_try_get_iterator_end, "test9_try_get_iterator_end");
+    TestSystem::start_test(test9_try_get_iterator_end,
+        "test9_try_get_iterator_end");
     TestSystem::start_test(test10_try_get_front, "test10_try_get_front");
     TestSystem::start_test(test11_try_get_back, "test11_try_get_back");
-    TestSystem::start_test(test12_try_check_is_empty_if_full, 
+    TestSystem::start_test(test12_try_check_is_empty_if_full,
         "test12_try_check_is_empty_if_full");
-    TestSystem::start_test(test13_try_check_is_empty_if_empty, 
+    TestSystem::start_test(test13_try_check_is_empty_if_empty,
         "test13_try_check_is_empty_if_empty");
 
     TestSystem::print_final_info();
