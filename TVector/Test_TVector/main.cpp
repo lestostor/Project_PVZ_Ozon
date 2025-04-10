@@ -236,7 +236,7 @@ int main() {
         "test12_try_check_is_empty_if_full");
     TestSystem::start_test(test13_try_check_is_empty_if_empty,
         "test13_try_check_is_empty_if_empty");
-    TestSystem::start_test(test14_try_clear_vector, 
+    TestSystem::start_test(test14_try_clear_vector,
         "test14_try_clear_vector");
 
     TestSystem::print_final_info();
