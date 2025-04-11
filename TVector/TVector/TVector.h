@@ -43,7 +43,7 @@ class TVector {
 
     inline T* begin() const noexcept {
         int i = 0;
-        for (i; _status[i] != Status::Busy; i++);
+        for (i; _status[i] != Status::Busy; i++) {}
         return _vec + i;
     }
 
