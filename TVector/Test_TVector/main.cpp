@@ -234,6 +234,42 @@ bool test16_try_push_back_with_reset_memory() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test17_try_push_front() {
+    TVector<int> vec({ 2, 3, 4, 5 });
+    int expected_result = 1;
+    vec.push_front(1);
+    int actual_result = *(vec.begin());
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test18_try_push_front_with_reset_memory() {
+    TVector<int> vec({ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 1;
+    vec.push_front(1);
+    int actual_result = *(vec.begin());
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test19_try_pop_back() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 4;
+    vec.pop_back();
+    int actual_result = *(vec.end() - 1);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test20_try_pop_back_without_reset_memory() {
+    TVector<int> vec({1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 14;
+    vec.pop_back();
+    int actual_result = *(vec.end() - 1);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -259,6 +295,12 @@ int main() {
     TestSystem::start_test(test15_try_push_back, "test15_try_push_back");
     TestSystem::start_test(test16_try_push_back_with_reset_memory,
         "test16_try_push_back_with_reset_memory");
+    TestSystem::start_test(test17_try_push_front, "test17_try_push_front");
+    TestSystem::start_test(test18_try_push_front_with_reset_memory,
+        "test18_try_push_front_with_reset_memory");
+    TestSystem::start_test(test19_try_pop_back, "test19_try_pop_back");
+    TestSystem::start_test(test20_try_pop_back_without_reset_memory,
+        "test20_try_pop_back_without_reset_memory");
 
     TestSystem::print_final_info();
 
