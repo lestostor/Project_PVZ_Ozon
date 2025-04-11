@@ -58,6 +58,10 @@ class TVector {
     }
 
     void clear();
+    void push_back(const T& value);
+
+ private:
+    T* reset_memory(int new_size);
 };
 
 template <class T>
@@ -72,7 +76,7 @@ template <class T>
 TVector<T>::TVector(int size) {
     _size = size;
     _capacity = (_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
-    _vec = new T[size];
+    _vec = new T[_capacity];
     _status = new Status[_capacity];
 
     for (int i = 0; i < _capacity; i++)
@@ -83,7 +87,7 @@ template <class T>
 TVector<T>::TVector(std::initializer_list<T> mass) {
     _size = mass.size();
     _capacity = (_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
-    _vec = new T[_size];
+    _vec = new T[_capacity];
     _status = new Status[_capacity];
 
     auto it = mass.begin();
@@ -100,7 +104,7 @@ template <class T>
 TVector<T>::TVector(const TVector& other) {
     _size = other._size;
     _capacity = _size / STEP_OF_CAPACITY * STEP_OF_CAPACITY + STEP_OF_CAPACITY;
-    _vec = new T[other._size];
+    _vec = new T[other._capacity];
     _status = new Status[_capacity];
 
     for (int i = 0; i < _capacity; i++) {
@@ -116,6 +120,29 @@ template <class T>
 void TVector<T>::clear() {
     for (int i = 0; i < _size; i++)
         _status[i] = Status::Empty;
+}
+
+template <class T>
+T* TVector<T>::reset_memory(int new_size) {
+    if (new_size >= _capacity) {
+        _capacity = (new_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
+        T* new_vec = new T[_capacity];
+
+        for (int i = 0; i < _size; i++)
+            if (_status[i] != Status::Empty
+                && _status[i] != Status::Deleted) new_vec[i] = _vec[i];
+        _size = new_size;
+        delete[] _vec;
+        return new_vec;
+    }
+    else return _vec;
+}
+
+template <class T>
+void TVector<T>::push_back(const T& value) {
+    _vec = reset_memory(++_size);
+    _vec[_size - 1] = value;
+    _status[_size - 1] = Status::Busy;
 }
 
 template <class T>

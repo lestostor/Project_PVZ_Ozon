@@ -216,6 +216,24 @@ bool test14_try_clear_vector() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test15_try_push_back() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 6;
+    vec.push_back(6);
+    int actual_result = *(vec.end() - 1);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test16_try_push_back_with_reset_memory() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 });
+    int expected_result = 15;
+    vec.push_back(15);
+    int actual_result = *(vec.end() - 1);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -238,6 +256,9 @@ int main() {
         "test13_try_check_is_empty_if_empty");
     TestSystem::start_test(test14_try_clear_vector,
         "test14_try_clear_vector");
+    TestSystem::start_test(test15_try_push_back, "test15_try_push_back");
+    TestSystem::start_test(test16_try_push_back_with_reset_memory,
+        "test16_try_push_back_with_reset_memory");
 
     TestSystem::print_final_info();
 
