@@ -22,11 +22,16 @@ class TVector {
     ~TVector();  //  destructor
 
     void clear();
+
+    //  add element
     void push_back(const T& value);
     void push_front(const T& value);
 
+
+    // delete element
     void pop_back();
     void pop_front();
+    void erase(int* pos);
 
     //  getters
     inline size_t size() const noexcept {
@@ -43,7 +48,8 @@ class TVector {
 
     inline T* begin() const noexcept {
         int i = 0;
-        for (i; _status[i] != Status::Busy; i++) continue;
+        for (i; _status[i] != Status::Busy; i++) 
+            continue;
         return _vec + i;
     }
 
@@ -70,6 +76,7 @@ class TVector {
     T* reset_memory(int new_size);
     T* reset_memory_for_deleted(int new_size, int deleted_count);
     int count_deleted();
+    int count_right_pos(int* pos);
 };
 
 template <class T>
@@ -131,6 +138,44 @@ void TVector<T>::clear() {
 }
 
 template <class T>
+void TVector<T>::push_back(const T& value) {
+    _vec = reset_memory(++_size);
+    _vec[_size - 1] = value;
+    _status[_size - 1] = Status::Busy;
+}
+
+template <class T>
+void TVector<T>::push_front(const T& value) {
+    _vec = reset_memory(++_size);
+    for (int i = _size - 1; i > 0; i--) {
+        _vec[i] = _vec[i - 1];
+    }
+    _vec[0] = value;
+    _status[0] = Status::Busy;
+}
+
+template <class T>
+void TVector<T>::pop_back() {
+    _status[_size - 1] = Status::Empty;
+    _vec = reset_memory_for_deleted(_size - 1, count_deleted());
+}
+
+template <class T>
+void TVector<T>::pop_front() {
+    int first_not_deleted = 0;
+    while (_status[first_not_deleted] == Status::Deleted) first_not_deleted++;
+    _status[first_not_deleted] = Status::Deleted;
+    _vec = reset_memory_for_deleted(_size - 1, count_deleted());
+}
+
+template <class T>
+void TVector<T>::erase(int* pos) {
+    int right_pos = count_right_pos(pos);
+    _status[right_pos] = Status::Deleted;
+    _vec = reset_memory_for_deleted(_size - 1, count_deleted());
+}
+
+template <class T>
 T* TVector<T>::reset_memory(int new_size) {
     if (new_size >= _capacity) {
         _capacity = (new_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
@@ -178,34 +223,13 @@ int TVector<T>::count_deleted() {
 }
 
 template <class T>
-void TVector<T>::push_back(const T& value) {
-    _vec = reset_memory(++_size);
-    _vec[_size - 1] = value;
-    _status[_size - 1] = Status::Busy;
-}
-
-template <class T>
-void TVector<T>::push_front(const T& value) {
-    _vec = reset_memory(++_size);
-    for (int i = _size - 1; i > 0; i--) {
-        _vec[i] = _vec[i - 1];
+int TVector<T>::count_right_pos(int* pos) {
+    int correct = 0, i;
+    for (i = 0; i < _size; i++) {
+        if (_status[i] != Status::Deleted) correct++;
+        if (_vec[correct] == *pos + 1) break;
     }
-    _vec[0] = value;
-    _status[0] = Status::Busy;
-}
-
-template <class T>
-void TVector<T>::pop_back() {
-    _status[_size - 1] = Status::Empty;
-    _vec = reset_memory_for_deleted(_size - 1, count_deleted());
-}
-
-template <class T>
-void TVector<T>::pop_front() {
-    int first_not_deleted = 0;
-    while (_status[first_not_deleted] == Status::Deleted) first_not_deleted++;
-    _status[first_not_deleted] = Status::Deleted;
-    _vec = reset_memory_for_deleted(_size - 1, count_deleted());
+    return i;
 }
 
 template <class T>
