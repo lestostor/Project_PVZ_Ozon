@@ -28,6 +28,8 @@ class TVector {
     void push_front(const T&);
     void insert(int*, const T&);
 
+    //  find
+    int find(const T&);
 
     // delete element
     void pop_back();
@@ -167,6 +169,16 @@ void TVector<T>::insert(int* pos, const T& value) {
         _vec[i] = _vec[i - 1];
     }
     _vec[i] = value;
+}
+
+template <class T>
+int TVector<T>::find(const T& value) {
+    int deleted = 0;
+    for (int i = 0; i < _size; i++) {
+        if (_status[i] != Status::Busy) deleted++;
+        if (_vec[i] == value) return i - deleted;
+    }
+    return -1;
 }
 
 template <class T>

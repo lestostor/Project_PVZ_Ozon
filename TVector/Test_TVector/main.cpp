@@ -389,7 +389,23 @@ bool test33_try_insert_after_erase() {
     int expected_result = 3;
     vec.erase(vec.begin() + 1);
     vec.insert(vec.begin() + 3, 3);
-    int actual_result = *(vec.begin() + 4);  // +1 т.к. удалённый и нет перегрузки разыменования и индексации
+    int actual_result = *(vec.begin() + 4);// +1 - without override
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test34_try_find_elem() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 2;
+    int actual_result = vec.find(3);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test35_try_find_non_existent_elem() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = -1;
+    int actual_result = vec.find(6);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -448,6 +464,9 @@ int main() {
         "test32_try_insert_after_pop_front");
     TestSystem::start_test(test33_try_insert_after_erase,
         "test33_try_insert_after_erase");
+    TestSystem::start_test(test34_try_find_elem, "test34_try_find_elem");
+    TestSystem::start_test(test35_try_find_non_existent_elem,
+        "test35_try_find_non_existent_elem");
 
     TestSystem::print_final_info();
 
