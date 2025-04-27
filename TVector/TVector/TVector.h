@@ -24,14 +24,15 @@ class TVector {
     void clear();
 
     //  add element
-    void push_back(const T& value);
-    void push_front(const T& value);
+    void push_back(const T&);
+    void push_front(const T&);
+    void insert(int*, const T&);
 
 
     // delete element
     void pop_back();
     void pop_front();
-    void erase(int* pos);
+    void erase(int*);
 
     //  getters
     inline size_t size() const noexcept {
@@ -58,14 +59,11 @@ class TVector {
     }
 
     inline T& front() const noexcept {
-        int i = 0;
-        for (i; _status[i] != Status::Busy; i++)
-            continue;
-        return *(_vec + i);
+        return *(begin());
     }
 
     inline T& back() const noexcept {
-        return *(_vec + _size - 1);
+        return *(end() - 1);
     }
 
     inline bool is_empty() const noexcept {
@@ -76,10 +74,10 @@ class TVector {
     }
 
  private:
-    T* reset_memory(int new_size);
-    T* reset_memory_for_deleted(int new_size, int deleted_count);
+    T* reset_memory(int);
+    T* reset_memory_for_deleted(int, int);
     int count_deleted();
-    int count_right_pos(int* pos);
+    int count_right_pos(int*);
     inline bool is_full() const noexcept {
         return !is_empty();
     }
@@ -161,6 +159,17 @@ void TVector<T>::push_front(const T& value) {
 }
 
 template <class T>
+void TVector<T>::insert(int* pos, const T& value) {
+    int right_pos = count_right_pos(pos);
+    _vec = reset_memory(++_size);
+    int i = _size - 1;
+    for (i; i > right_pos; i--) {
+        _vec[i] = _vec[i - 1];
+    }
+    _vec[i] = value;
+}
+
+template <class T>
 void TVector<T>::pop_back() {
     _status[_size - 1] = Status::Empty;
     _vec = reset_memory_for_deleted(_size - 1, count_deleted());
@@ -188,7 +197,8 @@ T* TVector<T>::reset_memory(int new_size) {
         T* new_vec = new T[_capacity];
 
         for (int i = 0; i < _size; i++)
-            if (_status[i] = Status::Busy) new_vec[i] = _vec[i];
+            if (_status[i] == Status::Busy) 
+                new_vec[i] = _vec[i];
         _size = new_size;
         delete[] _vec;
         return new_vec;

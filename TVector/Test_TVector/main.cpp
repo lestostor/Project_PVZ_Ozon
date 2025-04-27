@@ -346,6 +346,34 @@ bool test28_try_push_front_after_erase() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test29_try_push_back_after_erase_without_reset_mem() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 16;
+    vec.erase(vec.begin() + 2);
+    vec.push_back(16);
+    int actual_result = vec.back();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test30_try_insert() {
+    TVector<int> vec({ 1, 2, 4, 5 });
+    int expected_result = 3;
+    vec.insert(vec.begin() + 2, 3);
+    int actual_result = *(vec.begin() + 2);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test31_try_insert_with_reset_capacity() {
+    TVector<int> vec({ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 30;
+    vec.insert(vec.begin() + 2, 3);
+    int actual_result = vec.capacity();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -391,6 +419,11 @@ int main() {
         "test27_try_push_back_after_erase");
     TestSystem::start_test(test28_try_push_front_after_erase,
         "test28_try_push_front_after_erase");
+    TestSystem::start_test(test29_try_push_back_after_erase_without_reset_mem,
+        "test29_try_push_back_after_erase_without_reset_memory");
+    TestSystem::start_test(test30_try_insert, "test30_try_insert");
+    TestSystem::start_test(test31_try_insert_with_reset_capacity,
+        "test31_try_insert_with_reset_capacity");
 
     TestSystem::print_final_info();
 
