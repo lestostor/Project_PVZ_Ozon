@@ -326,6 +326,26 @@ bool test26_try_erase_elem_without_reset_memory() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test27_try_push_back_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 6;
+    vec.erase(vec.begin() + 1);
+    vec.push_back(6);
+    int actual_result = vec.back();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test28_try_push_front_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 0;
+    vec.erase(vec.begin() + 1);
+    vec.push_front(0);
+    int actual_result = vec.front();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -367,6 +387,10 @@ int main() {
     TestSystem::start_test(test25_try_erase_elem, "test25_try_erase_elem");
     TestSystem::start_test(test26_try_erase_elem_without_reset_memory,
         "test26_try_erase_elem_without_reset_memory");
+    TestSystem::start_test(test27_try_push_back_after_erase,
+        "test27_try_push_back_after_erase");
+    TestSystem::start_test(test28_try_push_front_after_erase,
+        "test28_try_push_front_after_erase");
 
     TestSystem::print_final_info();
 

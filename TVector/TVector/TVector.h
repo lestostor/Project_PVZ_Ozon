@@ -58,7 +58,10 @@ class TVector {
     }
 
     inline T& front() const noexcept {
-        return *_vec;
+        int i = 0;
+        for (i; _status[i] != Status::Busy; i++)
+            continue;
+        return *(_vec + i);
     }
 
     inline T& back() const noexcept {
@@ -77,6 +80,9 @@ class TVector {
     T* reset_memory_for_deleted(int new_size, int deleted_count);
     int count_deleted();
     int count_right_pos(int* pos);
+    inline bool is_full() const noexcept {
+        return !is_empty();
+    }
 };
 
 template <class T>
