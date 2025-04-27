@@ -374,6 +374,26 @@ bool test31_try_insert_with_reset_capacity() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test32_try_insert_after_pop_front() {
+    TVector<int> vec({ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 3;
+    vec.pop_front();
+    vec.insert(vec.begin() + 1, 3);
+    int actual_result = *(vec.begin() + 1);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test33_try_insert_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 3;
+    vec.erase(vec.begin() + 1);
+    vec.insert(vec.begin() + 3, 3);
+    int actual_result = *(vec.begin() + 4);  // +1 т.к. удалённый и нет перегрузки разыменования и индексации
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -424,6 +444,10 @@ int main() {
     TestSystem::start_test(test30_try_insert, "test30_try_insert");
     TestSystem::start_test(test31_try_insert_with_reset_capacity,
         "test31_try_insert_with_reset_capacity");
+    TestSystem::start_test(test32_try_insert_after_pop_front,
+        "test32_try_insert_after_pop_front");
+    TestSystem::start_test(test33_try_insert_after_erase,
+        "test33_try_insert_after_erase");
 
     TestSystem::print_final_info();
 

@@ -162,7 +162,7 @@ template <class T>
 void TVector<T>::insert(int* pos, const T& value) {
     int right_pos = count_right_pos(pos);
     _vec = reset_memory(++_size);
-    int i = _size - 1;
+    int i = _size + count_deleted() - 1;
     for (i; i > right_pos; i--) {
         _vec[i] = _vec[i - 1];
     }
@@ -197,8 +197,7 @@ T* TVector<T>::reset_memory(int new_size) {
         T* new_vec = new T[_capacity];
 
         for (int i = 0; i < _size; i++)
-            if (_status[i] == Status::Busy) 
-                new_vec[i] = _vec[i];
+            if (_status[i] == Status::Busy) new_vec[i] = _vec[i];
         _size = new_size;
         delete[] _vec;
         return new_vec;
@@ -240,10 +239,10 @@ int TVector<T>::count_deleted() {
 
 template <class T>
 int TVector<T>::count_right_pos(int* pos) {
-    int correct = 0, i;
+    int* correct = begin(), i;
     for (i = 0; i < _size; i++) {
         if (_status[i] != Status::Deleted) correct++;
-        if (_vec[correct] == *pos + 1) break;
+        if (correct == pos + 1) break;
     }
     return i;
 }
