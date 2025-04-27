@@ -176,7 +176,8 @@ int TVector<T>::find(const T& value) {
     int deleted = 0;
     for (int i = 0; i < _size; i++) {
         if (_status[i] != Status::Busy) deleted++;
-        if (_vec[i] == value) return i - deleted;
+        if (_vec[i] == value && _status[i] == Status::Busy)
+            return i - deleted;
     }
     return -1;
 }

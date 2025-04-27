@@ -389,7 +389,7 @@ bool test33_try_insert_after_erase() {
     int expected_result = 3;
     vec.erase(vec.begin() + 1);
     vec.insert(vec.begin() + 3, 3);
-    int actual_result = *(vec.begin() + 4);// +1 - without override
+    int actual_result = *(vec.begin() + 4);  // +1 - without override
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -406,6 +406,33 @@ bool test35_try_find_non_existent_elem() {
     TVector<int> vec({ 1, 2, 3, 4, 5 });
     int expected_result = -1;
     int actual_result = vec.find(6);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test36_try_find_elem_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 3;
+    vec.erase(vec.begin() + 2);
+    int actual_result = vec.find(5);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test37_try_find_elem_after_insert() {
+    TVector<int> vec({ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 2;
+    vec.insert(vec.begin() + 2, 3);
+    int actual_result = vec.find(3);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test38_try_find_deleted_elem() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = -1;
+    vec.erase(vec.begin() + 2);
+    int actual_result = vec.find(3);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -467,6 +494,12 @@ int main() {
     TestSystem::start_test(test34_try_find_elem, "test34_try_find_elem");
     TestSystem::start_test(test35_try_find_non_existent_elem,
         "test35_try_find_non_existent_elem");
+    TestSystem::start_test(test36_try_find_elem_after_erase,
+        "test36_try_find_elem_after_erase");
+    TestSystem::start_test(test37_try_find_elem_after_insert,
+        "test37_try_find_elem_after_insert");
+    TestSystem::start_test(test38_try_find_deleted_elem,
+        "test38_try_find_deleted_elem");
 
     TestSystem::print_final_info();
 
