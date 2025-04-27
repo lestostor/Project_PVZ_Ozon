@@ -5,8 +5,9 @@
 #define STEP_OF_CAPACITY 15
 
 enum Status { Busy, Deleted, Empty };
-template <class T>
+template <class T> class TVector;
 
+template <class T>
 class TVector {
     T* _vec;
     Status* _status;
@@ -15,8 +16,8 @@ class TVector {
 
  public:
     //  constructors
-    explicit TVector();
-    explicit TVector(int);  //  empty vector
+    TVector();
+    TVector(int);  //  empty vector
     TVector(std::initializer_list<T>);  //  convert list to vector
     TVector(const TVector<T>&);  //  copy
     ~TVector();  //  destructor
@@ -28,8 +29,8 @@ class TVector {
     void push_front(const T&);
     void insert(int*, const T&);
 
-    //  find
-    int find(const T&);
+    template <class T>
+    friend int find(const TVector<T>& ,const T&);
 
     // delete element
     void pop_back();
@@ -172,17 +173,6 @@ void TVector<T>::insert(int* pos, const T& value) {
 }
 
 template <class T>
-int TVector<T>::find(const T& value) {
-    int deleted = 0;
-    for (int i = 0; i < _size; i++) {
-        if (_status[i] != Status::Busy) deleted++;
-        if (_vec[i] == value && _status[i] == Status::Busy)
-            return i - deleted;
-    }
-    return -1;
-}
-
-template <class T>
 void TVector<T>::pop_back() {
     _status[_size - 1] = Status::Empty;
     _vec = reset_memory_for_deleted(_size - 1, count_deleted());
@@ -258,6 +248,20 @@ int TVector<T>::count_right_pos(int* pos) {
         if (correct == pos + 1) break;
     }
     return i;
+}
+
+template <class T>
+int find(const TVector<T>&vec, const T & value) {
+    int deleted = 0;
+    //size_t size = vec._size;
+    //Status* status = vec._status;
+    //T* vector = vec._vec;
+    for (int i = 0; i < vec._size; i++) {
+        if (vec._status[i] != Status::Busy) deleted++;
+        if (vec._vec[i] == value && vec._status[i] == Status::Busy)
+            return i - deleted;
+    }
+    return -1;
 }
 
 template <class T>

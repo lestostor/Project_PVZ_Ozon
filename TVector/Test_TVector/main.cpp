@@ -397,7 +397,7 @@ bool test33_try_insert_after_erase() {
 bool test34_try_find_elem() {
     TVector<int> vec({ 1, 2, 3, 4, 5 });
     int expected_result = 2;
-    int actual_result = vec.find(3);
+    int actual_result = find(vec, 3);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -405,7 +405,7 @@ bool test34_try_find_elem() {
 bool test35_try_find_non_existent_elem() {
     TVector<int> vec({ 1, 2, 3, 4, 5 });
     int expected_result = -1;
-    int actual_result = vec.find(6);
+    int actual_result = find(vec, 6);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -414,7 +414,7 @@ bool test36_try_find_elem_after_erase() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     int expected_result = 3;
     vec.erase(vec.begin() + 2);
-    int actual_result = vec.find(5);
+    int actual_result = find(vec, 5);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -423,7 +423,7 @@ bool test37_try_find_elem_after_insert() {
     TVector<int> vec({ 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     int expected_result = 2;
     vec.insert(vec.begin() + 2, 3);
-    int actual_result = vec.find(3);
+    int actual_result = find(vec, 3);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -432,7 +432,7 @@ bool test38_try_find_deleted_elem() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     int expected_result = -1;
     vec.erase(vec.begin() + 2);
-    int actual_result = vec.find(3);
+    int actual_result = find(vec, 3);
 
     return TestSystem::check(expected_result, actual_result);
 }
