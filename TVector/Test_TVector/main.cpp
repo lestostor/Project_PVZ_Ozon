@@ -395,9 +395,9 @@ bool test33_try_insert_after_erase() {
 }
 
 bool test34_try_find_elem() {
-    TVector<int> vec({ 1, 2, 3, 4, 5 });
-    int expected_result = 2;
-    int actual_result = find(vec, 3);
+    TVector<int> vec({ 1, 2, 2, 3, 4 });
+    int expected_result = 1;
+    int actual_result = find(vec, 2);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -433,6 +433,49 @@ bool test38_try_find_deleted_elem() {
     int expected_result = -1;
     vec.erase(vec.begin() + 2);
     int actual_result = find(vec, 3);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test39_try_find_last_elem() {
+    TVector<int> vec({ 1, 2, 2, 3, 4 });
+    int expected_result = 2;
+    int actual_result = find_last(vec, 2);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test40_try_find_non_existent_last_elem() {
+    TVector<int> vec({ 1, 2, 2, 3, 4 });
+    int expected_result = -1;
+    int actual_result = find_last(vec, 5);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test41_try_find_last_elem_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 4;
+    vec.erase(vec.begin() + 5);
+    int actual_result = find_last(vec, 5);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test42_try_find_last_elem_after_insert() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 3;
+    vec.insert(vec.begin() + 2, 3);
+    int actual_result = find_last(vec, 3);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test43_try_find_last_deleted_elem() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = -1;
+    vec.erase(vec.begin() + 2);
+    int actual_result = find_last(vec, 3);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -500,6 +543,16 @@ int main() {
         "test37_try_find_elem_after_insert");
     TestSystem::start_test(test38_try_find_deleted_elem,
         "test38_try_find_deleted_elem");
+    TestSystem::start_test(test39_try_find_last_elem,
+        "test39_try_find_last_elem");
+    TestSystem::start_test(test40_try_find_non_existent_last_elem,
+        "test40_try_find_non_existent_last_elem");
+    TestSystem::start_test(test41_try_find_last_elem_after_erase,
+        "test41_try_find_last_elem_after_erase");
+    TestSystem::start_test(test42_try_find_last_elem_after_insert,
+        "test42_try_find_last_elem_after_insert");
+    TestSystem::start_test(test43_try_find_last_deleted_elem,
+        "test43_try_find_last_deleted_elem");
 
     TestSystem::print_final_info();
 

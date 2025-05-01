@@ -17,7 +17,7 @@ class TVector {
  public:
     //  constructors
     TVector();
-    TVector(int);  //  empty vector
+    explicit TVector(int);  //  empty vector
     TVector(std::initializer_list<T>);  //  convert list to vector
     TVector(const TVector<T>&);  //  copy
     ~TVector();  //  destructor
@@ -31,6 +31,8 @@ class TVector {
 
     template <class T>
     friend int find(const TVector<T>& ,const T&);
+    template <class T>
+    friend int find_last(const TVector<T>& vec, const T& value);
 
     // delete element
     void pop_back();
@@ -79,7 +81,7 @@ class TVector {
  private:
     T* reset_memory(int);
     T* reset_memory_for_deleted(int, int);
-    int count_deleted();
+    int count_deleted() const;
     int count_right_pos(int*);
     inline bool is_full() const noexcept {
         return !is_empty();
@@ -229,7 +231,7 @@ T* TVector<T>::reset_memory_for_deleted(int new_size, int deleted_count) {
 }
 
 template <class T>
-int TVector<T>::count_deleted() {
+int TVector<T>::count_deleted() const {
     int count = 0;
     for (int i = 0; i < _size; i++) {
         if (_status[i] == Status::Deleted ||
@@ -253,13 +255,21 @@ int TVector<T>::count_right_pos(int* pos) {
 template <class T>
 int find(const TVector<T>&vec, const T & value) {
     int deleted = 0;
-    //size_t size = vec._size;
-    //Status* status = vec._status;
-    //T* vector = vec._vec;
     for (int i = 0; i < vec._size; i++) {
         if (vec._status[i] != Status::Busy) deleted++;
         if (vec._vec[i] == value && vec._status[i] == Status::Busy)
             return i - deleted;
+    }
+    return -1;
+}
+
+template <class T>
+int find_last(const TVector<T>& vec, const T& value) {
+    int deleted = 0;
+    for (int i = vec._size - 1; i >= 0; i--) {
+        if (vec._status[i] != Status::Busy) deleted++;
+        if (vec._vec[i] == value && vec._status[i] == Status::Busy)
+            return i - vec.count_deleted() + deleted;
     }
     return -1;
 }
