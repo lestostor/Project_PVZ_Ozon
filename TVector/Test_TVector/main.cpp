@@ -480,6 +480,28 @@ bool test43_try_find_last_deleted_elem() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test44_try_find_all_elems() {
+    TVector<int> vec({ 1, 2, 3, 2, 4, 2 });
+    int* expected_result = new int[3];
+    for (int i = 0; i < 3; i++)
+        expected_result[i] = 2 * i + 1;
+    int* actual_result = find_all(vec, 2);
+
+    bool result = true;
+    for (int i = 0; i < 3; i++)
+        result &= TestSystem::check(expected_result[i], actual_result[i]);
+
+    return result;
+}
+
+bool test45_try_find_all_non_existent_elems() {
+    TVector<int> vec({ 1, 2, 3, 4, 5});
+    int* expected_result = nullptr;
+    int* actual_result = find_all(vec, 6);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -553,6 +575,10 @@ int main() {
         "test42_try_find_last_elem_after_insert");
     TestSystem::start_test(test43_try_find_last_deleted_elem,
         "test43_try_find_last_deleted_elem");
+    TestSystem::start_test(test44_try_find_all_elems,
+        "test44_try_find_all_elems");
+    TestSystem::start_test(test45_try_find_all_non_existent_elems,
+        "test45_try_find_all_non_existent_elems");
 
     TestSystem::print_final_info();
 

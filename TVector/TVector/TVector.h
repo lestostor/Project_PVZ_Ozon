@@ -29,10 +29,13 @@ class TVector {
     void push_front(const T&);
     void insert(int*, const T&);
 
+    //  find
     template <class T>
-    friend int find(const TVector<T>& ,const T&);
+    friend int find(const TVector<T>&, const T&);
     template <class T>
     friend int find_last(const TVector<T>& vec, const T& value);
+    template <class T>
+    friend int* find_all(const TVector<T>&, const T&);
 
     // delete element
     void pop_back();
@@ -272,6 +275,29 @@ int find_last(const TVector<T>& vec, const T& value) {
             return i - vec.count_deleted() + deleted;
     }
     return -1;
+}
+
+template <class T>
+int* find_all(const TVector<T>& vec, const T& value) {
+    int* result = nullptr, size = 0, deleted = 0;
+    for (int i = 0; i < vec._size; i++) {
+        if (vec._status[i] != Status::Busy) deleted++;
+        if (vec._vec[i] == value && vec._status[i] == Status::Busy)
+            size++;
+    }
+    size -= deleted;
+    if (size == 0) return result;
+
+    result = new int[size];
+    for (int i = 0, j = 0; j < size; i++) {
+        if (vec._status[i] != Status::Busy) deleted++;
+        if (vec._vec[i] == value && vec._status[i] == Status::Busy) {
+            result[j] = i - deleted;
+            j++;
+        }
+    }
+
+    return result;
 }
 
 template <class T>
