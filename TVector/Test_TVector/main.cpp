@@ -807,6 +807,32 @@ bool test71_try_resize_to_more_after_erase() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test72_try_shuffle() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    int* expected_result = vec.data();
+    shuffle(vec);
+    int* actual_result = vec.data();
+
+    bool result = false;
+    for (int i = 0; i < vec.size(); i++)
+        result |= TestSystem::check(expected_result, actual_result);
+    return result;
+}
+
+bool test73_try_shuffle_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int* expected_result = vec.data();
+    
+    vec.erase(vec.begin() + 2);
+    shuffle(vec);
+    int* actual_result = vec.data();
+
+    bool result = false;
+    for (int i = 0; i < vec.size(); i++)
+        result |= TestSystem::check(expected_result, actual_result);
+    return result;
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -934,6 +960,9 @@ int main() {
         "test70_try_resize_to_more_with_reset_memory");
     TestSystem::start_test(test71_try_resize_to_more_after_erase,
         "test71_try_resize_to_more_after_erase");
+    TestSystem::start_test(test72_try_shuffle, "test72_try_shuffle");
+    TestSystem::start_test(test73_try_shuffle_after_erase,
+        "test73_try_shuffle_after_erase");
 
     TestSystem::print_final_info();
 

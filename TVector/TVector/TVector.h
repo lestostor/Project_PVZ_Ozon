@@ -30,13 +30,16 @@ class TVector {
     void push_front(const T&);
     void insert(const T*, const T&);
 
-    //  find
+    //  friends
     template <class T>
     friend int find(const TVector<T>&, const T&);
     template <class T>
     friend int find_last(const TVector<T>&, const T&);
     template <class T>
     friend int* find_all(const TVector<T>&, const T&);
+
+    template <class T>
+    friend void shuffle(TVector<T>&);
 
     // delete element
     void pop_back();
@@ -352,8 +355,7 @@ void TVector<T>::resize(size_t count, const T& value) {
             _vec[i] = value;
             _status[i] = Status::Busy;
         }
-    }
-    else {
+    } else {
         T* data = this->data();
         _vec = new T[_capacity];
         for (int i = 0, j = 0; j < count; i++) {
@@ -431,6 +433,18 @@ int* find_all(const TVector<T>& vec, const T& value) {
     }
 
     return result;
+}
+
+template <class T>
+void shuffle(TVector<T>& vec) {
+    for (int i = 0; i < vec._size; i++) {
+        int rand_pos = 0;
+        do {
+            rand_pos = rand() % vec._size;
+        } while (vec._status[rand_pos] != Status::Busy);
+        std::swap(vec._vec[i], vec._vec[rand_pos]);
+        std::swap(vec._status[i], vec._status[rand_pos]);
+    }
 }
 
 template <class T>
