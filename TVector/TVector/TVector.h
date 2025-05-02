@@ -44,6 +44,9 @@ class TVector {
     template <class T>
     friend void shuffle(TVector<T>&);
 
+    template <class T>
+    friend void sort(TVector<T>&);
+
     // delete element
     void pop_back();
     void pop_front();
@@ -108,6 +111,8 @@ class TVector {
     inline bool is_full() const noexcept {
         return !is_empty();
     }
+    template <class T>
+    friend void Hoara_sort_rec(TVector<T>&, int, int);
 };
 
 template <class T>
@@ -452,6 +457,33 @@ void shuffle(TVector<T>& vec) {
         std::swap(vec._vec[i], vec._vec[rand_pos]);
         std::swap(vec._status[i], vec._status[rand_pos]);
     }
+}
+
+template <class T>
+void Hoara_sort_rec(TVector<T>& vec, int left, int right) {
+    if (left < right) {
+        int l = left, r = right;
+        int base_pos = (left + right) * 0.5;
+        T base_value = vec._vec[base_pos];
+        while (l <= r) {
+            while (vec._vec[l] < base_value) l++;
+            while (vec._vec[r] > base_value) r--;
+            if (l < r) {
+                std::swap(vec._vec[l], vec._vec[r]);
+                std::swap(vec._status[l], vec._status[r]);
+                l++;
+                r--;
+            }
+            else break;
+        }
+        Hoara_sort_rec(vec, left, r);
+        Hoara_sort_rec(vec, r + 1, right);
+    }
+}
+
+template <class T>
+void sort(TVector<T>& vec) {
+    Hoara_sort_rec(vec, 0, (int)vec._size - 1);
 }
 
 template <class T>

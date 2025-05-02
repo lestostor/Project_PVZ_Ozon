@@ -51,8 +51,7 @@ bool check_not_equal(const T& expected, const T& actual) {
         std::cerr << "Expected result and actual result" <<
             "are equal." << std::endl;
         return false;
-    }
-    else {
+    } else {
         return true;
     }
 }
@@ -850,6 +849,41 @@ bool test73_try_shuffle_after_erase() {
     return result;
 }
 
+bool test74_try_sort() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    int* expected_result = new int[10];
+    for (int i = 0; i < 10; i++)
+        expected_result[i] = i + 1;
+
+    shuffle(vec);
+    sort(vec);
+    int* actual_result = vec.data();
+
+    bool result = true;
+    for (int i = 0; i < vec.size(); i++)
+        result &= TestSystem::check(expected_result[i], actual_result[i]);
+
+    return result;
+}
+
+bool test75_try_sort_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int* expected_result = new int[15];
+    for (int i = 0; i < 15; i++)
+        expected_result[i] = i + 1;
+
+    vec.erase(vec.begin() + 2);
+    shuffle(vec);
+    sort(vec);
+    int* actual_result = vec.data();
+
+    bool result = true;
+    for (int i = 0; i < vec.size(); i++)
+        result &= TestSystem::check(expected_result[i], actual_result[i]);
+
+    return result;
+}
+
 int main() {
     srand(time(0));
     TestSystem::start_test(test1_try_create_empty_vector,
@@ -981,6 +1015,9 @@ int main() {
     TestSystem::start_test(test72_try_shuffle, "test72_try_shuffle");
     TestSystem::start_test(test73_try_shuffle_after_erase,
         "test73_try_shuffle_after_erase");
+    TestSystem::start_test(test74_try_sort, "test74_try_sort");
+    TestSystem::start_test(test75_try_sort_after_erase,
+        "test75_try_sort_after_erase");
 
     TestSystem::print_final_info();
 
