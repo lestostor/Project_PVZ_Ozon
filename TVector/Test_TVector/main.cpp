@@ -856,7 +856,7 @@ bool test74_try_sort() {
         expected_result[i] = i + 1;
 
     shuffle(vec);
-    sort(vec);
+    sort_vector(vec);
     int* actual_result = vec.data();
 
     bool result = true;
@@ -874,7 +874,7 @@ bool test75_try_sort_after_erase() {
 
     vec.erase(vec.begin() + 2);
     shuffle(vec);
-    sort(vec);
+    sort_vector(vec);
     int* actual_result = vec.data();
 
     bool result = true;

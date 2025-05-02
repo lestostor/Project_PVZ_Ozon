@@ -45,7 +45,7 @@ class TVector {
     friend void shuffle(TVector<T>&);
 
     template <class T>
-    friend void sort(TVector<T>&);
+    friend void sort_vector(TVector<T>&);
 
     // delete element
     void pop_back();
@@ -482,8 +482,8 @@ void Hoara_sort_rec(TVector<T>& vec, int left, int right) {
 }
 
 template <class T>
-void sort(TVector<T>& vec) {
-    Hoara_sort_rec(vec, 0, (int)vec._size - 1);
+void sort_vector(TVector<T>& vec) {
+    Hoara_sort_rec(vec, 0, static_cast<int>(vec._size) - 1);
 }
 
 template <class T>
