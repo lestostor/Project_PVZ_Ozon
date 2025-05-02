@@ -538,6 +538,53 @@ bool test47_try_find_all_after_insert() {
     return result;
 }
 
+bool test48_try_find_all_with_deleted_elem() {
+    TVector<int> vec({ 1, 2, 3, 2, 4, 2 });
+    int* expected_result = new int[2];
+    expected_result[0] = 1;
+    expected_result[1] = 4;
+
+    vec.erase(vec.begin() + 3);
+    int* actual_result = find_all(vec, 2);
+
+    return TestSystem::check(expected_result[0], actual_result[0]) &&
+        TestSystem::check(expected_result[1], actual_result[1]);
+}
+
+bool test49_try_emplace() {
+    TVector<int> vec({ 1, 2, 3, 2, 4, 2 });
+    int* expected_result = new int[3];
+    for (int i = 0; i < 3; i++)
+        expected_result[i] = 2 * i + 1;
+    vec.emplace(2, 5);
+    int* actual_result = find_all(vec, 5);
+
+    bool result = true;
+    for (int i = 0; i < 3; i++)
+        result &= TestSystem::check(expected_result[i], actual_result[i]);
+    
+    return result;
+}
+
+bool test50_try_emplace_non_existent_elem() {
+    TVector<int> vec({ 1, 2, 3, 2, 4, 2 });
+    int* expected_result = nullptr;
+    vec.emplace(5, 6);
+    int* actual_result = find_all(vec, 6);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test51_try_emplace_deleted_elem() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = -1;
+    
+    vec.erase(vec.begin() + 2);
+    int actual_result = find(vec, 3);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -619,6 +666,13 @@ int main() {
         "test46_try_find_all_after_erase");
     TestSystem::start_test(test47_try_find_all_after_insert,
         "test47_try_find_all_after_insert");
+    TestSystem::start_test(test48_try_find_all_with_deleted_elem,
+        "test48_try_find_all_with_deleted_elem");
+    TestSystem::start_test(test49_try_emplace, "test49_try_emplace");
+    TestSystem::start_test(test50_try_emplace_non_existent_elem,
+        "test50_try_emplace_non_existent_elem");
+    TestSystem::start_test(test51_try_emplace_deleted_elem,
+        "test51_try_emplace_deleted_elem");
 
     TestSystem::print_final_info();
 

@@ -27,20 +27,22 @@ class TVector {
     //  add element
     void push_back(const T&);
     void push_front(const T&);
-    void insert(int*, const T&);
+    void insert(T*, const T&);
 
     //  find
     template <class T>
     friend int find(const TVector<T>&, const T&);
     template <class T>
-    friend int find_last(const TVector<T>& vec, const T& value);
+    friend int find_last(const TVector<T>&, const T&);
     template <class T>
     friend int* find_all(const TVector<T>&, const T&);
 
     // delete element
     void pop_back();
     void pop_front();
-    void erase(int*);
+    void erase(T*);
+
+    void emplace(const T&, const T&);
 
     //  getters
     inline size_t size() const noexcept {
@@ -171,7 +173,7 @@ void TVector<T>::push_front(const T& value) {
 }
 
 template <class T>
-void TVector<T>::insert(int* pos, const T& value) {
+void TVector<T>::insert(T* pos, const T& value) {
     int right_pos = count_right_pos(pos);
     _vec = reset_memory(_size + 1);
     int i = _size + count_deleted();
@@ -199,10 +201,18 @@ void TVector<T>::pop_front() {
 }
 
 template <class T>
-void TVector<T>::erase(int* pos) {
+void TVector<T>::erase(T* pos) {
     int right_pos = count_right_pos(pos);
     _status[right_pos] = Status::Deleted;
     _vec = reset_memory_for_deleted(_size - 1, count_deleted());
+}
+
+template <class T>
+void TVector<T>::emplace(const T& value, const T& new_value) {
+    for (int i = 0; i < _size; i++) {
+        if (_vec[i] == value && _status[i] == Status::Busy)
+            _vec[i] = new_value;
+    }
 }
 
 template <class T>
