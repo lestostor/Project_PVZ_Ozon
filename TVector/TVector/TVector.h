@@ -2,6 +2,8 @@
 #include <iterator>
 #include <stdexcept>
 #include <utility>
+#include <random>
+
 //  Copyright 2025 Shcherbakova Olesya
 
 #define STEP_OF_CAPACITY 15
@@ -351,8 +353,7 @@ template <class T>
 void TVector<T>::resize(size_t count, const T& value) {
     if (_size == count) {
         return;
-    }
-    else if (count > _size) {
+    } else if (count > _size) {
         _vec = reset_memory(count);
         for (int i = _size - 1; i < count; i++) {
             _vec[i] = value;
@@ -440,10 +441,13 @@ int* find_all(const TVector<T>& vec, const T& value) {
 
 template <class T>
 void shuffle(TVector<T>& vec) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, vec._size - 1);
     for (int i = 0; i < vec._size; i++) {
         int rand_pos = 0;
         do {
-            rand_pos = rand() % vec._size;
+            rand_pos = distrib(gen);
         } while (vec._status[rand_pos] != Status::Busy);
         std::swap(vec._vec[i], vec._vec[rand_pos]);
         std::swap(vec._status[i], vec._status[rand_pos]);
