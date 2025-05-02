@@ -755,6 +755,58 @@ bool test66_try_shrink_to_fit_after_erase() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test67_try_resize_to_less() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 3;
+
+    vec.resize(3);
+    int actual_result = vec.size();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test68_try_resize_to_less_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 10;
+
+    vec.erase(vec.begin() + 2);
+    vec.resize(10);
+    int actual_result = vec.size();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test69_try_resize_to_more() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 10;
+
+    vec.resize(10);
+    int actual_result = vec.size();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test70_try_resize_to_more_with_reset_memory() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    int expected_result = 15;
+
+    vec.resize(15);
+    int actual_result = vec.size();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test71_try_resize_to_more_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 17;
+
+    vec.erase(vec.begin() + 2);
+    vec.resize(17);
+    int actual_result = vec.size();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
@@ -872,6 +924,16 @@ int main() {
         "test65_try_shrink_to_fit");
     TestSystem::start_test(test66_try_shrink_to_fit_after_erase,
         "test66_try_shrink_to_fit_after_erase");
+    TestSystem::start_test(test67_try_resize_to_less,
+        "test67_try_resize_to_less");
+    TestSystem::start_test(test68_try_resize_to_less_after_erase,
+        "test68_try_resize_to_less_after_erase");
+    TestSystem::start_test(test69_try_resize_to_more,
+        "test69_try_resize_to_more");
+    TestSystem::start_test(test70_try_resize_to_more_with_reset_memory,
+        "test70_try_resize_to_more_with_reset_memory");
+    TestSystem::start_test(test71_try_resize_to_more_after_erase,
+        "test71_try_resize_to_more_after_erase");
 
     TestSystem::print_final_info();
 

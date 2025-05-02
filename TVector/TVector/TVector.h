@@ -48,7 +48,9 @@ class TVector {
     void emplace(const T*, const T&);  //  by index
 
     TVector<T> assign(const TVector&);
+
     void shrink_to_fit();
+    void resize(size_t, const T& value = T());
 
     //  getters
     inline size_t size() const noexcept {
@@ -291,9 +293,11 @@ T* TVector<T>::reset_memory(size_t new_size) {
         T* new_vec = new T[new_capacity];
         _status = reserve(new_capacity);
 
-        for (int i = 0; i < _size; i++)
-            if (_status[i] == Status::Busy)
-                new_vec[i] = _vec[i];
+        for (int i = 0, j = 0; i < _size; i++)
+            if (_status[i] == Status::Busy) {
+                new_vec[j] = _vec[i];
+                j++;
+            }
 
         _capacity = new_capacity;
         delete[] _vec;
@@ -327,7 +331,7 @@ void TVector<T>::shrink_to_fit() {
     _capacity = _size;
     T* data = this->data();
     _vec = new T[_capacity];
-    for (int i = 0, j = 0; i < _size; i++) {
+    for (int i = 0, j = 0; j < _size; i++) {
         if (_status[i] == Status::Busy) {
             _vec[j] = data[i];
             j++;
@@ -337,6 +341,29 @@ void TVector<T>::shrink_to_fit() {
     for (int i = 0; i < _size; i++)
         _status[i] = Status::Busy;
     delete[] data;
+}
+
+template <class T>
+void TVector<T>::resize(size_t count, const T& value) {
+    if (_size == count) return;
+    else if (count > _size) {
+        _vec = reset_memory(count);
+        for (int i = _size - 1; i < count; i++) {
+            _vec[i] = value;
+            _status[i] = Status::Busy;
+        }
+    }
+    else {
+        T* data = this->data();
+        _vec = new T[_capacity];
+        for (int i = 0, j = 0; j < count; i++) {
+            if (_status[i] == Status::Busy) {
+                _vec[j] = data[i];
+                j++;
+            }
+        }
+    }
+    _size = count;
 }
 
 template <class T>
@@ -352,7 +379,7 @@ int TVector<T>::count_deleted() const {
 }
 
 template <class T>
-int TVector<T>::count_right_pos(const T* pos) const{
+int TVector<T>::count_right_pos(const T* pos) const {
     int* correct = this->begin(), i;
     for (i = 0; i < _size; i++) {
         if (_status[i] != Status::Deleted) correct++;
