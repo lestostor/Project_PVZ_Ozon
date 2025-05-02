@@ -648,7 +648,7 @@ bool test56_try_assign_vector() {
     bool result = true;
     for (int i = 0; i < 5; i++)
         result &= TestSystem::check(expected_result[i], actual_result[i]);
-
+    
     return result;
 }
 
@@ -664,6 +664,73 @@ bool test57_try_assign_null_vector() {
         actual_result = false;
     }
     
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test58_try_at() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 3;
+    int actual_result = vec.at(2);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test59_try_at_out_of_range() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    bool expected_result = false;
+    bool actual_result = true;
+    try {
+        int num = vec.at(5);
+    }
+    catch (const std::exception&) {
+        actual_result = false;
+    }
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test_60_try_at_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 7;
+
+    vec.erase(vec.begin() + 2);
+    int actual_result = vec.at(5);
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test_61_try_at_after_insert() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 5;
+
+    vec.insert(vec.begin() + 2, 20);
+    int actual_result = vec.at(5);
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test62_try_test_at_deleted_elem() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 4;
+
+    vec.erase(vec.begin() + 2);
+    int actual_result = vec.at(2);
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test63_try_test_at_after_pop_front() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 2;
+
+    vec.pop_front();
+    int actual_result = vec.at(0);
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test64_try_test_at_after_pop_back() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 14;
+
+    vec.pop_back();
+    int actual_result = vec.at(vec.size() - 1);
     return TestSystem::check(expected_result, actual_result);
 }
 
@@ -767,6 +834,19 @@ int main() {
     TestSystem::start_test(test56_try_assign_vector, "test56_try_assign_vec");
     TestSystem::start_test(test57_try_assign_null_vector,
         "test57_try_assign_null_vector");
+    TestSystem::start_test(test58_try_at, "test58_try_at");
+    TestSystem::start_test(test59_try_at_out_of_range,
+        "test59_try_at_out_of_range");
+    TestSystem::start_test(test_60_try_at_after_erase,
+        "test_60_try_at_after_erase");
+    TestSystem::start_test(test_61_try_at_after_insert,
+        "test_61_try_at_after_insert");
+    TestSystem::start_test(test62_try_test_at_deleted_elem,
+        "test62_try_test_at_deleted_elem");
+    TestSystem::start_test(test63_try_test_at_after_pop_front,
+        "test63_try_test_at_after_pop_front");
+    TestSystem::start_test(test64_try_test_at_after_pop_back,
+        "test64_try_test_at_after_pop_back");
 
     TestSystem::print_final_info();
 

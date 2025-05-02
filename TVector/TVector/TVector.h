@@ -88,12 +88,14 @@ class TVector {
         return true;
     }
 
+    T& at(const int) const;
+
  private:
     Status* reserve(size_t);
     T* reset_memory(size_t);
     T* reset_memory_for_deleted(size_t, int);
     int count_deleted() const;
-    int count_right_pos(const T*);
+    int count_right_pos(const T*) const;
     inline bool is_full() const noexcept {
         return !is_empty();
     }
@@ -224,7 +226,7 @@ template <class T>
 void TVector<T>::emplace(const T* pos, const T& new_value) {
     int right_pos = count_right_pos(pos);
     if (right_pos >= _size)
-        throw std::logic_error("Index is out of range");
+        throw std::logic_error("Index is out of range\n");
     _vec[right_pos] = new_value;
 }
 
@@ -247,6 +249,19 @@ TVector<T> TVector<T>::assign(const TVector& other_vector) {
     }
 
     return *this;
+}
+
+template <class T>
+T& TVector<T>::at(const int pos) const {
+    int correct = 0, i;
+    for (i = 0; i < _size; i++) {
+        if (_status[i] != Status::Deleted) correct++;
+        if (correct == pos + 1) break;
+    }
+
+    if (i >= _size)
+        throw std::logic_error("Index is out of range\n");
+    return _vec[i];
 }
 
 template <class T>
@@ -319,8 +334,8 @@ int TVector<T>::count_deleted() const {
 }
 
 template <class T>
-int TVector<T>::count_right_pos(const T* pos) {
-    int* correct = begin(), i;
+int TVector<T>::count_right_pos(const T* pos) const{
+    int* correct = this->begin(), i;
     for (i = 0; i < _size; i++) {
         if (_status[i] != Status::Deleted) correct++;
         if (correct == pos + 1) break;
