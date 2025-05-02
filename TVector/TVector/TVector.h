@@ -1,6 +1,7 @@
 #pragma once
 #include <iterator>
 #include <stdexcept>
+#include <utility>
 //  Copyright 2025 Shcherbakova Olesya
 
 #define STEP_OF_CAPACITY 15
@@ -348,7 +349,9 @@ void TVector<T>::shrink_to_fit() {
 
 template <class T>
 void TVector<T>::resize(size_t count, const T& value) {
-    if (_size == count) return;
+    if (_size == count) {
+        return;
+    }
     else if (count > _size) {
         _vec = reset_memory(count);
         for (int i = _size - 1; i < count; i++) {

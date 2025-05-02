@@ -44,6 +44,18 @@ bool check(const T& expected, const T& actual) {
     }
 }
 
+template <class T>
+bool check_not_equal(const T& expected, const T& actual) {
+    if (expected == actual) {
+        std::cerr << "Expected result and actual result" <<
+            "are equal." << std::endl;
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
 void print_init_info() {
     set_color(2, 0);
     std::cout << "[==========] " << std::endl;
@@ -809,31 +821,36 @@ bool test71_try_resize_to_more_after_erase() {
 
 bool test72_try_shuffle() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-    int* expected_result = vec.data();
+    int* expected_result = new int[10];
+    for (int i = 0; i < 10; i++)
+        expected_result[i] = i + 1;
     shuffle(vec);
     int* actual_result = vec.data();
 
     bool result = false;
     for (int i = 0; i < vec.size(); i++)
-        result |= TestSystem::check(expected_result, actual_result);
+        result |= TestSystem::check_not_equal(expected_result, actual_result);
     return result;
 }
 
 bool test73_try_shuffle_after_erase() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
-    int* expected_result = vec.data();
-    
+    int* expected_result = new int[10];
+    for (int i = 0; i < 10; i++)
+        expected_result[i] = i + 1;
+
     vec.erase(vec.begin() + 2);
     shuffle(vec);
     int* actual_result = vec.data();
 
     bool result = false;
     for (int i = 0; i < vec.size(); i++)
-        result |= TestSystem::check(expected_result, actual_result);
+        result |= TestSystem::check_not_equal(expected_result, actual_result);
     return result;
 }
 
 int main() {
+    srand(time(0));
     TestSystem::start_test(test1_try_create_empty_vector,
         "test1_try_create_empty_vector");
     TestSystem::start_test(test2_try_create_vector, "test2_try_create_vector");
