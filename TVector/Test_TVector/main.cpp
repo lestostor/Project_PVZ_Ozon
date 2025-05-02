@@ -534,7 +534,7 @@ bool test47_try_find_all_after_insert() {
     bool result = true;
     for (int i = 0; i < 4; i++)
         result &= TestSystem::check(expected_result[i], actual_result[i]);
-
+    
     return result;
 }
 
@@ -558,7 +558,7 @@ bool test49_try_emplace_by_value() {
         expected_result[i] = 2 * i + 1;
     vec.emplace(2, 5);
     int* actual_result = find_all(vec, 5);
-
+    
     bool result = true;
     for (int i = 0; i < 3; i++)
         result &= TestSystem::check(expected_result[i], actual_result[i]);
@@ -571,7 +571,7 @@ bool test50_try_emplace_by_value_non_existent_elem() {
     int* expected_result = nullptr;
     vec.emplace(5, 6);
     int* actual_result = find_all(vec, 6);
-
+    
     return TestSystem::check(expected_result, actual_result);
 }
 
@@ -627,6 +627,43 @@ bool test55_try_emplace_by_index_after_erase() {
     vec.emplace(vec.begin() + 5, 20);
     int actual_result = find(vec, 7);
 
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test56_try_assign_vector() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5 }), vec2;
+    int* expected_result = new int[5];
+    for (int i = 0; i < 5; i++)
+        expected_result[i] = i + 1;
+    int* actual_result;
+
+    try {
+        vec2.assign(vec1);
+        actual_result = vec2.data();
+    }
+    catch (const std::exception&) {
+        actual_result = nullptr;
+    }
+    
+    bool result = true;
+    for (int i = 0; i < 5; i++)
+        result &= TestSystem::check(expected_result[i], actual_result[i]);
+
+    return result;
+}
+
+bool test57_try_assign_null_vector() {
+    TVector<int> *vec1 = NULL, vec2;
+    bool expected_result = false;
+    bool actual_result = true;
+    try {
+        vec2.assign(*vec1);
+        actual_result = true;
+    }
+    catch (const std::exception&) {
+        actual_result = false;
+    }
+    
     return TestSystem::check(expected_result, actual_result);
 }
 
@@ -727,6 +764,9 @@ int main() {
         "test54_try_emplace_by_value_after_erase");
     TestSystem::start_test(test55_try_emplace_by_index_after_erase,
         "test55_try_emplace_by_index_after_erase");
+    TestSystem::start_test(test56_try_assign_vector, "test56_try_assign_vec");
+    TestSystem::start_test(test57_try_assign_null_vector,
+        "test57_try_assign_null_vector");
 
     TestSystem::print_final_info();
 

@@ -47,6 +47,8 @@ class TVector {
     void emplace(const T&, const T&);  //  by value
     void emplace(const T*, const T&);  //  by index
 
+    TVector<T> assign(const TVector&);
+
     //  getters
     inline size_t size() const noexcept {
         return this->_size;
@@ -136,8 +138,8 @@ TVector<T>::TVector(std::initializer_list<T> mass) {
 template <class T>
 TVector<T>::TVector(const TVector& other) {
     _size = other._size;
-    _capacity = _size / STEP_OF_CAPACITY * STEP_OF_CAPACITY + STEP_OF_CAPACITY;
-    _vec = new T[other._capacity];
+    _capacity = other._capacity;
+    _vec = new T[_capacity];
     _status = new Status[_capacity];
 
     for (int i = 0; i < _capacity; i++) {
@@ -224,6 +226,27 @@ void TVector<T>::emplace(const T* pos, const T& new_value) {
     if (right_pos >= _size)
         throw std::logic_error("Index is out of range");
     _vec[right_pos] = new_value;
+}
+
+template <class T>
+TVector<T> TVector<T>::assign(const TVector& other_vector) {
+    if (&other_vector == NULL)
+        throw std::logic_error("NULL object");
+
+    this->_size = other_vector._size;
+    this->_capacity = other_vector._capacity;
+    this->_vec = new T[this->_capacity];
+    this->_status = new Status[this->_capacity];
+
+    for (int i = 0; i < this->_capacity; i++) {
+        if (i < other_vector._size) {
+            this->_vec[i] = other_vector._vec[i];
+            this->_status[i] = Status::Busy;
+        }
+        else this->_status[i] = Status::Empty;
+    }
+
+    return *this;
 }
 
 template <class T>
