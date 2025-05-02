@@ -48,6 +48,7 @@ class TVector {
     void emplace(const T*, const T&);  //  by index
 
     TVector<T> assign(const TVector&);
+    void shrink_to_fit();
 
     //  getters
     inline size_t size() const noexcept {
@@ -319,6 +320,23 @@ T* TVector<T>::reset_memory_for_deleted(size_t new_size, int deleted_count) {
     }
     _size = new_size;
     return _vec;
+}
+
+template <class T>
+void TVector<T>::shrink_to_fit() {
+    _capacity = _size;
+    T* data = this->data();
+    _vec = new T[_capacity];
+    for (int i = 0, j = 0; i < _size; i++) {
+        if (_status[i] == Status::Busy) {
+            _vec[j] = data[i];
+            j++;
+        }
+    }
+    _status = new Status[_capacity];
+    for (int i = 0; i < _size; i++)
+        _status[i] = Status::Busy;
+    delete[] data;
 }
 
 template <class T>

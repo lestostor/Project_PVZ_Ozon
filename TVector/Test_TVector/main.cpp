@@ -534,7 +534,7 @@ bool test47_try_find_all_after_insert() {
     bool result = true;
     for (int i = 0; i < 4; i++)
         result &= TestSystem::check(expected_result[i], actual_result[i]);
-    
+
     return result;
 }
 
@@ -558,11 +558,11 @@ bool test49_try_emplace_by_value() {
         expected_result[i] = 2 * i + 1;
     vec.emplace(2, 5);
     int* actual_result = find_all(vec, 5);
-    
+
     bool result = true;
     for (int i = 0; i < 3; i++)
         result &= TestSystem::check(expected_result[i], actual_result[i]);
-    
+
     return result;
 }
 
@@ -571,17 +571,17 @@ bool test50_try_emplace_by_value_non_existent_elem() {
     int* expected_result = nullptr;
     vec.emplace(5, 6);
     int* actual_result = find_all(vec, 6);
-    
+
     return TestSystem::check(expected_result, actual_result);
 }
 
 bool test51_try_emplace_by_value_deleted_elem() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     int expected_result = -1;
-    
+
     vec.erase(vec.begin() + 2);
     int actual_result = find(vec, 3);
-    
+
     return TestSystem::check(expected_result, actual_result);
 }
 
@@ -644,11 +644,11 @@ bool test56_try_assign_vector() {
     catch (const std::exception&) {
         actual_result = nullptr;
     }
-    
+
     bool result = true;
     for (int i = 0; i < 5; i++)
         result &= TestSystem::check(expected_result[i], actual_result[i]);
-    
+
     return result;
 }
 
@@ -663,7 +663,7 @@ bool test57_try_assign_null_vector() {
     catch (const std::exception&) {
         actual_result = false;
     }
-    
+
     return TestSystem::check(expected_result, actual_result);
 }
 
@@ -731,6 +731,27 @@ bool test64_try_test_at_after_pop_back() {
 
     vec.pop_back();
     int actual_result = vec.at(vec.size() - 1);
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test65_try_shrink_to_fit() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 5;
+
+    vec.shrink_to_fit();
+    int actual_result = vec.capacity();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test66_try_shrink_to_fit_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = 14;
+
+    vec.erase(vec.begin() + 2);
+    vec.shrink_to_fit();
+    int actual_result = vec.capacity();
+
     return TestSystem::check(expected_result, actual_result);
 }
 
@@ -847,6 +868,10 @@ int main() {
         "test63_try_test_at_after_pop_front");
     TestSystem::start_test(test64_try_test_at_after_pop_back,
         "test64_try_test_at_after_pop_back");
+    TestSystem::start_test(test65_try_shrink_to_fit,
+        "test65_try_shrink_to_fit");
+    TestSystem::start_test(test66_try_shrink_to_fit_after_erase,
+        "test66_try_shrink_to_fit_after_erase");
 
     TestSystem::print_final_info();
 
