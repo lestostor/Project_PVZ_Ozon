@@ -581,7 +581,7 @@ bool test51_try_emplace_by_value_deleted_elem() {
     
     vec.erase(vec.begin() + 2);
     int actual_result = find(vec, 3);
-
+    
     return TestSystem::check(expected_result, actual_result);
 }
 
@@ -604,6 +604,28 @@ bool test53_try_emplace_by_index_elem_out_of_range() {
     catch (const std::exception& ex) {
         actual_result = false;
     }
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test54_try_emplace_by_value_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = -1;
+
+    vec.erase(vec.begin() + 2);
+    vec.emplace(3, 20);
+    int actual_result = find(vec, 20);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test55_try_emplace_by_index_after_erase() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    int expected_result = -1;
+
+    vec.erase(vec.begin() + 2);
+    vec.emplace(vec.begin() + 5, 20);
+    int actual_result = find(vec, 7);
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -701,6 +723,10 @@ int main() {
         "test52_try_emplace_by_index");
     TestSystem::start_test(test53_try_emplace_by_index_elem_out_of_range,
         "test53_try_emplace_by_index_elem_out_of_range");
+    TestSystem::start_test(test54_try_emplace_by_value_after_erase,
+        "test54_try_emplace_by_value_after_erase");
+    TestSystem::start_test(test55_try_emplace_by_index_after_erase,
+        "test55_try_emplace_by_index_after_erase");
 
     TestSystem::print_final_info();
 
