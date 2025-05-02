@@ -551,7 +551,7 @@ bool test48_try_find_all_with_deleted_elem() {
         TestSystem::check(expected_result[1], actual_result[1]);
 }
 
-bool test49_try_emplace() {
+bool test49_try_emplace_by_value() {
     TVector<int> vec({ 1, 2, 3, 2, 4, 2 });
     int* expected_result = new int[3];
     for (int i = 0; i < 3; i++)
@@ -566,7 +566,7 @@ bool test49_try_emplace() {
     return result;
 }
 
-bool test50_try_emplace_non_existent_elem() {
+bool test50_try_emplace_by_value_non_existent_elem() {
     TVector<int> vec({ 1, 2, 3, 2, 4, 2 });
     int* expected_result = nullptr;
     vec.emplace(5, 6);
@@ -575,12 +575,35 @@ bool test50_try_emplace_non_existent_elem() {
     return TestSystem::check(expected_result, actual_result);
 }
 
-bool test51_try_emplace_deleted_elem() {
+bool test51_try_emplace_by_value_deleted_elem() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     int expected_result = -1;
     
     vec.erase(vec.begin() + 2);
     int actual_result = find(vec, 3);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test52_try_emplace_by_index() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 5;
+    vec.emplace(vec.begin() + 2, 5);
+    int actual_result = *(vec.begin() + 2);
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test53_try_emplace_by_index_elem_out_of_range() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = false;
+    int actual_result = true;
+    try {
+        vec.emplace(vec.begin() + 5, 5);
+    }
+    catch (const std::exception& ex) {
+        actual_result = false;
+    }
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -668,11 +691,16 @@ int main() {
         "test47_try_find_all_after_insert");
     TestSystem::start_test(test48_try_find_all_with_deleted_elem,
         "test48_try_find_all_with_deleted_elem");
-    TestSystem::start_test(test49_try_emplace, "test49_try_emplace");
-    TestSystem::start_test(test50_try_emplace_non_existent_elem,
-        "test50_try_emplace_non_existent_elem");
-    TestSystem::start_test(test51_try_emplace_deleted_elem,
-        "test51_try_emplace_deleted_elem");
+    TestSystem::start_test(test49_try_emplace_by_value,
+        "test49_try_emplace_by_value");
+    TestSystem::start_test(test50_try_emplace_by_value_non_existent_elem,
+        "test50_try_emplace_by_value_non_existent_elem");
+    TestSystem::start_test(test51_try_emplace_by_value_deleted_elem,
+        "test51_try_emplace_by_value_deleted_elem");
+    TestSystem::start_test(test52_try_emplace_by_index,
+        "test52_try_emplace_by_index");
+    TestSystem::start_test(test53_try_emplace_by_index_elem_out_of_range,
+        "test53_try_emplace_by_index_elem_out_of_range");
 
     TestSystem::print_final_info();
 

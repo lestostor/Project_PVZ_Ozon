@@ -1,5 +1,6 @@
 #pragma once
 #include <iterator>
+#include <stdexcept>
 //  Copyright 2025 Shcherbakova Olesya
 
 #define STEP_OF_CAPACITY 15
@@ -27,7 +28,7 @@ class TVector {
     //  add element
     void push_back(const T&);
     void push_front(const T&);
-    void insert(T*, const T&);
+    void insert(const T*, const T&);
 
     //  find
     template <class T>
@@ -40,9 +41,11 @@ class TVector {
     // delete element
     void pop_back();
     void pop_front();
-    void erase(T*);
+    void erase(const T*);
 
-    void emplace(const T&, const T&);
+    //  emplace
+    void emplace(const T&, const T&);  //  by value
+    void emplace(const T*, const T&);  //  by index
 
     //  getters
     inline size_t size() const noexcept {
@@ -88,7 +91,7 @@ class TVector {
     T* reset_memory(size_t);
     T* reset_memory_for_deleted(size_t, int);
     int count_deleted() const;
-    int count_right_pos(int*);
+    int count_right_pos(const T*);
     inline bool is_full() const noexcept {
         return !is_empty();
     }
@@ -173,7 +176,7 @@ void TVector<T>::push_front(const T& value) {
 }
 
 template <class T>
-void TVector<T>::insert(T* pos, const T& value) {
+void TVector<T>::insert(const T* pos, const T& value) {
     int right_pos = count_right_pos(pos);
     _vec = reset_memory(_size + 1);
     int i = _size + count_deleted();
@@ -201,7 +204,7 @@ void TVector<T>::pop_front() {
 }
 
 template <class T>
-void TVector<T>::erase(T* pos) {
+void TVector<T>::erase(const T* pos) {
     int right_pos = count_right_pos(pos);
     _status[right_pos] = Status::Deleted;
     _vec = reset_memory_for_deleted(_size - 1, count_deleted());
@@ -213,6 +216,14 @@ void TVector<T>::emplace(const T& value, const T& new_value) {
         if (_vec[i] == value && _status[i] == Status::Busy)
             _vec[i] = new_value;
     }
+}
+
+template <class T>
+void TVector<T>::emplace(const T* pos, const T& new_value) {
+    int right_pos = count_right_pos(pos);
+    if (right_pos >= _size)
+        throw std::logic_error("Index is out of range");
+    _vec[right_pos] = new_value;
 }
 
 template <class T>
@@ -236,7 +247,8 @@ Status* TVector<T>::reserve(size_t new_cap) {
 template <class T>
 T* TVector<T>::reset_memory(size_t new_size) {
     if (new_size / STEP_OF_CAPACITY >= 1) {
-        size_t new_capacity = (new_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
+        size_t new_capacity = (new_size / STEP_OF_CAPACITY + 1)
+            * STEP_OF_CAPACITY;
         T* new_vec = new T[new_capacity];
         _status = reserve(new_capacity);
 
@@ -284,7 +296,7 @@ int TVector<T>::count_deleted() const {
 }
 
 template <class T>
-int TVector<T>::count_right_pos(int* pos) {
+int TVector<T>::count_right_pos(const T* pos) {
     int* correct = begin(), i;
     for (i = 0; i < _size; i++) {
         if (_status[i] != Status::Deleted) correct++;
