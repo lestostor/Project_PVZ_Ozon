@@ -884,6 +884,102 @@ bool test75_try_sort_after_erase() {
     return result;
 }
 
+bool test76_try_operator_assign() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }), vec2;
+    int* expected_result = new int[10];
+    for (int i = 0; i < 10; i++)
+        expected_result[i] = i + 1;
+
+    vec2 = vec1;
+    int* actual_result = vec2.data();
+
+    bool result = true;
+    for (int i = 0; i < vec2.size(); i++)
+        result &= TestSystem::check(expected_result[i], actual_result[i]);
+
+    return result;
+}
+
+bool test77_try_operator_compare_if_equal() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }),
+        vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = true;
+    bool actual_result = vec1 == vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test78_try_operator_compare_if_not_equal() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 9 }),
+        vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = false;
+    bool actual_result = vec1 == vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test79_try_operator_compare_after_erase() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }),
+        vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    bool expected_result = false;
+
+    vec1.erase(vec1.begin() + 2);
+    bool actual_result = vec1 == vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test80_try_operator_compare_after_erase_if_equal() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }),
+    vec2({ 1, 2, 3, 3, 4, 5, 6, 7, 8,9, 10, 11, 12, 13, 14, 15 });
+    bool expected_result = true;
+
+    vec2.erase(vec2.begin() + 2);
+    bool actual_result = vec1 == vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test81_try_sec_operator_compare_if_equal() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }),
+        vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = false;
+    bool actual_result = vec1 != vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test82_try_sec_operator_compare_if_not_equal() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 9 }),
+        vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = true;
+    bool actual_result = vec1 != vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test83_try_sec_operator_compare_after_erase() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }),
+        vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    bool expected_result = true;
+
+    vec1.erase(vec1.begin() + 2);
+    bool actual_result = vec1 != vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test84try_sec_operator_compare_after_erase_if_equal() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }),
+        vec2({ 1, 2, 3, 3, 4, 5, 6, 7, 8,9, 10, 11, 12, 13, 14, 15 });
+    bool expected_result = false;
+
+    vec2.erase(vec2.begin() + 2);
+    bool actual_result = vec1 != vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     srand(time(0));
     TestSystem::start_test(test1_try_create_empty_vector,
@@ -1018,6 +1114,24 @@ int main() {
     TestSystem::start_test(test74_try_sort, "test74_try_sort");
     TestSystem::start_test(test75_try_sort_after_erase,
         "test75_try_sort_after_erase");
+    TestSystem::start_test(test76_try_operator_assign,
+        "test76_try_operator_assign");
+    TestSystem::start_test(test77_try_operator_compare_if_equal,
+        "test77_try_operator_compare_if_equal");
+    TestSystem::start_test(test78_try_operator_compare_if_not_equal,
+        "test78_try_operator_compare_if_not_equal");
+    TestSystem::start_test(test79_try_operator_compare_after_erase,
+        "test79_try_operator_compare_after_erase");
+    TestSystem::start_test(test80_try_operator_compare_after_erase_if_equal,
+        "test80_try_operator_compare_after_erase_if_equal");
+    TestSystem::start_test(test81_try_sec_operator_compare_if_equal,
+        "test81_try_sec_operator_compare_if_equal");
+    TestSystem::start_test(test82_try_sec_operator_compare_if_not_equal,
+        "test82_try_sec_operator_compare_if_not_equal");
+    TestSystem::start_test(test83_try_sec_operator_compare_after_erase,
+        "test83_try_sec_operator_compare_after_erase");
+    TestSystem::start_test(test84try_sec_operator_compare_after_erase_if_equal,
+        "test84try_sec_operator_compare_after_erase_if_equal");
 
     TestSystem::print_final_info();
 

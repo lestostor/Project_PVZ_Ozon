@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <utility>
 #include <random>
+#include <iostream>
 
 //  Copyright 2025 Shcherbakova Olesya
 
@@ -57,6 +58,11 @@ class TVector {
     void emplace(const T*, const T&);  //  by index
 
     TVector<T> assign(const TVector&);
+
+    //  operators
+    TVector<T>& operator = (const TVector<T>&);
+    bool operator == (const TVector<T>&);
+    bool operator != (const TVector<T>&);
 
     void shrink_to_fit();
     void resize(size_t, const T& value = T());
@@ -266,6 +272,34 @@ TVector<T> TVector<T>::assign(const TVector& other_vector) {
 }
 
 template <class T>
+TVector<T>& TVector<T>::operator = (const TVector<T>& other_vector) {
+    if (&other_vector != this) (*this).assign(other_vector);
+    return *this;
+}
+
+template <class T>
+bool TVector<T>::operator == (const TVector<T>& other_vector) {
+    if (this->_size != other_vector._size) return false;
+    for (int i = 0, j = 0; i + j < other_vector._size; i++) {
+        if (this->_vec[i + j] != other_vector._vec[i] &&
+            this->_status[i] == Status::Busy &&
+            other_vector._status[i] == Status::Busy &&
+            this->_vec[i] != other_vector._vec[i + j] &&
+            this->_status[i] == Status::Busy &&
+            other_vector._status[i] == Status::Busy) return false;
+
+        else if (this->_status[i] != Status::Busy ||
+            other_vector._status[i] != Status::Busy) j++;  // for deleted
+    }
+    return true;
+}
+
+template <class T>
+bool TVector<T>::operator != (const TVector<T>& other_vector) {
+    return !((*this) == other_vector);
+}
+
+template <class T>
 T& TVector<T>::at(const int pos) const {
     int correct = 0, i;
     for (i = 0; i < _size; i++) {
@@ -322,7 +356,7 @@ T* TVector<T>::reset_memory_for_deleted(size_t new_size, int deleted_count) {
     if (deleted_count >= 0.1 * _size) {
         _capacity = (new_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
         T* new_vec = new T[_capacity];
-        for (int i = 0, j = 0; i < _size; i++) {
+        for (int i = 0, j = 0; j < _size; i++) {
             if (_status[i] == Status::Busy) {
                 new_vec[j] = _vec[i];
                 _status[j] = Status::Busy;
