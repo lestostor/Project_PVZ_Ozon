@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Worker", "Worker\Worker.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FIO", "FIO\FIO.vcxproj", "{97780F64-D925-47BE-B35D-DDDCC9C7B9F4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Application", "Application\Application.vcxproj", "{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{97780F64-D925-47BE-B35D-DDDCC9C7B9F4}.Release|x64.Build.0 = Release|x64
 		{97780F64-D925-47BE-B35D-DDDCC9C7B9F4}.Release|x86.ActiveCfg = Release|Win32
 		{97780F64-D925-47BE-B35D-DDDCC9C7B9F4}.Release|x86.Build.0 = Release|Win32
+		{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}.Debug|x64.ActiveCfg = Debug|x64
+		{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}.Debug|x64.Build.0 = Debug|x64
+		{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}.Debug|x86.ActiveCfg = Debug|Win32
+		{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}.Debug|x86.Build.0 = Debug|Win32
+		{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}.Release|x64.ActiveCfg = Release|x64
+		{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}.Release|x64.Build.0 = Release|x64
+		{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}.Release|x86.ActiveCfg = Release|Win32
+		{BC5F5811-DF9C-49F1-93F5-1BA789CF50F5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

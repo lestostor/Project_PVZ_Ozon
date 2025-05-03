@@ -128,8 +128,8 @@ template <class T>
 TVector<T>::TVector() {
     _size = 0;
     _capacity = 0;
-    _vec = nullptr;
-    _status = nullptr;
+    _vec = new T[0];
+    _status = new Status[0];
 }
 
 template <class T>
