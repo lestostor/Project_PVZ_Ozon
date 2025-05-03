@@ -63,6 +63,10 @@ class TVector {
     TVector<T>& operator = (const TVector<T>&);
     bool operator == (const TVector<T>&);
     bool operator != (const TVector<T>&);
+    T& operator[](const int) const;
+    template <class T>
+    friend std::ostream& operator << (std::ostream&, const TVector<T>&);
+    
 
     void shrink_to_fit();
     void resize(size_t, const T& value = T());
@@ -300,6 +304,23 @@ bool TVector<T>::operator != (const TVector<T>& other_vector) {
 }
 
 template <class T>
+T& TVector<T>::operator[](const int pos) const {
+    return at(pos);
+}
+
+template <class T>
+std::ostream& operator << (std::ostream& out, const TVector<T>& vector) {
+    for (int i = 0; i < vector._size; i++) {
+        if (vector._status[i] == Status::Busy) {
+            out << vector._vec[i];
+            if (i != vector._size - 1) out << ' ';
+        }
+    }
+    out << std::endl;
+    return out;
+}
+
+template <class T>
 T& TVector<T>::at(const int pos) const {
     int correct = 0, i;
     for (i = 0; i < _size; i++) {
@@ -307,8 +328,8 @@ T& TVector<T>::at(const int pos) const {
         if (correct == pos + 1) break;
     }
 
-    if (i >= _size)
-        throw std::logic_error("Index is out of range\n");
+    if (i >= _size || i < 0)
+        throw std::out_of_range("Index is out of range\n");
     return _vec[i];
 }
 

@@ -931,7 +931,7 @@ bool test79_try_operator_compare_after_erase() {
 
 bool test80_try_operator_compare_after_erase_if_equal() {
     TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }),
-    vec2({ 1, 2, 3, 3, 4, 5, 6, 7, 8,9, 10, 11, 12, 13, 14, 15 });
+    vec2({ 1, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     bool expected_result = true;
 
     vec2.erase(vec2.begin() + 2);
@@ -971,11 +971,47 @@ bool test83_try_sec_operator_compare_after_erase() {
 
 bool test84try_sec_operator_compare_after_erase_if_equal() {
     TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }),
-        vec2({ 1, 2, 3, 3, 4, 5, 6, 7, 8,9, 10, 11, 12, 13, 14, 15 });
+        vec2({ 1, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     bool expected_result = false;
 
     vec2.erase(vec2.begin() + 2);
     bool actual_result = vec1 != vec2;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test85_try_at_negative_index() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    bool expected_result = false;
+    bool actual_result = true;
+    try {
+        int num = vec.at(-1);
+    }
+    catch (const std::exception&) {
+        actual_result = false;
+    }
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test86_try_operator_index() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_result = 3;
+    int actual_result = vec[2];
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test87_try_operator_index_out_of_range() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    bool expected_result = false;
+    bool actual_result = true;
+    try {
+        int num = vec[5];
+    }
+    catch (const std::exception& ex) {
+        actual_result = false;
+    }
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -1132,6 +1168,12 @@ int main() {
         "test83_try_sec_operator_compare_after_erase");
     TestSystem::start_test(test84try_sec_operator_compare_after_erase_if_equal,
         "test84try_sec_operator_compare_after_erase_if_equal");
+    TestSystem::start_test(test85_try_at_negative_index,
+        "test85_try_at_negative_index");
+    TestSystem::start_test(test86_try_operator_index,
+        "test86_try_operator_index");
+    TestSystem::start_test(test87_try_operator_index_out_of_range,
+        "test87_try_operator_index_out_of_range");
 
     TestSystem::print_final_info();
 
