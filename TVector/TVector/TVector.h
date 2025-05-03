@@ -66,7 +66,6 @@ class TVector {
     T& operator[](const int) const;
     template <class T>
     friend std::ostream& operator << (std::ostream&, const TVector<T>&);
-    
 
     void shrink_to_fit();
     void resize(size_t, const T& value = T());
