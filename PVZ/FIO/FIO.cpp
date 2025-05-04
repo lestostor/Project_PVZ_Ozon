@@ -86,10 +86,16 @@ std::string FIO::convert_to_normal_form(const std::string str) {
     else new_str += str[0];
 
     for (int i = 1; i < lenght; i++) {
-    if (str[i] >= 'A' && str[i] <= 'Z' ||
-        str[i] >= 'À' && str[i] <= 'ß') new_str += str[i] + 32;
-        else if (str[i] == '¨') new_str += '¸';
-        else new_str += str[i];
+        if (str[i] >= 'A' && str[i] <= 'Z' ||
+            str[i] >= 'À' && str[i] <= 'ß') {
+            new_str += str[i] + 32;
+        }
+        else if (str[i] == '¨') {
+            new_str += '¸';
+        }
+        else {
+            new_str += str[i];
+        }
     }
 
     return new_str;
