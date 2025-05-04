@@ -3,31 +3,28 @@
 
 namespace CppCLRWinFormsProject {
 
-#pragma warning(disable : 4644)
     using namespace System;
     using namespace System::ComponentModel;
     using namespace System::Collections;
     using namespace System::Windows::Forms;
     using namespace System::Data;
     using namespace System::Drawing;
-#pragma warning(default : 4644)
 
     /// <summary>
     /// Summary for Form1
     /// </summary>
-    public ref class Form1 : public System::Windows::Forms::Form
-    {
+    public ref class Form1 : public System::Windows::Forms::Form {
     public:
         Form1(void) {
             InitializeComponent();
             //
-            //TODO: Add the constructor code here
+            //  TODO: Add the constructor code here
             //
         }
 
     protected:
         /// <summary>
-        /// Clean up any resources being used.
+        ///  Clean up any resources being used.
         /// </summary>
         ~Form1() {
             if (components) {

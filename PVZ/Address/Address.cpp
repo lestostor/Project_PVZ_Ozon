@@ -6,9 +6,9 @@
 Address::Address(const char* area, const char* region,
 const char* city, const char* street, const char* building) {
     bool area_res = check_correction(area);
-	bool region_res = check_correction(region);
-	bool city_res = check_correction(city);
-	bool street_res = check_correction(street);
+    bool region_res = check_correction(region);
+    bool city_res = check_correction(city);
+    bool street_res = check_correction(street);
     bool building_res = check_correction(building);
 
     if (!(area_res && region_res && city_res &&
