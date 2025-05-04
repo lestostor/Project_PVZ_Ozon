@@ -1016,6 +1016,24 @@ bool test87_try_operator_index_out_of_range() {
     return TestSystem::check(expected_result, actual_result);
 }
 
+bool test_88_check_the_insertion_into_an_empty_vector() {
+    TVector<int> vec1;
+    vec1.push_front(1);
+    TVector<int> res1({ 1 });
+    TVector<int> vec2;
+    vec2.push_back(10);
+    TVector<int> res2({ 10 });
+    TVector<int> vec3;
+    vec3.insert(0, 88);
+    TVector<int> res3({ 88 });
+    bool expected_result = true;
+    bool actual_result = true;
+    if (vec1 == res1)
+        actual_result = true;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     srand(time(0));
     TestSystem::start_test(test1_try_create_empty_vector,
@@ -1174,6 +1192,8 @@ int main() {
         "test86_try_operator_index");
     TestSystem::start_test(test87_try_operator_index_out_of_range,
         "test87_try_operator_index_out_of_range");
+    TestSystem::start_test(test_88_check_the_insertion_into_an_empty_vector,
+        "test_88_check_the_insertion_into_an_empty_vector");
 
     TestSystem::print_final_info();
 

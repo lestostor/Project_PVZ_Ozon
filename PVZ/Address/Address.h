@@ -14,4 +14,7 @@ public:
     Address(const std::string, const std::string, const std::string,
         const std::string, const std::string);
     Address(const Address&);
+
+private:
+    bool check_correction(const std::string);
 };

@@ -186,6 +186,10 @@ template <class T>
 void TVector<T>::push_back(const T& value) {
     _vec = reset_memory(_size + 1);
     _size++;
+    if (_size == 1) {
+        _vec = new T[1];
+        _status = new Status[1];
+    }
     _vec[_size - 1] = value;
     _status[_size - 1] = Status::Busy;
 }
@@ -194,6 +198,10 @@ template <class T>
 void TVector<T>::push_front(const T& value) {
     _vec = reset_memory(_size + 1);
     _size++;
+    if (_size == 1) {
+        _vec = new T[1];
+        _status = new Status[1];
+    }
     for (int i = _size - 1; i > 0; i--) {
         _vec[i] = _vec[i - 1];
         _status[i] = _status[i - 1];
@@ -212,6 +220,10 @@ void TVector<T>::insert(const T* pos, const T& value) {
         _status[i] = Status::Busy;
     }
     _size++;
+    if (_size == 1) {
+        _vec = new T[1];
+        _status = new Status[1];
+    }
     _vec[i] = value;
     _status[i] = Status::Busy;
 }
