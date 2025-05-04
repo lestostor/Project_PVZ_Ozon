@@ -9,12 +9,11 @@ class Address {
     std::string _street;
     std::string _building;
 
-public:
+ public:
     Address() = default;
-    Address(const std::string, const std::string, const std::string,
-        const std::string, const std::string);
+    Address(const char*, const char*, const char*, const char*, const char*);
     Address(const Address&);
 
-private:
+ private:
     bool check_correction(const std::string);
 };

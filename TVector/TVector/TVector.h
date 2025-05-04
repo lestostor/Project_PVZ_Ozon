@@ -187,6 +187,7 @@ void TVector<T>::push_back(const T& value) {
     _vec = reset_memory(_size + 1);
     _size++;
     if (_size == 1) {
+        _capacity = STEP_OF_CAPACITY;
         _vec = new T[1];
         _status = new Status[1];
     }
@@ -199,6 +200,7 @@ void TVector<T>::push_front(const T& value) {
     _vec = reset_memory(_size + 1);
     _size++;
     if (_size == 1) {
+        _capacity = STEP_OF_CAPACITY;
         _vec = new T[1];
         _status = new Status[1];
     }
@@ -221,6 +223,7 @@ void TVector<T>::insert(const T* pos, const T& value) {
     }
     _size++;
     if (_size == 1) {
+        _capacity = STEP_OF_CAPACITY;
         _vec = new T[1];
         _status = new Status[1];
     }

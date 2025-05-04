@@ -1,10 +1,13 @@
-#include "pch.h"
+#include "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/PVZ/Application/pch.h"
+//  Copyright 2025 Shcherbakova Olesya
 
+#pragma warning(disable : 4644)
 using namespace System;
 using namespace System::Reflection;
 using namespace System::Runtime::CompilerServices;
 using namespace System::Runtime::InteropServices;
 using namespace System::Security::Permissions;
+#pragma warning(default : 4644)
 
 [assembly:AssemblyTitleAttribute(L"CppCLRWinFormsProject")];
 [assembly:AssemblyDescriptionAttribute(L"")];
