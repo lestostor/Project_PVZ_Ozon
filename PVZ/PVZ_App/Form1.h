@@ -15,9 +15,6 @@ namespace CppCLRWinFormsProject {
     public:
         Form1(void) {
             InitializeComponent();
-            //
-            // TODO (Olesya): Stuff
-            //
         }
     protected:
         ///  <summary>
