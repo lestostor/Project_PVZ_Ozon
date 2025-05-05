@@ -1,6 +1,5 @@
 ﻿#include "FIO.h"
 #include <iostream>
-#include <string>
 #include <stdexcept>
 //  Copyright 2025 Shcherbakova Olesya
 

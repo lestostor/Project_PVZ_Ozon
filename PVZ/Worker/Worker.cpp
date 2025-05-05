@@ -1,6 +1,5 @@
 #include "Worker.h"
 #include <stdexcept>
-#include <string>
 //  Copyright 2025 Shcherbakova Olesya
 
 Worker::Worker() {
