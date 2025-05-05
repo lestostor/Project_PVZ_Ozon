@@ -7,7 +7,7 @@ class FIO {
     std::string _name;
     std::string _surname;
     std::string _patronymic;
-public:
+ public:
     FIO(const std::string, const std::string, const std::string);
     FIO();
     FIO(const FIO& original);
@@ -19,7 +19,7 @@ public:
     void set_first_name(const std::string);
     void set_second_name(const std::string);
     void set_last_name(const std::string);
-private:
+ private:
     bool check_name(const std::string);
     bool check_corrections(const std::string, int lenght);
     std::string convert_to_normal_form(const std::string);
