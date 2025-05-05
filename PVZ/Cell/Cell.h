@@ -3,6 +3,11 @@
 
 
 class Cell {
-    int _num;
+    int _num = 0;
     int _sum = 0;
+
+ public:
+    Cell() = default;
+    Cell(const int, const int);
+    Cell(const Cell&);
 };

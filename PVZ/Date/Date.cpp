@@ -26,7 +26,7 @@ Date::Date(const Date& other_date) {
 }
 
 bool Date::if_leap_year(const int year) {
-    if (year % 4 == 0 || year % 4 && year % 100 != 0 ||
+    if (year % 4 == 0 || year % 4 == 0 && year % 100 != 0 ||
         year % 400 == 0) return true;
     return false;
 }

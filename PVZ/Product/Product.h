@@ -5,9 +5,15 @@
 
 class Product {
     int _code;
-    int _price;
+    int _price = 0;
     bool _prepay;
     int _age_limit = 0;  //  0 - without limit
     bool _returnability = true;
     Date _date;
+
+ public:
+     Product() = default;
+     Product(const int, const int, const bool, const int,
+         const bool, const Date);
+     Product(const Product&);
 };

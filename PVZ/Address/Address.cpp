@@ -19,7 +19,7 @@ Address::Address(const char* area, const char* region,
     bool street_res = check_correction(street);
 
     if (!(area_res && region_res && city_res && street_res))
-        throw std::logic_error("Unexpected symbols ");
+        throw std::logic_error("Unexpected symbols\n");
     _area = convert_to_normal_form(area);
     _region = convert_to_normal_form(region);
     _city = convert_to_normal_form(city);
