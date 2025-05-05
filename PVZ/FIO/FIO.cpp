@@ -17,15 +17,15 @@ FIO::FIO() {
     default_sname = "Иванов",
     default_lname = "Иванович";
 
-    copy_string(&_name, default_fname);
-    copy_string(&_surname, default_sname);
-    copy_string(&_patronymic, default_lname);
+    _name = default_fname;
+    _surname = default_sname;
+    _patronymic = default_lname;
 }
 
 FIO::FIO(const FIO& original) {
-    copy_string(&_name, original._name);
-    copy_string(&_surname, original._surname);
-    copy_string(&_patronymic, original._patronymic);
+    _name = original._name;
+    _surname = original._surname;
+    _patronymic = original._patronymic;
 }
 
 const std::string FIO::get_first_name() {
@@ -99,11 +99,4 @@ std::string FIO::convert_to_normal_form(const std::string str) {
     }
 
     return new_str;
-}
-
-void FIO::copy_string(std::string* name, const std::string default_name) {
-    int i = 0;
-    for (i; default_name[i] != '\0'; i++)
-        (*name)[i] = default_name[i];
-    (*name)[i] = '\0';
 }

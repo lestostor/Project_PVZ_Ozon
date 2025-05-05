@@ -7,11 +7,11 @@ class Address {
     std::string _region;
     std::string _city;
     std::string _street;
-    std::string _building;
+    int _building;
 
  public:
-    Address() = default;
-    Address(const char*, const char*, const char*, const char*, const char*);
+    Address();
+    Address(const char*, const char*, const char*, const char*, const int);
     Address(const Address&);
 
  private:

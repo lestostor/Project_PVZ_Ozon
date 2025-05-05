@@ -9,7 +9,9 @@
 
 
 int main() {
-    Address address("vnwsov", "bvgaiw", "fnwie", "fnowe", "oqwf");
+    FIO person("зубенко", "михаил", "Петрович");
+    Address address("Ивановская", "Ивановский", "Кохма", "Ивановская", 92);
+    Worker worker1(person, "workmail@gmail.com", address), worker2(worker1);
 
     return 0;
 }

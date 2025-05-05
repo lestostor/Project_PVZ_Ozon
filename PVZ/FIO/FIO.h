@@ -23,5 +23,4 @@ class FIO {
     bool check_name(const std::string);
     bool check_corrections(const std::string, int lenght);
     std::string convert_to_normal_form(const std::string);
-    void copy_string(std::string*, const std::string);
 };
