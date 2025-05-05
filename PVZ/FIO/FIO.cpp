@@ -1,6 +1,7 @@
-﻿#include "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/PVZ/FIO/FIO.h"
+﻿#include "FIO.h"
 #include <iostream>
 #include <string>
+#include <stdexcept>
 //  Copyright 2025 Shcherbakova Olesya
 
 FIO::FIO(const std::string fname, const std::string sname,
