@@ -1,6 +1,7 @@
 ﻿#include "FIO.h"
 #include <iostream>
 #include <stdexcept>
+#include <string>
 //  Copyright 2025 Shcherbakova Olesya
 
 FIO::FIO(const std::string fname, const std::string sname,

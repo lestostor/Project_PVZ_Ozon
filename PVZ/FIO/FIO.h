@@ -2,7 +2,6 @@
 #include <string>
 //  Copyright 2025 Shcherbakova Olesya
 
-
 class FIO {
     std::string _name;
     std::string _surname;
