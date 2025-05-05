@@ -1,4 +1,3 @@
-//  -- coding: utf-8 --
 #include "Worker.h"
 #include <stdexcept>
 #include <string>

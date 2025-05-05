@@ -1,5 +1,4 @@
-﻿//  -- coding: utf-8 --
-#include "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/PVZ/FIO/FIO.h"
+﻿#include "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/PVZ/FIO/FIO.h"
 #include <iostream>
 #include <string>
 //  Copyright 2025 Shcherbakova Olesya

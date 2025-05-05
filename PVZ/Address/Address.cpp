@@ -1,5 +1,4 @@
-﻿//  -- coding: utf-8 --
-#include "Address.h"
+﻿#include "Address.h"
 #include <string>
 #include <stdexcept>
 //  Copyright 2025 Shcherbakova Olesya

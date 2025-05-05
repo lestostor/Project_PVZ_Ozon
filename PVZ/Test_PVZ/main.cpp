@@ -1,4 +1,3 @@
-//  -- coding: utf-8 --
 #include "Address.h"
 #include "Cell.h"
 #include "Date.h"
