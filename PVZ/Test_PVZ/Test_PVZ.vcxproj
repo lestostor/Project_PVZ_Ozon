@@ -107,12 +107,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Worker;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Product;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\FIO;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Date;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Cell;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Address;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\TVector;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Worker;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Product;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\FIO;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Date;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Cell;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Address;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Worker;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Product;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\FIO;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Date;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Cell;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Address;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\TVector;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Worker;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Product;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\FIO;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Date;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Cell;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Address;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,6 +146,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Product\Product.vcxproj">
       <Project>{1567d9e8-8057-4b12-b3da-9dab972b05a9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TVector\TVector.vcxproj">
+      <Project>{036b64a5-9f03-4728-bd50-5b5f64214c34}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Worker\Worker.vcxproj">
       <Project>{2d4e3332-fdd9-4cf6-985a-9c45880ff1b8}</Project>

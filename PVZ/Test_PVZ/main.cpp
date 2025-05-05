@@ -49,11 +49,11 @@ int main() {
     }
 
     //  test product
-    Product product1, product2(1111, 1000, false, 0, false, date2),
+    Product product1, product2(1111, 10, false, 0, false, date2),
         product3(product2);
 
     //  test cell
-    Cell cell1, cell2(2, 1500), cell3(cell2);
+    Cell cell1, cell2(2, {product1, product2}), cell3(cell2);
 
     return 0;
 }

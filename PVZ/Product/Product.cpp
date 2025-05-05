@@ -5,7 +5,7 @@
 Product::Product(const int code, const int price, const bool prepay,
 const int limit, const bool returnability, const Date date) :
 _code(code), _price(price), _prepay(prepay), _age_limit(limit),
-_returnability(returnability), _date(date){}
+_returnability(returnability), _date(date) {}
 
 Product::Product(const Product& other_product) {
     if (&other_product == NULL)

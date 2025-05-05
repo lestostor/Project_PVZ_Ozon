@@ -2,7 +2,6 @@
 #include "Date.h"
 //  Copyright 2025 Shcherbakova Olesya
 
-
 class Product {
     int _code;
     int _price = 0;
