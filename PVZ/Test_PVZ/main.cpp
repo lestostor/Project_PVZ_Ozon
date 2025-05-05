@@ -1,6 +1,7 @@
 #include "Address.h"
 #include "Cell.h"
 #include "Date.h"
+// -*- coding: utf-8 -*-
 #include "FIO.h"
 #include "Product.h"
 #include "Worker.h"

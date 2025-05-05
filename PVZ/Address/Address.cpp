@@ -1,4 +1,5 @@
-﻿#include "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/PVZ/Address/Address.h"
+﻿// -*- coding: utf-8 -*-
+#include "Address.h"
 #include <string>
 #include <stdexcept>
 //  Copyright 2025 Shcherbakova Olesya
@@ -64,11 +65,9 @@ std::string Address::convert_to_normal_form(const std::string str) {
         if (str[i] >= 'A' && str[i] <= 'Z' ||
             str[i] >= 'А' && str[i] <= 'Я') {
             new_str += str[i] + 32;
-        }
-        else if (str[i] == 'Ё') {
+        } else if (str[i] == 'Ё') {
             new_str += 'ё';
-        }
-        else {
+        } else {
             new_str += str[i];
         }
     }

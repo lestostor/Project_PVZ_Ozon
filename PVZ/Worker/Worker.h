@@ -1,7 +1,7 @@
 #pragma once
+#include <string>
 #include "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/PVZ/FIO/FIO.h"
 #include "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/PVZ/Address/Address.h"
-#include <string>
 //  Copyright 2025 Shcherbakova Olesya
 
 
@@ -10,11 +10,11 @@ class Worker {
     std::string _mail;
     Address _address;
 
-public:
+ public:
     Worker();
     Worker(const FIO, const std::string, const Address);
     Worker(const Worker&);
 
-private:
+ private:
     bool check_mail(const std::string);
 };
