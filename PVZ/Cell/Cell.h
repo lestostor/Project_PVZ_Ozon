@@ -12,4 +12,7 @@ class Cell {
     Cell() = default;
     Cell(const int, const TVector<Product>);
     Cell(const Cell&);
+
+    void add_new_products(const Product&);
+    void delete_product(const Product&);
 };

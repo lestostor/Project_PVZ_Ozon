@@ -11,3 +11,11 @@ Cell::Cell(const Cell& other_cell) {
     _num = other_cell._num;
     _products = other_cell._products;
 }
+
+void Cell::add_new_products(const Product& product) {
+    _products.push_back(product);
+}
+
+void Cell::delete_product(const Product& product) {
+    _products.erase(_products.begin() + find(_products, product));
+}

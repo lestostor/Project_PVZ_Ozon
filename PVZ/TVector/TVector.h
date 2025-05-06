@@ -19,7 +19,7 @@ class TVector {
     size_t _size;
     size_t _capacity;
 
-public:
+ public:
     //  constructors
     TVector();
     explicit TVector(int);  //  empty vector
@@ -111,7 +111,7 @@ public:
 
     T& at(const int) const;
 
-private:
+ private:
     Status* reserve(size_t);
     T* reset_memory(size_t);
     T* reset_memory_for_deleted(size_t, int);
@@ -391,7 +391,7 @@ T* TVector<T>::reset_memory_for_deleted(size_t new_size, int deleted_count) {
     if (deleted_count >= 0.1 * _size) {
         _capacity = (new_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
         T* new_vec = new T[_capacity];
-        for (int i = 0, j = 0; j < _size; i++) {
+        for (int i = 0, j = 0; j < _size && i < _capacity; i++) {
             if (_status[i] == Status::Busy) {
                 new_vec[j] = _vec[i];
                 _status[j] = Status::Busy;
@@ -427,15 +427,13 @@ template <class T>
 void TVector<T>::resize(size_t count, const T& value) {
     if (_size == count) {
         return;
-    }
-    else if (count > _size) {
+    } else if (count > _size) {
         _vec = reset_memory(count);
         for (int i = _size - 1; i < count; i++) {
             _vec[i] = value;
             _status[i] = Status::Busy;
         }
-    }
-    else {
+    } else {
         T* data = this->data();
         _vec = new T[_capacity];
         for (int i = 0, j = 0; j < count; i++) {
@@ -462,7 +460,8 @@ int TVector<T>::count_deleted() const {
 
 template <class T>
 int TVector<T>::count_right_pos(const T* pos) const {
-    int* correct = this->begin(), i;
+    T* correct = this->begin();
+    int i;
     for (i = 0; i < _size; i++) {
         if (_status[i] != Status::Deleted) correct++;
         if (correct == pos + 1) break;

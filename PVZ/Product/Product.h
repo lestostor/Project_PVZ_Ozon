@@ -15,4 +15,6 @@ class Product {
      Product(const int, const int, const bool, const int,
          const bool, const Date);
      Product(const Product&);
+
+     bool operator == (const Product&);
 };

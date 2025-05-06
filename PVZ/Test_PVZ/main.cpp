@@ -54,6 +54,8 @@ int main() {
 
     //  test cell
     Cell cell1, cell2(2, {product1, product2}), cell3(cell2);
+    cell2.delete_product(product2);
+    cell2.add_new_products(product3);
 
     return 0;
 }

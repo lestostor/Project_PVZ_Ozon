@@ -48,5 +48,5 @@ namespace CppCLRWinFormsProject {
             this->ResumeLayout(false);
         }
 #pragma endregion
-	};
+    };
 }  // namespace CppCLRWinFormsProject

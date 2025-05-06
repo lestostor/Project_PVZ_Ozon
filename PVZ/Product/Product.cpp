@@ -17,3 +17,11 @@ Product::Product(const Product& other_product) {
     _returnability = other_product._returnability;
     _date = other_product._date;
 }
+
+bool Product::operator==(const Product& second_product) {
+    if (_code == second_product._code && _price == second_product._price &&
+        _age_limit == second_product._age_limit && _returnability ==
+        second_product._returnability && _date == second_product._date)
+        return true;
+    return false;
+}

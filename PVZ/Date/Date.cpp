@@ -30,3 +30,9 @@ bool Date::if_leap_year(const int year) {
         year % 400 == 0) return true;
     return false;
 }
+
+bool Date::operator==(const Date& second_date) {
+    if (_day == second_date._day && _month == second_date._month &&
+        _year == second_date._year) return true;
+    return false;
+}
