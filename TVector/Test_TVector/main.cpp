@@ -295,7 +295,7 @@ bool test22_try_pop_front_without_reset_memory() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     int expected_result = 2;
     vec.pop_front();
-    int actual_result = *(vec.begin());
+    int actual_result = vec[0];
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -391,7 +391,7 @@ bool test32_try_insert_after_pop_front() {
     int expected_result = 3;
     vec.pop_front();
     vec.insert(vec.begin() + 1, 3);
-    int actual_result = *(vec.begin() + 1);
+    int actual_result = vec[1];
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -401,7 +401,7 @@ bool test33_try_insert_after_erase() {
     int expected_result = 3;
     vec.erase(vec.begin() + 1);
     vec.insert(vec.begin() + 3, 3);
-    int actual_result = *(vec.begin() + 4);  // +1 - without override
+    int actual_result = vec[3];
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -1016,7 +1016,7 @@ bool test87_try_operator_index_out_of_range() {
     return TestSystem::check_not_equal(expected_result, actual_result);
 }
 
-bool test_88_check_the_insertion_into_an_empty_vector() {
+bool test88_try_insert_into_an_empty_vector() {
     TVector<int> vec1;
     vec1.push_front(1);
     TVector<int> res1({ 1 });
@@ -1030,6 +1030,53 @@ bool test_88_check_the_insertion_into_an_empty_vector() {
     bool actual_result = true;
     if (vec1 == res1)
         actual_result = true;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test89_try_reserve() {
+    TVector<int> vec;
+    vec.reserve(20);
+    int expected_result = 20;
+    int actual_result = vec.capacity();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test90_try_delete_last_elem() {
+    TVector<int> vec({ 1 });
+    vec.erase(vec.begin());
+    int expected_result = 0;
+    int actual_result = vec.size();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test91_try_insert_elem_after_delete_last() {
+    TVector<int> vec({ 1 });
+    vec.erase(vec.begin());
+    vec.insert(vec.begin(), 2);
+    int expected_result = 2;
+    int actual_result = vec[0];
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test92_try_shrink_to_fit_empty_vec() {
+    TVector<int> vec;
+    size_t expected_result = 0;
+    vec.shrink_to_fit();
+    size_t actual_result = vec.capacity();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test93_try_add_elem_after_shrink_to_fit() {
+    TVector<int> vec;
+    size_t expected_result = 1;
+    vec.shrink_to_fit();
+    vec.insert(vec.begin(), 1);
+    size_t actual_result = vec.size();
 
     return TestSystem::check(expected_result, actual_result);
 }
@@ -1192,8 +1239,17 @@ int main() {
         "test86_try_operator_index");
     TestSystem::start_test(test87_try_operator_index_out_of_range,
         "test87_try_operator_index_out_of_range");
-    TestSystem::start_test(test_88_check_the_insertion_into_an_empty_vector,
-        "test_88_check_the_insertion_into_an_empty_vector");
+    TestSystem::start_test(test88_try_insert_into_an_empty_vector,
+        "test88_try_insert_into_an_empty_vector");
+    TestSystem::start_test(test89_try_reserve, "test89_try_reserve");
+    TestSystem::start_test(test90_try_delete_last_elem,
+        "test90_try_delete_last_elem");
+    TestSystem::start_test(test91_try_insert_elem_after_delete_last,
+        "test91_try_insert_elem_after_delete_last");
+    TestSystem::start_test(test92_try_shrink_to_fit_empty_vec,
+        "test92_try_shrink_to_fit_empty_vec");
+    TestSystem::start_test(test93_try_add_elem_after_shrink_to_fit,
+        "test93_try_add_elem_after_shrink_to_fit");
 
     TestSystem::print_final_info();
 
