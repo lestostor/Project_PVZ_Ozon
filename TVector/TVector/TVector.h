@@ -391,7 +391,7 @@ T* TVector<T>::reset_memory_for_deleted(size_t new_size, int deleted_count) {
     if (deleted_count >= 0.1 * _size) {
         _capacity = (new_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
         T* new_vec = new T[_capacity];
-        for (int i = 0, j = 0; j < _size; i++) {
+        for (int i = 0, j = 0; j < _size && i < _capacity; i++) {
             if (_status[i] == Status::Busy) {
                 new_vec[j] = _vec[i];
                 _status[j] = Status::Busy;
