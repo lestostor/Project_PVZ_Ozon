@@ -59,6 +59,8 @@ class TVector {
 
     TVector<T> assign(const TVector&);
 
+    void reserve(size_t);
+
     //  operators
     TVector<T>& operator = (const TVector<T>&);
     bool operator == (const TVector<T>&);
@@ -112,7 +114,6 @@ class TVector {
     T& at(const int) const;
 
  private:
-    Status* reserve(size_t);
     T* reset_memory(size_t);
     T* reset_memory_for_deleted(size_t, int);
     int count_deleted() const;
@@ -127,9 +128,9 @@ class TVector {
 template <class T>
 TVector<T>::TVector() {
     _size = 0;
-    _capacity = 0;
-    _vec = new T[0];
-    _status = new Status[0];
+    _capacity = STEP_OF_CAPACITY;
+    _vec = new T[_capacity];
+    _status = new Status[_capacity];
 }
 
 template <class T>
@@ -214,8 +215,9 @@ void TVector<T>::push_front(const T& value) {
 
 template <class T>
 void TVector<T>::insert(const T* pos, const T& value) {
+    if (_size + 1 >= _capacity)
+        _vec = reset_memory(_size + 1);
     int right_pos = count_right_pos(pos);
-    _vec = reset_memory(_size + 1);
     int i = _size + count_deleted();
     for (i; i > right_pos; i--) {
         _vec[i] = _vec[i - 1];
@@ -321,7 +323,13 @@ bool TVector<T>::operator != (const TVector<T>& other_vector) {
 
 template <class T>
 T& TVector<T>::operator[](const int pos) const {
-    return at(pos);
+    int correct = 0, i;
+    for (i = 0; i < _size; i++) {
+        if (_status[i] != Status::Deleted) correct++;
+        if (correct == pos + 1) break;
+    }
+
+    return _vec[i];
 }
 
 template <class T>
@@ -350,42 +358,51 @@ T& TVector<T>::at(const int pos) const {
 }
 
 template <class T>
-Status* TVector<T>::reserve(size_t new_cap) {
-    if (new_cap >= _capacity) {
-        Status* new_status = new Status[new_cap];
-        int i = 0;
-        for (i; i < _capacity; i++) {
-            new_status[i] = _status[i];
-        }
-
-        for (i; i < new_cap; i++)
-            new_status[i] = Status::Empty;
-
-        delete[] _status;
-        return new_status;
+void TVector<T>::reserve(size_t new_cap) {
+    if (new_cap <= _capacity) {
+        return;
     }
-    return _status;
+    T* new_vec = new T[new_cap];
+    Status* new_status = new Status[new_cap];
+    for (int i = 0, j = 0; i < _capacity; i++) {
+        if (_status[i] == Status::Busy) {
+            new_vec[j] = _vec[i];
+            new_status[j] = Status::Busy;
+            j++;
+        }
+    }
+    for (int i = _size; i < new_cap; i++) {
+        new_status[i] = Status::Empty;
+    }
+    delete[] _vec;
+    delete[] _status;
+    _vec = new_vec;
+    _status = new_status;
+    _capacity = new_cap;
 }
+
 
 template <class T>
 T* TVector<T>::reset_memory(size_t new_size) {
-    if (new_size / STEP_OF_CAPACITY >= 1) {
-        size_t new_capacity = (new_size / STEP_OF_CAPACITY + 1)
-            * STEP_OF_CAPACITY;
-        T* new_vec = new T[new_capacity];
-        _status = reserve(new_capacity);
+    size_t new_capacity = (new_size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
+    reserve(new_capacity);
+    T* new_vec = new T[new_capacity];
 
-        for (int i = 0, j = 0; i < _size; i++)
-            if (_status[i] == Status::Busy) {
-                new_vec[j] = _vec[i];
-                j++;
-            }
-
-        _capacity = new_capacity;
-        delete[] _vec;
-        return new_vec;
+    for (int i = 0, j = 0; j < _size; i++)
+        if (_status[i] == Status::Busy) {
+            new_vec[j] = _vec[i];
+            j++;
+        }
+    delete[] _status;
+    _status = new Status[new_capacity];
+    for (int i = 0; i < new_capacity; i++) {
+        if (i < _size) _status[i] = Status::Busy;
+        else _status[i] = Status::Empty;
     }
-    return _vec;
+    _capacity = new_capacity;
+    delete[] _vec;
+
+    return new_vec;
 }
 
 template <class T>
@@ -411,6 +428,17 @@ T* TVector<T>::reset_memory_for_deleted(size_t new_size, int deleted_count) {
 template <class T>
 void TVector<T>::shrink_to_fit() {
     _capacity = _size;
+    if (_size == 0) {
+        if (_vec != nullptr) {
+            delete[] _vec;
+            _vec = nullptr;
+        }
+        if (_status != nullptr) {
+            delete[] _status;
+            _status = nullptr;
+        }
+        return;
+    }
     T* data = this->data();
     _vec = new T[_capacity];
     for (int i = 0, j = 0; j < _size; i++) {
@@ -419,10 +447,11 @@ void TVector<T>::shrink_to_fit() {
             j++;
         }
     }
+    delete[] data;
+    delete[] _status;
     _status = new Status[_capacity];
     for (int i = 0; i < _size; i++)
         _status[i] = Status::Busy;
-    delete[] data;
 }
 
 template <class T>
@@ -559,6 +588,6 @@ void sort_vector(TVector<T>& vec) {
 
 template <class T>
 TVector<T>::~TVector() {
-    delete[] _vec;
-    delete[] _status;
+    if (_vec != nullptr) delete[] _vec;
+    if (_status != nullptr) delete[] _status;
 }
