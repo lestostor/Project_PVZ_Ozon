@@ -8,7 +8,6 @@ namespace CppCLRWinFormsProject {
     using namespace System::Windows::Forms;
     using namespace System::Data;
     using namespace System::Drawing;
-    using namespace Microsoft::Office::Interop::Excel;
     ///  <summary>
     ///  Summary for Form1
     ///  </summary>
@@ -16,23 +15,6 @@ namespace CppCLRWinFormsProject {
     public:
         Form1(void) {
             InitializeComponent();
-            ApplicationClass^ table = gcnew ApplicationClass();
-            Workbook^ book = table->Workbooks->Open("C:/Users/user/Desktop/Test.xlsx",
-                0,
-                false,
-                5,
-                "",
-                "",
-                true,
-                XlPlatform::xlWindows,
-                "\t",
-                false,
-                false,
-                0,
-                true,
-                1,
-                0);
-            book->Close(false, "C:/Users/user/Desktop/Test.xlsx", nullptr);
         }
     protected:
         ///  <summary>
