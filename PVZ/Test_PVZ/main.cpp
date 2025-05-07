@@ -57,5 +57,6 @@ int main() {
     cell2.delete_product(product2);
     cell2.add_new_products(product3);
 
+
     return 0;
 }
