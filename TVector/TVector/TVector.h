@@ -272,6 +272,8 @@ template <class T>
 TVector<T> TVector<T>::assign(const TVector& other_vector) {
     if (&other_vector == NULL)
         throw std::logic_error("NULL object");
+    else if (&other_vector == this)
+        return *this;
 
     this->_size = other_vector._size;
     this->_capacity = other_vector._capacity;
@@ -281,7 +283,7 @@ TVector<T> TVector<T>::assign(const TVector& other_vector) {
     for (int i = 0; i < this->_capacity; i++) {
         if (i < other_vector._size) {
             this->_vec[i] = other_vector._vec[i];
-            this->_status[i] = Status::Busy;
+            this->_status[i] = other_vector._status[i];
         }
         else this->_status[i] = Status::Empty;
     }
