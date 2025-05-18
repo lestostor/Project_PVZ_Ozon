@@ -37,3 +37,12 @@ bool Cell::operator > (const Cell& second_cell) {
 bool Cell::operator < (const Cell& second_cell) {
     return !(*this > second_cell);
 }
+
+TVector<Product> get_products(const TVector<Cell>& cells,
+    const long long int code) {
+    int number = code % 1000;
+    if (code / pow(10, 12) > 9 || number >= cells.size() ||
+        cells[number]._products.size() == 0)
+        throw std::logic_error("Product isn't found");
+    return cells[number]._products;
+}
