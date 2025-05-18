@@ -1104,23 +1104,28 @@ int main() {
         "test13_try_check_is_empty_if_empty");
     TestSystem::start_test(test14_try_clear_vector,
         "test14_try_clear_vector");
-    TestSystem::start_test(test15_try_push_back_without_reset_memory, "test15_try_push_back");
+    TestSystem::start_test(test15_try_push_back_without_reset_memory,
+        "test15_try_push_back_without_reset_memory");
     TestSystem::start_test(test16_try_push_back_with_reset_memory,
         "test16_try_push_back_with_reset_memory");
-    TestSystem::start_test(test17_try_push_front_without_reset_memory, "test17_try_push_front");
+    TestSystem::start_test(test17_try_push_front_without_reset_memory,
+        "test17_try_push_front_without_reset_memory");
     TestSystem::start_test(test18_try_push_front_with_reset_memory,
         "test18_try_push_front_with_reset_memory");
-    TestSystem::start_test(test19_try_pop_back_with_reset_memory, "test19_try_pop_back");
+    TestSystem::start_test(test19_try_pop_back_with_reset_memory,
+        "test19_try_pop_back_with_reset_memory");
     TestSystem::start_test(test20_try_pop_back_without_reset_memory,
         "test20_try_pop_back_without_reset_memory");
-    TestSystem::start_test(test21_try_pop_front_with_reset_memory, "test21_try_pop_front");
+    TestSystem::start_test(test21_try_pop_front_with_reset_memory,
+        "test21_try_pop_front_with_reset_memory");
     TestSystem::start_test(test22_try_pop_front_without_reset_memory,
         "test22_try_pop_front_without_reset_memory");
     TestSystem::start_test(test23_try_push_back_after_pop_front,
         "test23_try_push_back_after_pop_front");
     TestSystem::start_test(test24_try_push_front_after_pop_back,
         "test24_try_push_front_after_pop_back");
-    TestSystem::start_test(test25_try_erase_elem_with_reset_mem, "test25_try_erase_elem");
+    TestSystem::start_test(test25_try_erase_elem_with_reset_mem,
+        "test25_try_erase_elem_with_reset_mem");
     TestSystem::start_test(test26_try_erase_elem_without_reset_memory,
         "test26_try_erase_elem_without_reset_memory");
     TestSystem::start_test(test27_try_push_back_after_erase_with_reset_mem,
@@ -1129,7 +1134,8 @@ int main() {
         "test28_try_push_front_after_erase");
     TestSystem::start_test(test29_try_push_back_after_erase_without_reset_mem,
         "test29_try_push_back_after_erase_without_reset_memory");
-    TestSystem::start_test(test30_try_insert_without_reset_memory, "test30_try_insert");
+    TestSystem::start_test(test30_try_insert_without_reset_memory,
+        "test30_try_insert_without_reset_memory");
     TestSystem::start_test(test31_try_insert_with_reset_capacity,
         "test31_try_insert_with_reset_capacity");
     TestSystem::start_test(test32_try_insert_after_pop_front,
