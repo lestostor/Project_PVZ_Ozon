@@ -66,6 +66,7 @@ class TVector {
     bool operator == (const TVector<T>&);
     bool operator != (const TVector<T>&);
     T& operator[](const int) const;
+    T& operator[](const int);
     template <class T>
     friend std::ostream& operator << (std::ostream&, const TVector<T>&);
 
@@ -326,6 +327,17 @@ bool TVector<T>::operator != (const TVector<T>& other_vector) {
 
 template <class T>
 T& TVector<T>::operator[](const int pos) const {
+    int correct = 0, i;
+    for (i = 0; i < _size; i++) {
+        if (_status[i] != Status::Deleted) correct++;
+        if (correct == pos + 1) break;
+    }
+
+    return _vec[i];
+}
+
+template <class T>
+T& TVector<T>::operator[](const int pos) {
     int correct = 0, i;
     for (i = 0; i < _size; i++) {
         if (_status[i] != Status::Deleted) correct++;
