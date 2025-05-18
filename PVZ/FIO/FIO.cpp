@@ -32,6 +32,16 @@ FIO::FIO(const FIO& original) {
     _patronymic = original._patronymic;
 }
 
+bool FIO::operator ==(const FIO& second_fio) {
+    if (_name == second_fio._name && _surname == second_fio._surname &&
+        _patronymic == second_fio._patronymic) return true;
+    return false;
+}
+
+bool FIO::operator !=(const FIO& second_fio) {
+    return !(*this == second_fio);
+}
+
 const std::string FIO::get_first_name() {
     return _name;
 }

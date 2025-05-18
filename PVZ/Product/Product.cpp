@@ -25,3 +25,16 @@ bool Product::operator==(const Product& second_product) {
         return true;
     return false;
 }
+
+bool Product::operator!=(const Product& second_product) {
+    return !(*this == second_product);
+}
+
+bool Product::operator >(const Product& second_product) {
+    if (this->_date > second_product._date) return true;
+    return false;
+}
+
+bool Product::operator <(const Product& second_product) {
+    return !(*this > second_product);
+}

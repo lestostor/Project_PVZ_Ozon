@@ -37,6 +37,17 @@ Address::Address(const Address& other_address) {
     _building = other_address._building;
 }
 
+bool Address::operator ==(const Address& second_address) {
+    if (_area == second_address._area && _region == second_address._region &&
+        _city == second_address._city && _street == second_address._street &&
+        _building == second_address._building) return true;
+    return false;
+}
+
+bool Address::operator !=(const Address& second_address) {
+    return !(*this == second_address);
+}
+
 bool Address::check_correction(const std::string str) {
     int lenght = str.length();
     for (int i = 0; i < lenght; i++) {

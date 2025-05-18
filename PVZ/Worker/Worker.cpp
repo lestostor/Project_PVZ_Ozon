@@ -22,6 +22,16 @@ Worker::Worker(const Worker& other_worker) {
     _address = other_worker._address;
 }
 
+bool Worker::operator ==(const Worker& second_worker) {
+    if (_worker == second_worker._worker && _mail == second_worker._mail &&
+        _address == second_worker._address) return true;
+    return false;
+}
+
+bool Worker::operator !=(const Worker& second_worker) {
+    return !(*this == second_worker);
+}
+
 bool Worker::check_mail(const std::string mail) {
     for (int i = 0; i < mail.size(); i++) {
         if (mail[i] == '@') return true;

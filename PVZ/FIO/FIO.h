@@ -11,6 +11,9 @@ class FIO {
     FIO();
     FIO(const FIO& original);
 
+    bool operator == (const FIO&);
+    bool operator != (const FIO&);
+
     const std::string get_first_name();
     const std::string get_second_name();
     const std::string get_last_name();

@@ -15,6 +15,9 @@ class Worker {
     Worker(const FIO, const std::string, const Address);
     Worker(const Worker&);
 
+    bool operator == (const Worker&);
+    bool operator != (const Worker&);
+
  private:
     bool check_mail(const std::string);
 };

@@ -10,26 +10,38 @@
 
 int main() {
     //  test FIO
-    FIO person1, person2("желтухин", "михаил", "давидович"), person3(person2);
+    std::cout << "TEST FIO" << std::endl;
+
+    FIO person1, person2("Zheltuhin", "Michael", "davidovich"), person3(person2);
     try {
-        FIO person4("смирнов1", "олег", "николаевич");
+        FIO person4("smirnov1", "oleg", "nikolaevich");
     }
     catch (const std::exception& ex) {
         std::cerr << ex.what();
     }
+    std::cout << "person2 == person3 is " << (person2 == person3) << std::endl;
+
+    std::cout << std::endl;
 
     //  test address
-    Address address1, address2("ивановская", "ивановский",
-        "иваново", "ивановская", 50), address3(address2);
+    std::cout << "TEST ADDRESS" << std::endl;
+
+    Address address1, address2("ivanovskaya", "ivanovskiy",
+        "ivanovo", "ivanovskaya", 50), address3(address2);
     try {
-        Address address2("ивановская", "ивановски2й",
-            "иваново", "ивановская", 50);
+        Address address2("ivanovskaya", "ivanovski2y",
+            "ivanovo", "ivanovskaya", 50);
     }
     catch (const std::exception& ex) {
         std::cerr << ex.what();
     }
+    std::cout << "address2 == address3 is " << (address2 == address3) << std::endl;
+
+    std::cout << std::endl;
 
     //  test worker
+    std::cout << "TEST WORKER" << std::endl;
+
     Worker worker1, worker2(person2, "workmail@gmail.com", address2),
         worker3(worker2);
     try {
@@ -38,25 +50,39 @@ int main() {
     catch (const std::exception& ex) {
         std::cerr << ex.what();
     }
+    std::cout << std::endl;
 
     //  test date
-    Date date1, date2(1, 3, 25), date3(date2);
+    std::cout << "TEST DATE" << std::endl;
+
+    Date date1, date2(1, 3, 2025), date3(date2);
     try {
         Date date4(29, 2, 2025);
     }
     catch (const std::exception& ex) {
         std::cerr << ex.what();
     }
+    std::cout << "date2 > date1 is " << (date2 > date1) << std::endl;
+
+    std::cout << std::endl;
 
     //  test product
+    std::cout << "TEST PRODUCT" << std::endl;
+
     Product product1, product2(1111, 10, false, 0, false, date2),
         product3(product2);
+    std::cout << "product2 > product1 is " << (product2 > product1) << std::endl;
+
+    std::cout << std::endl;
 
     //  test cell
+    std::cout << "TEST CELL" << std::endl;
+
     Cell cell1, cell2(2, {product1, product2}), cell3(cell2);
     cell2.delete_product(product2);
     cell2.add_new_products(product3);
-
+    std::cout << "cell2 > cell1 is " << (cell2 > cell1) << std::endl;
+    std::cout << "cell2 == cell3 is " << (cell2 == cell3) << std::endl;
 
     return 0;
 }

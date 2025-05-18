@@ -19,3 +19,21 @@ void Cell::add_new_products(const Product& product) {
 void Cell::delete_product(const Product& product) {
     _products.erase(_products.begin() + find(_products, product));
 }
+
+bool Cell::operator == (const Cell& second_cell) {
+    if (this->_num == second_cell._num) return true;
+    return false;
+}
+
+bool Cell::operator != (const Cell& second_cell) {
+    return !(*this == second_cell);
+}
+
+bool Cell::operator > (const Cell& second_cell) {
+    if (this->_num > second_cell._num) return true;
+    return false;
+}
+
+bool Cell::operator < (const Cell& second_cell) {
+    return !(*this > second_cell);
+}

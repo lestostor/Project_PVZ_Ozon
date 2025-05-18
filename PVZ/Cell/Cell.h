@@ -13,6 +13,11 @@ class Cell {
     Cell(const int, const TVector<Product>);
     Cell(const Cell&);
 
+    bool operator == (const Cell&);
+    bool operator != (const Cell&);
+    bool operator > (const Cell&);
+    bool operator < (const Cell&);
+
     void add_new_products(const Product&);
     void delete_product(const Product&);
 };

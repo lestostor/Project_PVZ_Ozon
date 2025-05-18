@@ -17,4 +17,7 @@ class Product {
      Product(const Product&);
 
      bool operator == (const Product&);
+     bool operator != (const Product&);
+     bool operator > (const Product&);
+     bool operator < (const Product&);
 };

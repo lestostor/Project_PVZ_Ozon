@@ -31,8 +31,27 @@ bool Date::if_leap_year(const int year) {
     return false;
 }
 
-bool Date::operator==(const Date& second_date) {
+bool Date::operator ==(const Date& second_date) {
     if (_day == second_date._day && _month == second_date._month &&
         _year == second_date._year) return true;
     return false;
+}
+
+bool Date::operator !=(const Date& second_date) {
+    return !(*this == second_date);
+}
+
+bool Date::operator > (const Date& second_date) {
+    if (this->_year > second_date._year) return true;
+    else if (this->_year < second_date._year) return false;
+
+    if (this->_month > second_date._month) return true;
+    else if (this->_month < second_date._month) return false;
+
+    if (this->_day > second_date._day) return true;
+    else if (this->_day < second_date._day) return false;
+}
+
+bool Date::operator < (const Date& second_date) {
+    return !(*this > second_date);
 }

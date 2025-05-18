@@ -12,6 +12,9 @@ class Date {
      Date(const Date&);
 
      bool operator == (const Date&);
+     bool operator != (const Date&);
+     bool operator > (const Date&);
+     bool operator < (const Date&);
 
  private:
      bool if_leap_year(const int year);

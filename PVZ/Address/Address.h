@@ -14,6 +14,9 @@ class Address {
     Address(const char*, const char*, const char*, const char*, const int);
     Address(const Address&);
 
+    bool operator == (const Address&);
+    bool operator != (const Address&);
+
  private:
     bool check_correction(const std::string);
     std::string convert_to_normal_form(const std::string);
