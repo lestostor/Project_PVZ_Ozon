@@ -36,11 +36,11 @@ class TVector {
 
     //  friends
     template <class T>
-    friend int find(const TVector<T>&, const T&);
+    friend const int find(const TVector<T>&, const T&);
     template <class T>
-    friend int find_last(const TVector<T>&, const T&);
+    friend const int find_last(const TVector<T>&, const T&);
     template <class T>
-    friend int* find_all(const TVector<T>&, const T&);
+    friend const int* find_all(const TVector<T>&, const T&);
 
     template <class T>
     friend void shuffle(TVector<T>&);
@@ -64,6 +64,7 @@ class TVector {
     bool operator == (const TVector<T>&);
     bool operator != (const TVector<T>&);
     T& operator[](const int) const;
+    T& operator[](const int);
     template <class T>
     friend std::ostream& operator << (std::ostream&, const TVector<T>&);
 
@@ -323,6 +324,11 @@ T& TVector<T>::operator[](const int pos) const {
 }
 
 template <class T>
+T& TVector<T>::operator[](const int pos) {
+    return at(pos);
+}
+
+template <class T>
 std::ostream& operator << (std::ostream& out, const TVector<T>& vector) {
     for (int i = 0; i < vector._size; i++) {
         if (vector._status[i] == Status::Busy) {
@@ -470,7 +476,7 @@ int TVector<T>::count_right_pos(const T* pos) const {
 }
 
 template <class T>
-int find(const TVector<T>& vec, const T& value) {
+const int find(const TVector<T>& vec, const T& value) {
     int deleted = 0;
     for (int i = 0; i < vec._size; i++) {
         if (vec._status[i] != Status::Busy) deleted++;
@@ -481,7 +487,7 @@ int find(const TVector<T>& vec, const T& value) {
 }
 
 template <class T>
-int find_last(const TVector<T>& vec, const T& value) {
+const int find_last(const TVector<T>& vec, const T& value) {
     int deleted = 0;
     for (int i = vec._size - 1; i >= 0; i--) {
         if (vec._status[i] != Status::Busy) deleted++;
@@ -492,7 +498,7 @@ int find_last(const TVector<T>& vec, const T& value) {
 }
 
 template <class T>
-int* find_all(const TVector<T>& vec, const T& value) {
+const int* find_all(const TVector<T>& vec, const T& value) {
     int* result = nullptr, size = 0, deleted = 0;
     for (int i = 0; i < vec._size; i++) {
         if (vec._status[i] != Status::Busy) deleted++;

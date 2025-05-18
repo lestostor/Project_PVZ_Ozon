@@ -89,8 +89,8 @@ int main() {
     cell2.add_new_products(product3);
     std::cout << "cell2 > cell1 is " << (cell2 > cell1) << std::endl;
     std::cout << "cell2 == cell3 is " << (cell2 == cell3) << std::endl;
-    
-    std::cout << "TEST CELL: get product" << std::endl;
+
+    std::cout << "TEST CELL: get products" << std::endl;
     TVector<Cell> cells({ cell1, cell2 });
     TVector<Product> products = get_products(cells, 4700000083001);  //  cell2
 
@@ -124,6 +124,9 @@ int main() {
     catch (const std::exception& ex) {
         std::cerr << ex.what();  //  (many digits)
     }
+
+    std::cout << "TEST CELL: give products" << std::endl;
+    give_products(cell2, products);
 
     return 0;
 }

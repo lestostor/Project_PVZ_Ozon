@@ -14,13 +14,15 @@ class Cell {
     Cell(const int, const TVector<Product>);
     Cell(const Cell&);
 
-    bool operator == (const Cell&);
-    bool operator != (const Cell&);
-    bool operator > (const Cell&);
-    bool operator < (const Cell&);
+    bool operator == (const Cell&) const;
+    bool operator != (const Cell&) const;
+    bool operator > (const Cell&) const;
+    bool operator < (const Cell&) const;
 
     void add_new_products(const Product&);
     void delete_product(const Product&);
 
-    friend TVector<Product> get_products(const TVector<Cell>&, const long long int);
+    friend TVector<Product> get_products(const TVector<Cell>&,
+        const long long int);
+    friend void give_products(Cell&, TVector<Product>&);
 };
