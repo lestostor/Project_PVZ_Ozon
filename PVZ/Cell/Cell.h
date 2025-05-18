@@ -24,5 +24,7 @@ class Cell {
 
     friend TVector<Product> get_products(const TVector<Cell>&,
         const long long int);
-    friend void give_products(Cell&, TVector<Product>&);
+    friend void give_products(Cell&, TVector<Product>&, const int);
+    friend void return_products(Cell&, TVector<Product>&);
+    friend void return_products(TVector<Product>, const int);
 };

@@ -20,4 +20,6 @@ class Product {
      bool operator != (const Product&);
      bool operator > (const Product&);
      bool operator < (const Product&);
+
+     void set_code(const int);
 };

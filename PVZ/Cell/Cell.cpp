@@ -48,9 +48,18 @@ TVector<Product> get_products(const TVector<Cell>& cells,
     return cells[number]._products;
 }
 
-void give_products(Cell& cell, TVector<Product>& products) {
+void give_products(Cell& cell, TVector<Product>& products, const int code) {
     for (int i = 0; i < products.size(); i++) {
-        int num = find(cell._products, products[i]);
-        cell._products.erase(cell._products.begin() + num);
+        cell.delete_product(products[i]);
+        products[i].set_code(code);
     }
+}
+
+void return_products(Cell& cell, TVector<Product>& products) {
+    for (int i = 0; i < products.size(); i++)
+        cell.delete_product(products[i]);
+}
+
+void return_products(TVector<Product> returned, const int code) {
+
 }

@@ -16,6 +16,8 @@ class Date {
      bool operator > (const Date&);
      bool operator < (const Date&);
 
+     void set_date_for_return(const int, const int, const int);
+
  private:
      bool if_leap_year(const int year);
 };

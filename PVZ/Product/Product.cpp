@@ -38,3 +38,7 @@ bool Product::operator >(const Product& second_product) {
 bool Product::operator <(const Product& second_product) {
     return !(*this > second_product);
 }
+
+void Product::set_code(const int code) {
+    _code = code;
+}

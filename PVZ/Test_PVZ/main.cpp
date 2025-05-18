@@ -67,6 +67,14 @@ int main() {
     }
     std::cout << "date2 > date1 is " << (date2 > date1) << std::endl;
 
+    std::cout << "TEST DATE: set date for return" << std::endl;
+    date2.set_date_for_return(3, 5, 2025);
+    date2.set_date_for_return(18, 5, 2025);
+    date2.set_date_for_return(20, 6, 2025);
+    date2.set_date_for_return(25, 12, 2025);
+    date2.set_date_for_return(13, 2, 2025);
+    date2.set_date_for_return(15, 2, 2024);
+
     std::cout << std::endl;
 
     //  test product
@@ -124,9 +132,14 @@ int main() {
     catch (const std::exception& ex) {
         std::cerr << ex.what();  //  (many digits)
     }
+    std::cout << std::endl;
 
     std::cout << "TEST CELL: give products" << std::endl;
-    give_products(cell2, products);
+    give_products(cell2, products, 123);
+
+    std::cout << "TEST CELL: return products" << std::endl;
+    TVector<Product> test_product({ product2 });
+    return_products(cell3, test_product);
 
     return 0;
 }
