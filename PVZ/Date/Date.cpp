@@ -9,7 +9,8 @@ Date::Date() {
 }
 
 Date::Date(const int day, const int month, const int year) {
-    if (day > 30 || month > 12 ||
+    if (day > 30 && (month == 4 || month == 6 || month == 9 || month == 11) ||
+        day > 31 || month > 12 ||
         month == 2 && day == 29 && !if_leap_year(year))
         throw std::invalid_argument("Wrong date\n");
     _day = day;
@@ -56,32 +57,26 @@ bool Date::operator < (const Date& second_date) {
     return !(*this > second_date);
 }
 
-void Date::set_date_for_return(const int day, const int month, const int year)
-{
-    if ((month == 1 || month == 3 || month == 5 || month == 7 ||
-        month == 8 || month == 10 || month == 12) && day + 15 > 31)
-    {
-        _day = 15 - (31 - day);
-        if (month + 1 > 12) 
-        {
-            _month = 1;
-            _year += 1;
-        } else {
-            _month = month + 1;
-        }
-    } else if ((month == 4 || month == 6 || month == 9 || month == 11 &&
-        day + 15 <= 30)) {
-        _day = 15 - (30 - day);
-        _month = month + 1;
-    } else if (month == 2 && if_leap_year(year) && day + 15 > 29) {
-        _day = 15 - (29 - day);
-        _month = month + 1;
-    } else if (month == 2 && !if_leap_year(year) && day + 15 > 28) {
-        _day = 15 - (28 - day);
-        _month = month + 1;
-    } else {
-        _day = day + 15;
-        _month = month;
-        _year = year;
-    }
+void Date::set_day(const int day) {
+    _day = day;
+}
+
+void Date::set_month(const int month) {
+    _month = month;
+}
+
+void Date::set_year(const int year) {
+    _year = year;
+}
+
+int Date::get_day() const {
+    return _day;
+}
+
+int Date::get_month() const {
+    return _month;
+}
+
+int Date::get_year() const {
+    return _year;
 }

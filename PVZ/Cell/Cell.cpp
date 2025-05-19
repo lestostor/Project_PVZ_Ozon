@@ -12,7 +12,7 @@ Cell::Cell(const Cell& other_cell) {
     _products = other_cell._products;
 }
 
-void Cell::add_new_products(const Product& product) {
+void Cell::add_new_product(const Product& product) {
     _products.push_back(product);
 }
 
@@ -38,20 +38,25 @@ bool Cell::operator < (const Cell& second_cell) const {
     return !(*this > second_cell);
 }
 
-TVector<Product> get_products(const TVector<Cell>& cells,
+TVector<Product> Cell::get_products() {
+    return _products;
+}
+
+TVector<Product> get_products_by_code(const TVector<Cell>& cells,
     const long long int code) {
     int number = code % 1000;
-    if (code / pow(10, 12) > 9 || number >= cells.size() ||
-        cells[number]._products.size() == 0)
+    if (code / pow(10, 12) > 9 || number > cells.size() ||
+        cells[number - 1]._products.size() == 0)
         throw std::logic_error("Product isn't found");
 
-    return cells[number]._products;
+    return cells[number - 1]._products;
 }
 
 void give_products(Cell& cell, TVector<Product>& products, const int code) {
     for (int i = 0; i < products.size(); i++) {
         cell.delete_product(products[i]);
         products[i].set_code(code);
+        //products[i].set_date_for_return(today, today, today);
     }
 }
 
@@ -60,6 +65,6 @@ void return_products(Cell& cell, TVector<Product>& products) {
         cell.delete_product(products[i]);
 }
 
-void return_products(TVector<Product> returned, const int code) {
+void return_products(const int code) {
 
 }

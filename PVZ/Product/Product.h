@@ -22,4 +22,5 @@ class Product {
      bool operator < (const Product&);
 
      void set_code(const int);
+     void set_date_for_return(const Date&);
 };

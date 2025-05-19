@@ -19,12 +19,14 @@ class Cell {
     bool operator > (const Cell&) const;
     bool operator < (const Cell&) const;
 
-    void add_new_products(const Product&);
+    TVector<Product> get_products();
+
+    void add_new_product(const Product&);
     void delete_product(const Product&);
 
-    friend TVector<Product> get_products(const TVector<Cell>&,
+    friend TVector<Product> get_products_by_code(const TVector<Cell>&,
         const long long int);
     friend void give_products(Cell&, TVector<Product>&, const int);
     friend void return_products(Cell&, TVector<Product>&);
-    friend void return_products(TVector<Product>, const int);
+    friend void return_products(const int);
 };
