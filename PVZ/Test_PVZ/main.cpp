@@ -432,6 +432,36 @@ bool test10_try_get_products_by_code() {
         TestSystem::check(expected_result5, actual_result5);
 }
 
+bool test11_try_give_products() {
+    size_t expected_result = 1;
+    Date date1(10, 3, 2025), date2(11, 3, 2025);
+    Product product1(1111, 250, true, 0, true, date2),
+        product2(2222, 10, false, 0, false, date2),
+        product3(3333, 1563, true, 18, false, date2);
+    Cell cell(1, { product1, product2, product3 });
+    TVector<Product> products({ product1, product2 });
+
+    give_products(cell, products, 1000, date1);
+    size_t actual_result = cell.get_products().size();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+bool test12_try_return_products() {
+    size_t expected_result = 1;
+    Date date1(10, 3, 2025), date2(11, 3, 2025);
+    Product product1(1111, 250, true, 0, true, date2),
+        product2(2222, 10, false, 0, false, date2),
+        product3(3333, 1563, true, 18, false, date2);
+    Cell cell(1, { product1, product2, product3 });
+    TVector<Product> products({ product1, product2 });
+
+    return_products(cell, products);
+    size_t actual_result = cell.get_products().size();
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
 int main() {
     TestSystem::start_test(test1_try_FIO_constructors,
         "FIO.test1_try_FIO_constructors");
@@ -453,47 +483,12 @@ int main() {
         "Cell.test9_try_add_product_after_delete");
     TestSystem::start_test(test10_try_get_products_by_code,
         "Cell.test10_try_get_products_by_code");
+    TestSystem::start_test(test11_try_give_products,
+        "Cell.test11_try_give_products");
+    TestSystem::start_test(test12_try_return_products,
+        "Cell.test12_try_return_products");
 
     TestSystem::print_final_info();
-
-    //std::cout << "TEST CELL: get products" << std::endl;
-    //TVector<Cell> cells({ cell1, cell2 });
-    //TVector<Product> products = get_products(cells, 4700000083001);  //  cell2
-
-    //try {
-    //    TVector<Product> products = get_products(cells, 4700000083002);
-    //}
-    //catch (const std::exception& ex) {
-    //    std::cerr << ex.what();  //  non-existent cell
-    //}
-    //std::cout << std::endl;
-
-    //try {
-    //    TVector<Product> products = get_products(cells, 4700000083000);
-    //}
-    //catch (const std::exception& ex) {
-    //    std::cerr << ex.what();  //  empty
-    //}
-    //std::cout << std::endl;
-
-    //try {
-    //    TVector<Product> products = get_products(cells, 470000830031);
-    //}
-    //catch (const std::exception& ex) {
-    //    std::cerr << ex.what();  //  wrong code (not enough digits)
-    //}
-    //std::cout << std::endl;
-
-    //try {
-    //    TVector<Product> products = get_products(cells, 470000008305315345);
-    //}
-    //catch (const std::exception& ex) {
-    //    std::cerr << ex.what();  //  (many digits)
-    //}
-    //std::cout << std::endl;
-
-    //std::cout << "TEST CELL: give products" << std::endl;
-    //give_products(cell2, products, 123);
 
     //std::cout << "TEST CELL: return products" << std::endl;
     //TVector<Product> test_product({ product2 });

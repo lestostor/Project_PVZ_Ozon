@@ -52,19 +52,15 @@ TVector<Product> get_products_by_code(const TVector<Cell>& cells,
     return cells[number - 1]._products;
 }
 
-void give_products(Cell& cell, TVector<Product>& products, const int code) {
+void give_products(Cell& cell, TVector<Product>& products, const int code, const Date today) {
     for (int i = 0; i < products.size(); i++) {
         cell.delete_product(products[i]);
         products[i].set_code(code);
-        //products[i].set_date_for_return(today, today, today);
+        products[i].set_date_for_return(today);
     }
 }
 
 void return_products(Cell& cell, TVector<Product>& products) {
     for (int i = 0; i < products.size(); i++)
         cell.delete_product(products[i]);
-}
-
-void return_products(const int code) {
-
 }
