@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,10 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{8c622bc0-4b37-40b4-a0b2-c832eb29169c}</ProjectGuid>
+    <ProjectGuid>{043c6a36-8d4c-4c6e-be94-4c7aba8d8916}</ProjectGuid>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>PVZ_App</RootNamespace>
+    <RootNamespace>OzonLoginWindow</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -80,13 +80,13 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Worker;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Product;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\FIO;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Date;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Cell;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Address;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Worker;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\TVector;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Product;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\FIO;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Date;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Cell;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Address;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
-      <AdditionalLibraryDirectories>C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Worker;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Product;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\FIO;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Date;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Cell;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Address;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Worker;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\TVector;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Product;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\FIO;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Date;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Cell;C:\Users\user\Project_PVZ_Ozon\Project_PVZ_Ozon\PVZ\Address;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -132,7 +132,7 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Form1.h">
+    <ClInclude Include="LoginWindow.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="pch.h" />
@@ -160,29 +160,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.h</DependentUpon>
+    <EmbeddedResource Include="LoginWindow.resx">
+      <DependentUpon>LoginWindow.h</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Address\Address.vcxproj">
-      <Project>{d4bde3a3-ebee-4a33-87ad-d1dca42c4517}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Cell\Cell.vcxproj">
-      <Project>{0b8c7db5-e277-491d-b9de-514930db5763}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Date\Date.vcxproj">
-      <Project>{7c436900-792e-4b35-bfda-7bd60d63c62d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\FIO\FIO.vcxproj">
-      <Project>{97780f64-d925-47be-b35d-dddcc9c7b9f4}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Product\Product.vcxproj">
-      <Project>{1567d9e8-8057-4b12-b3da-9dab972b05a9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Worker\Worker.vcxproj">
-      <Project>{2d4e3332-fdd9-4cf6-985a-9c45880ff1b8}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

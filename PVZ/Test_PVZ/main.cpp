@@ -490,9 +490,5 @@ int main() {
 
     TestSystem::print_final_info();
 
-    //std::cout << "TEST CELL: return products" << std::endl;
-    //TVector<Product> test_product({ product2 });
-    //return_products(cell3, test_product);
-
     return 0;
 }
