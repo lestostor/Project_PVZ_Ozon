@@ -164,6 +164,29 @@
       <DependentUpon>LoginWindow.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Address\Address.vcxproj">
+      <Project>{d4bde3a3-ebee-4a33-87ad-d1dca42c4517}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Cell\Cell.vcxproj">
+      <Project>{0b8c7db5-e277-491d-b9de-514930db5763}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Date\Date.vcxproj">
+      <Project>{7c436900-792e-4b35-bfda-7bd60d63c62d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\FIO\FIO.vcxproj">
+      <Project>{97780f64-d925-47be-b35d-dddcc9c7b9f4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Product\Product.vcxproj">
+      <Project>{1567d9e8-8057-4b12-b3da-9dab972b05a9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TVector\TVector.vcxproj">
+      <Project>{036b64a5-9f03-4728-bd50-5b5f64214c34}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Worker\Worker.vcxproj">
+      <Project>{2d4e3332-fdd9-4cf6-985a-9c45880ff1b8}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
