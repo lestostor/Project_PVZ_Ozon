@@ -12,10 +12,10 @@ namespace CppCLRWinFormsProject {
 	/// <summary>
 	/// Summary for Form1
 	/// </summary>
-	public ref class Form1 : public System::Windows::Forms::Form
+	public ref class MainWindow : public System::Windows::Forms::Form
 	{
 	public:
-		Form1(void)
+		MainWindow(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace CppCLRWinFormsProject {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~Form1()
+		~MainWindow()
 		{
 			if (components)
 			{

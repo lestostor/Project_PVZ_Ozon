@@ -6,6 +6,7 @@
 #include "Date.h"
 #include "Product.h"
 #include "Cell.h"
+#include "../OzonMainWindow/MainWindow.h"
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -168,16 +169,18 @@ namespace CppCLRWinFormsProject {
 
 
 private: System::Void login_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-	std::ifstream log{ "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Test.csv" };
-	std::string line, colname, s;
-	if (log.good())
-	{
-		std::getline(log, line);
-		std::stringstream ss(line);
-		System::String^ managedString = gcnew System::String(line.c_str());
-		mail->Text = managedString;
-	}
-
+	//std::ifstream log{ "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Test.csv" };
+	//std::string line, colname, s;
+	//if (log.good())
+	//{
+	//	std::getline(log, line);
+	//	std::stringstream ss(line);
+	//	System::String^ managedString = gcnew System::String(line.c_str());
+	//	mail->Text = managedString;
+	//}
+	/*Application::Run(gcnew CppCLRWinFormsProject::MainWindow());*/
+	MainWindow^ window = gcnew MainWindow();
+	window->ShowDialog(this);
 }
 };
 }
