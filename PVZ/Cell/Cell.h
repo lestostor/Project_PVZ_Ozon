@@ -11,7 +11,7 @@ class Cell {
 
  public:
     Cell() = default;
-    Cell(const int);
+    explicit Cell(const int);
     Cell(const int, const TVector<Product>);
     Cell(const Cell&);
 

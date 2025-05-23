@@ -10,7 +10,7 @@ class Date {
  public:
      Date();
      Date(const int, const int, const int);
-     Date(const std::string&);
+     explicit Date(const std::string&);
      Date(const Date&);
 
      bool operator == (const Date&);

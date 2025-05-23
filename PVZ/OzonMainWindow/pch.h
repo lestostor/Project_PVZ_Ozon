@@ -1,8 +1,8 @@
 //  Copyright 2025 Shcherbakova Olesya
 
-#ifndef PCH_H
-#define PCH_H
+#ifndef PVZ_OZONMAINWINDOW_PCH_H_
+#define PVZ_OZONMAINWINDOW_PCH_H_
 
 // add headers that you want to pre-compile here
 
-#endif //PCH_H
+#endif  //  PVZ_OZONMAINWINDOW_PCH_H_

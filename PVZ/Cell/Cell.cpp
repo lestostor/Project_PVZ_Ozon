@@ -2,7 +2,7 @@
 #include <stdexcept>
 //  Copyright 2025 Shcherbakova Olesya
 
-Cell::Cell(const int num) : _num(num), _products() {};
+Cell::Cell(const int num) : _num(num), _products() {}
 
 Cell::Cell(const int num, const TVector<Product> products) :
     _num(num), _products(products) {}
@@ -62,7 +62,8 @@ TVector<Product> get_products_by_code(const TVector<Cell>& cells,
     return cells[number - 1]._products;
 }
 
-void give_products(Cell& cell, TVector<Product>& products, const int code, const Date today) {
+void give_products(Cell& cell, TVector<Product>& products,
+    const int code, const Date today) {
     for (int i = 0; i < products.size(); i++) {
         cell.delete_product(products[i]);
         products[i].set_code(code);

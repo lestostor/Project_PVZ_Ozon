@@ -1,5 +1,6 @@
 #include "Date.h"
 #include <stdexcept>
+#include <string>
 //  Copyright 2025 Shcherbakova Olesya
 
 Date::Date() {
@@ -22,15 +23,13 @@ Date::Date(const std::string& date) {
     std::string day = "", month = "", year = "";
     if (date[0] == '0') {
         day += date[1];
-    }
-    else {
+    } else {
         day += date[0];
         day += date[1];
     }
     if (date[3] == '0') {
         month += date[4];
-    }
-    else {
+    } else {
         month += date[3];
         month += date[4];
     }

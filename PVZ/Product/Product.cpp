@@ -43,38 +43,30 @@ void Product::set_code(const int code) {
     _code = code;
 }
 
-void Product::set_date_for_return(const Date& today)
-{
+void Product::set_date_for_return(const Date& today) {
     int day = today.get_day(),
         month = today.get_month(),
         year = today.get_year();
     if ((month == 1 || month == 3 || month == 5 || month == 7 ||
-        month == 8 || month == 10 || month == 12) && day + 7 > 31)
-    {
+        month == 8 || month == 10 || month == 12) && day + 7 > 31) {
         _date.set_day(7 - (31 - day));
-        if (month + 1 > 12)
-        {
+        if (month + 1 > 12) {
             _date.set_month(1);
             _date.set_year(year + 1);
-        }
-        else {
+        } else {
             _date.set_month(month + 1);
         }
-    }
-    else if ((month == 4 || month == 6 || month == 9 || month == 11 &&
+    } else if ((month == 4 || month == 6 || month == 9 || month == 11 &&
         day + 7 <= 30)) {
         _date.set_day(7 - (30 - day));
         _date.set_month(month + 1);
-    }
-    else if (month == 2 && _date.if_leap_year(year) && day + 7 > 29) {
+    } else if (month == 2 && _date.if_leap_year(year) && day + 7 > 29) {
         _date.set_day(7 - (29 - day));
         _date.set_month(month + 1);
-    }
-    else if (month == 2 && !_date.if_leap_year(year) && day + 7 > 28) {
+    } else if (month == 2 && !_date.if_leap_year(year) && day + 7 > 28) {
         _date.set_day(7 - (28 - day));
         _date.set_month(month + 1);
-    }
-    else {
+    } else {
         _date.set_day(day + 7);
         _date.set_month(month);
         _date.set_year(year);

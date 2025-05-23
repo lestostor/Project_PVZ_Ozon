@@ -29,8 +29,7 @@ namespace TestSystem {
             set_color(2, 0);
             std::cout << "[       OK ]" << std::endl;
             count_success++;
-        }
-        else {
+        } else {
             set_color(4, 0);
             std::cout << "[  FAILED  ]" << std::endl;
             count_failed++;
@@ -42,8 +41,7 @@ namespace TestSystem {
     bool check(const T& expected, const T& actual) {
         if (expected == actual) {
             return true;
-        }
-        else {
+        } else {
             std::cerr << "Expected result is " << expected <<
                 ", but actual is " << actual << "." << std::endl;
             return false;
@@ -56,8 +54,7 @@ namespace TestSystem {
             std::cerr << "Expected result and actual result" <<
                 "are equal." << std::endl;
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -73,7 +70,8 @@ namespace TestSystem {
         std::cout << "[==========] ";
         set_color(7, 0);
         std::cout << count_success + count_failed << " test" <<
-            (count_success + count_failed > 1 ? "s" : "") << " ran." << std::endl;
+            (count_success + count_failed > 1 ? "s" : "") <<
+            " ran." << std::endl;
         set_color(2, 0);
         std::cout << "[  PASSED  ] ";
         set_color(7, 0);

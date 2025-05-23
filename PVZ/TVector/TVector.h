@@ -19,7 +19,7 @@ class TVector {
     size_t _size;
     size_t _capacity;
 
-public:
+ public:
     //  constructors
     TVector();
     explicit TVector(int);  //  empty vector
@@ -111,7 +111,7 @@ public:
 
     T& at(const int) const;
 
-private:
+ private:
     T* reset_memory(size_t);
     T* reset_memory_for_deleted(size_t);
     int count_deleted() const;
@@ -470,15 +470,13 @@ template <class T>
 void TVector<T>::resize(size_t count, const T& value) {
     if (_size == count) {
         return;
-    }
-    else if (count > _size) {
+    } else if (count > _size) {
         _vec = reset_memory(count);
         for (int i = _size - 1; i < count; i++) {
             _vec[i] = value;
             _status[i] = Status::Busy;
         }
-    }
-    else {
+    } else {
         T* data = this->data();
         _vec = new T[_capacity];
         for (int i = 0, j = 0; j < count; i++) {

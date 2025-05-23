@@ -1,4 +1,7 @@
 #pragma once
+#include <fstream>
+#include <string>
+#include <sstream>
 #include "TVector.h"
 #include "FIO.h"
 #include "Worker.h"
@@ -7,9 +10,6 @@
 #include "Product.h"
 #include "Cell.h"
 #include "../OzonMainWindow/MainWindow.h"
-#include <fstream>
-#include <string>
-#include <sstream>
 //  Copyright 2025 Shcherbakova Olesya
 
 namespace CppCLRWinFormsProject {
@@ -43,12 +43,8 @@ namespace CppCLRWinFormsProject {
     private: System::Windows::Forms::TextBox^ _mail;
     private: System::Windows::Forms::TextBox^ _password;
     protected:
-
-
     protected:
-
     protected:
-
     private: System::Windows::Forms::Label^ label1;
     private: System::Windows::Forms::Label^ label2;
     private: System::Windows::Forms::Label^ label3;
@@ -74,9 +70,9 @@ namespace CppCLRWinFormsProject {
             this->label3 = (gcnew System::Windows::Forms::Label());
             this->login_btn = (gcnew System::Windows::Forms::Button());
             this->SuspendLayout();
-            // 
+            //
             // _mail
-            // 
+            //
             this->_mail->BorderStyle = System::Windows::Forms::BorderStyle::
                 FixedSingle;
             this->_mail->Font = (gcnew System::Drawing::Font
@@ -222,7 +218,7 @@ private: System::Void login_btn_Click(System::Object^ sender,
         MessageBox::Show("Enter mail and password");
         return;
     }
-    
+
     if (!check_account(mail, password, workers)) {
         MessageBox::Show("Wrong mail or password");
         return;
@@ -233,4 +229,4 @@ private: System::Void login_btn_Click(System::Object^ sender,
     window->ShowDialog(this);
 }
 };
-}
+}  // namespace CppCLRWinFormsProject
