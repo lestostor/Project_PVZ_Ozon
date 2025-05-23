@@ -25,11 +25,9 @@ namespace CppCLRWinFormsProject {
     /// <summary>
     /// Summary for Form1
     /// </summary>
-    public ref class Form1 : public System::Windows::Forms::Form
-    {
+    public ref class Form1 : public System::Windows::Forms::Form {
     public:
-        Form1(void)
-        {
+        Form1(void) {
             InitializeComponent();
         }
 
@@ -37,10 +35,8 @@ namespace CppCLRWinFormsProject {
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        ~Form1()
-        {
-            if (components)
-            {
+        ~Form1() {
+            if (components) {
                 delete components;
             }
         }
@@ -70,8 +66,7 @@ namespace CppCLRWinFormsProject {
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        void InitializeComponent(void)
-        {
+        void InitializeComponent(void) {
             this->_mail = (gcnew System::Windows::Forms::TextBox());
             this->_password = (gcnew System::Windows::Forms::TextBox());
             this->label1 = (gcnew System::Windows::Forms::Label());

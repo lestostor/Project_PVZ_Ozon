@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 //  Copyright 2025 Shcherbakova Olesya
 
 class Date {
@@ -9,6 +10,7 @@ class Date {
  public:
      Date();
      Date(const int, const int, const int);
+     Date(const std::string&);
      Date(const Date&);
 
      bool operator == (const Date&);

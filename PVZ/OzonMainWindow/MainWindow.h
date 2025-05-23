@@ -23,11 +23,9 @@ namespace CppCLRWinFormsProject {
     /// <summary>
     /// Summary for Form1
     /// </summary>
-    public ref class MainWindow : public System::Windows::Forms::Form
-    {
+    public ref class MainWindow : public System::Windows::Forms::Form {
     public:
-        MainWindow(void)
-        {
+        MainWindow(void) {
             InitializeComponent();
         }
 
@@ -35,16 +33,15 @@ namespace CppCLRWinFormsProject {
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        ~MainWindow()
-        {
-            if (components)
-            {
+        ~MainWindow() {
+            if (components) {
                 delete components;
             }
         }
     private: System::Windows::Forms::GroupBox^ groupBox1;
     private: System::Windows::Forms::TextBox^ code;
     private: System::Windows::Forms::Label^ label1;
+    private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
     protected:
 
     private:
@@ -58,11 +55,11 @@ namespace CppCLRWinFormsProject {
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        void InitializeComponent(void)
-        {
+        void InitializeComponent(void) {
             this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
             this->code = (gcnew System::Windows::Forms::TextBox());
             this->label1 = (gcnew System::Windows::Forms::Label());
+            this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
             this->SuspendLayout();
             // 
             // groupBox1
@@ -76,29 +73,32 @@ namespace CppCLRWinFormsProject {
             // 
             // code
             // 
-            this->code->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
-                Regular, System::Drawing::GraphicsUnit::Point,
+            this->code->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->code->Location = System::Drawing::Point(563, 199);
+            this->code->Location = System::Drawing::Point(357, 9);
             this->code->Name = L"code";
             this->code->Size = System::Drawing::Size(424, 42);
             this->code->TabIndex = 1;
-            this->code->TextChanged += gcnew System::EventHandler
-            (this, &MainWindow::code_TextChanged);
+            this->code->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainWindow::code_KeyDown);
             // 
             // label1
             // 
             this->label1->AutoSize = true;
-            this->label1->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
-                Regular, System::Drawing::GraphicsUnit::Point,
+            this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->label1->Location = System::Drawing::Point(335, 202);
+            this->label1->Location = System::Drawing::Point(269, 9);
             this->label1->Name = L"label1";
-            this->label1->Size = System::Drawing::Size(208, 35);
+            this->label1->Size = System::Drawing::Size(82, 35);
             this->label1->TabIndex = 2;
-            this->label1->Text = L"Product\'s code";
+            this->label1->Text = L"Ñode";
+            // 
+            // checkedListBox1
+            // 
+            this->checkedListBox1->FormattingEnabled = true;
+            this->checkedListBox1->Location = System::Drawing::Point(357, 89);
+            this->checkedListBox1->Name = L"checkedListBox1";
+            this->checkedListBox1->Size = System::Drawing::Size(489, 454);
+            this->checkedListBox1->TabIndex = 3;
             // 
             // MainWindow
             // 
@@ -106,15 +106,14 @@ namespace CppCLRWinFormsProject {
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::SystemColors::Control;
             this->ClientSize = System::Drawing::Size(1214, 617);
+            this->Controls->Add(this->checkedListBox1);
             this->Controls->Add(this->label1);
             this->Controls->Add(this->code);
             this->Controls->Add(this->groupBox1);
             this->Name = L"MainWindow";
-            this->StartPosition = System::Windows::Forms::FormStartPosition::
-                CenterScreen;
+            this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"Ozon";
-            this->FormClosed += gcnew System::Windows::Forms::
-                FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
+            this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
             this->ResumeLayout(false);
             this->PerformLayout();
 
@@ -125,10 +124,62 @@ namespace CppCLRWinFormsProject {
         Application::Exit();
     }
 
+           TVector<TVector<std::string>> read(std::string file_name) {
+               std::ifstream file{ file_name };
+               if (!file.is_open())
+                   throw std::runtime_error("File isn't open");
 
-    private: System::Void code_TextChanged(System::Object^ sender,
-        System::EventArgs^ e) {
+               std::string line;
+               std::getline(file, line);
+               int i = 0, j = 0;
+               TVector<TVector<std::string>> table;
 
+               while (std::getline(file, line)) {
+                   TVector<std::string> row;
+                   std::string cell;
+                   std::stringstream lineStream(line);
+
+                   while (std::getline(lineStream, cell, ';')) {
+                       row.push_back(cell);
+                   }
+                   table.push_back(row);
+                   i++;
+               }
+
+               return table;
+           }
+
+           void add_products(TVector<Cell>& cells,
+               TVector<TVector<std::string>> products) {
+               for (int i = 0; i < products.size(); i++) {
+                   int cell_num = std::atoi(products[i][0].c_str());
+                   int code = std::atoi(products[i][1].c_str());
+                   int price = std::atoi(products[i][2].c_str());
+                   bool prepay = std::atoi(products[i][3].c_str());
+                   int limit = std::atoi(products[i][4].c_str());
+                   bool returnability = std::atoi(products[i][5].c_str());
+                   Date date(products[i][6]);
+                   Product product(code, price, prepay, limit, returnability, date);
+
+                   cells[cell_num - 1].add_new_product(product);
+               }
+           }
+
+private: System::Void code_KeyDown(System::Object^ sender,
+    System::Windows::Forms::KeyEventArgs^ e) {
+    TVector<Cell> cells(100);
+
+    if (e->KeyCode == Keys::Enter) {
+        TVector<TVector<std::string>> products = read(
+        "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Products.csv");
+
+        for (int i = 0; i < cells.size(); i++) {
+            Cell cell(i + 1, {});
+            cells[i] = cell;
+        }
+
+        add_products(cells, products);
     }
-    };
+}
+};
 }

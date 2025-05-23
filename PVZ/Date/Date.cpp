@@ -18,6 +18,29 @@ Date::Date(const int day, const int month, const int year) {
     _year = year;
 }
 
+Date::Date(const std::string& date) {
+    std::string day = "", month = "", year = "";
+    if (date[0] == '0') {
+        day += date[1];
+    }
+    else {
+        day += date[0];
+        day += date[1];
+    }
+    if (date[3] == '0') {
+        month += date[4];
+    }
+    else {
+        month += date[3];
+        month += date[4];
+    }
+    for (int i = 6; date[i] != '\0'; i++)
+        year += date[i];
+    _day = std::atoi(day.c_str());
+    _month = std::atoi(month.c_str());
+    _year = std::atoi(year.c_str());
+}
+
 Date::Date(const Date& other_date) {
     if (&other_date == NULL)
         throw std::logic_error("No object\n");

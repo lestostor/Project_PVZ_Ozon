@@ -220,11 +220,12 @@ bool test3_try_worker_constructors() {
 
 bool test4_try_date_constructors() {
     bool expected_result1 = true, expected_result2 = true,
-        expected_result3 = true, expected_result4 = false;
+        expected_result3 = true, expected_result4 = false,
+        expected_result5 = true;
     bool actual_result1 = false, actual_result2 = false,
-        actual_result3 = false, actual_result4 = true;
+        actual_result3 = false, actual_result4 = true,
+        actual_result5 = false;
 
-    Date date1, date2(1, 3, 2025), date3(date2);
     try {
         Date date1;
         actual_result1 = true;
@@ -253,11 +254,19 @@ bool test4_try_date_constructors() {
     catch (const std::exception& ex) {
         actual_result4 = false;
     }
+    try {
+        Date date5("20.02.2025");
+        actual_result5 = true;
+    }
+    catch (const std::exception& ex) {
+        actual_result5 = false;
+    }
 
     return TestSystem::check(expected_result1, actual_result1) &&
         TestSystem::check(expected_result2, actual_result2) &&
         TestSystem::check(expected_result3, actual_result3) &&
-        TestSystem::check(expected_result4, actual_result4);
+        TestSystem::check(expected_result4, actual_result4) &&
+        TestSystem::check(expected_result5, actual_result5);
 }
 
 bool test5_try_product_constructors() {
@@ -298,9 +307,9 @@ bool test5_try_product_constructors() {
 
 bool test6_try_cell_constructors() {
     bool expected_result1 = true, expected_result2 = true,
-        expected_result3 = true;
+        expected_result3 = true, expected_result4 = true;
     bool actual_result1 = false, actual_result2 = false,
-        actual_result3 = false;
+        actual_result3 = false, actual_result4 = false;
     Date date1(10, 3, 2025), date2(29, 4, 2025);
     Product product1(1111, 250, true, 0, true, date1),
         product2(2222, 10, false, 0, false, date2);
@@ -327,10 +336,18 @@ bool test6_try_cell_constructors() {
     catch (const std::exception& ex) {
         actual_result3 = false;
     }
+    try {
+        Cell cell4(1);
+        actual_result4 = true;
+    }
+    catch (const std::exception& ex) {
+        actual_result4 = false;
+    }
 
     return TestSystem::check(expected_result1, actual_result1) &&
         TestSystem::check(expected_result2, actual_result2) &&
-        TestSystem::check(expected_result3, actual_result3);
+        TestSystem::check(expected_result3, actual_result3) &&
+        TestSystem::check(expected_result4, actual_result4);
 }
 
 bool test7_try_delete_product() {

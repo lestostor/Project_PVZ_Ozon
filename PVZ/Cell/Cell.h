@@ -11,9 +11,11 @@ class Cell {
 
  public:
     Cell() = default;
+    Cell(const int);
     Cell(const int, const TVector<Product>);
     Cell(const Cell&);
 
+    Cell& operator = (const Cell&);
     bool operator == (const Cell&) const;
     bool operator != (const Cell&) const;
     bool operator > (const Cell&) const;

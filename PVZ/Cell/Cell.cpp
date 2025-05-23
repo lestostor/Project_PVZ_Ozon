@@ -2,6 +2,8 @@
 #include <stdexcept>
 //  Copyright 2025 Shcherbakova Olesya
 
+Cell::Cell(const int num) : _num(num), _products() {};
+
 Cell::Cell(const int num, const TVector<Product> products) :
     _num(num), _products(products) {}
 
@@ -18,6 +20,14 @@ void Cell::add_new_product(const Product& product) {
 
 void Cell::delete_product(const Product& product) {
     _products.erase(_products.begin() + find(_products, product));
+}
+
+Cell& Cell::operator = (const Cell& second_cell) {
+    if (&second_cell == this)
+        return *this;
+    this->_num = second_cell._num;
+    this->_products = second_cell._products;
+    return *this;
 }
 
 bool Cell::operator == (const Cell& second_cell) const {

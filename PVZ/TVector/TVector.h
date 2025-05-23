@@ -505,7 +505,8 @@ int TVector<T>::count_deleted() const {
 
 template <class T>
 int TVector<T>::count_right_pos(const T* pos) const {
-    int* correct = this->begin(), i;
+    T* correct = this->begin();
+    int i;
     for (i = 0; i < _size; i++) {
         if (_status[i] != Status::Deleted) correct++;
         if (correct == pos + 1) break;
