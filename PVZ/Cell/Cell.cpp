@@ -53,9 +53,9 @@ TVector<Product> Cell::get_products() {
 }
 
 TVector<Product> get_products_by_code(const TVector<Cell>& cells,
-    const long long int code) {
+    const int64_t code) {
     int number = code % 1000;
-    long long int x = pow(10, 12);
+    int64_t x = pow(10, 12);
     if (code / x > 9 || number > cells.size() ||
         cells[number - 1]._products.size() == 0 || code / x == 0)
         throw std::logic_error("Product isn't found");

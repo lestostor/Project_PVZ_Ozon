@@ -10,7 +10,7 @@
 #include "Product.h"
 #include "Cell.h"
 #include "../OzonMainWindow/MainWindow.h"
-//  Copyright 2025 Shcherbakova Olesya
+// Copyright 2025 Shcherbakova Olesya
 
 namespace CppCLRWinFormsProject {
 
@@ -49,8 +49,6 @@ namespace CppCLRWinFormsProject {
     private: System::Windows::Forms::Label^ label2;
     private: System::Windows::Forms::Label^ label3;
     private: System::Windows::Forms::Button^ login_btn;
-
-
     private:
         /// <summary>
         /// Required designer variable.
@@ -172,7 +170,6 @@ namespace CppCLRWinFormsProject {
             this->Text = L"Form1";
             this->ResumeLayout(false);
             this->PerformLayout();
-
         }
 #pragma endregion
         TVector<TVector<std::string>> read(std::string file_name) {
