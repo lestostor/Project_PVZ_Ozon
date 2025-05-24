@@ -12,7 +12,6 @@
 //  Copyright 2025 Shcherbakova Olesya
 
 namespace CppCLRWinFormsProject {
-
     using namespace System;
     using namespace System::ComponentModel;
     using namespace System::Collections;
@@ -39,9 +38,11 @@ namespace CppCLRWinFormsProject {
             }
         }
     private: System::Windows::Forms::GroupBox^ groupBox1;
-    private: System::Windows::Forms::TextBox^ code;
+    private: System::Windows::Forms::TextBox^ _code;
+
     private: System::Windows::Forms::Label^ label1;
-    private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
+    private: System::Windows::Forms::CheckedListBox^ _list;
+
     protected:
     private:
         /// <summary>
@@ -56,10 +57,9 @@ namespace CppCLRWinFormsProject {
         /// </summary>
         void InitializeComponent(void) {
             this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-            this->code = (gcnew System::Windows::Forms::TextBox());
+            this->_code = (gcnew System::Windows::Forms::TextBox());
             this->label1 = (gcnew System::Windows::Forms::Label());
-            this->checkedListBox1 = (gcnew System::Windows::Forms::
-                CheckedListBox());
+            this->_list = (gcnew System::Windows::Forms::CheckedListBox());
             this->SuspendLayout();
             //
             // groupBox1
@@ -71,17 +71,17 @@ namespace CppCLRWinFormsProject {
             this->groupBox1->TabIndex = 0;
             this->groupBox1->TabStop = false;
             //
-            // code
+            // _code
             //
-            this->code->Font = (gcnew System::Drawing::Font
+            this->_code->Font = (gcnew System::Drawing::Font
             (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
                 Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->code->Location = System::Drawing::Point(357, 9);
-            this->code->Name = L"code";
-            this->code->Size = System::Drawing::Size(424, 42);
-            this->code->TabIndex = 1;
-            this->code->KeyDown += gcnew System::Windows::Forms::
+            this->_code->Location = System::Drawing::Point(357, 9);
+            this->_code->Name = L"_code";
+            this->_code->Size = System::Drawing::Size(424, 42);
+            this->_code->TabIndex = 1;
+            this->_code->KeyDown += gcnew System::Windows::Forms::
                 KeyEventHandler(this, &MainWindow::code_KeyDown);
             //
             // label1
@@ -97,13 +97,17 @@ namespace CppCLRWinFormsProject {
             this->label1->TabIndex = 2;
             this->label1->Text = L"Ñode";
             //
-            // checkedListBox1
+            // _list
             //
-            this->checkedListBox1->FormattingEnabled = true;
-            this->checkedListBox1->Location = System::Drawing::Point(357, 89);
-            this->checkedListBox1->Name = L"checkedListBox1";
-            this->checkedListBox1->Size = System::Drawing::Size(489, 454);
-            this->checkedListBox1->TabIndex = 3;
+            this->_list->Font = (gcnew System::Drawing::Font
+            (L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(204)));
+            this->_list->FormattingEnabled = true;
+            this->_list->Location = System::Drawing::Point(275, 89);
+            this->_list->Name = L"_list";
+            this->_list->Size = System::Drawing::Size(927, 498);
+            this->_list->TabIndex = 3;
             //
             // MainWindow
             //
@@ -111,16 +115,17 @@ namespace CppCLRWinFormsProject {
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::SystemColors::Control;
             this->ClientSize = System::Drawing::Size(1214, 617);
-            this->Controls->Add(this->checkedListBox1);
+            this->Controls->Add(this->_list);
             this->Controls->Add(this->label1);
-            this->Controls->Add(this->code);
+            this->Controls->Add(this->_code);
             this->Controls->Add(this->groupBox1);
             this->Name = L"MainWindow";
-            this->StartPosition = System::Windows::Forms::
-                FormStartPosition::CenterScreen;
+            this->StartPosition = System::Windows::Forms::FormStartPosition::
+                CenterScreen;
             this->Text = L"Ozon";
             this->FormClosed += gcnew System::Windows::Forms::
-                FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
+                FormClosedEventHandler(this, &MainWindow::
+                    MainWindow_FormClosed);
             this->ResumeLayout(false);
             this->PerformLayout();
 
@@ -166,26 +171,76 @@ namespace CppCLRWinFormsProject {
                    int limit = std::atoi(products[i][4].c_str());
                    bool returnability = std::atoi(products[i][5].c_str());
                    Date date(products[i][6]);
-                   Product product(code, price, prepay, limit, returnability, date);
+                   Product product(code, price, prepay, limit,
+                       returnability, date);
 
                    cells[cell_num - 1].add_new_product(product);
                }
            }
 
+           TVector<Cell> create_cells() {
+               TVector<Cell> cells(100);
+               TVector<TVector<std::string>> products = read(
+"C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Products.csv");
+
+               for (int i = 0; i < cells.size(); i++) {
+                   Cell cell(i + 1, {});
+                   cells[i] = cell;
+               }
+
+               add_products(cells, products);
+               return cells;
+           }
+
+           String^ add_product_to_list(Product product) {
+               String^ new_product = gcnew String("");
+               new_product += "Code: " +
+                   Convert::ToString(product.get_code()) + "   ";
+
+               new_product += "Price: " +
+                   Convert::ToString(product.get_price()) + "   ";
+
+               int age_limit = product.get_age_limit();
+               if (age_limit == 0)
+                   new_product += "Age limit: No   ";
+               else new_product += "Age limit:   " +
+                   Convert::ToString(age_limit) + "   ";
+
+               bool prepay = product.get_prepay();
+               if (prepay)
+                   new_product += "Paid: yes   ";
+               else 
+                   new_product += "Paid: no   ";
+
+               bool returnability = product.get_returnability();
+               if (prepay)
+                   new_product += "Returnability: yes";
+               else
+                   new_product += "Returnability: no";
+
+               return new_product;
+           }
+
 private: System::Void code_KeyDown(System::Object^ sender,
     System::Windows::Forms::KeyEventArgs^ e) {
-    TVector<Cell> cells(100);
 
     if (e->KeyCode == Keys::Enter) {
-        TVector<TVector<std::string>> products = read(
-        "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Products.csv");
+        _list->Items->Clear();
+        TVector<Cell> cells = create_cells();
+        long long int code = System::Convert::ToInt64(_code->Text);
+        try {
+            TVector<Product> products = get_products_by_code(cells, code);
 
-        for (int i = 0; i < cells.size(); i++) {
-            Cell cell(i + 1, {});
-            cells[i] = cell;
+            for (int i = 0; i < products.size(); i++) {
+                String^ characteristics = add_product_to_list(products[i]);
+                _list->Items->Add(characteristics);
+            }
         }
-
-        add_products(cells, products);
+        catch (std::exception& ex) {
+            String^ error = gcnew String(ex.what());
+            MessageBox::Show(error, "Error");
+            return;
+        }
     }
 }
 };

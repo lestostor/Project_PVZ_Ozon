@@ -72,3 +72,27 @@ void Product::set_date_for_return(const Date& today) {
         _date.set_year(year);
     }
 }
+
+int Product::get_code() const {
+    return _code;
+}
+
+int Product::get_price() const {
+    return _price;
+}
+
+bool Product::get_prepay() const {
+    return _prepay;
+}
+
+int Product::get_age_limit() const {
+    return _age_limit;
+}
+
+bool Product::get_returnability() const {
+    return _returnability;
+}
+
+Date Product::get_date() const {
+    return _date;
+}
