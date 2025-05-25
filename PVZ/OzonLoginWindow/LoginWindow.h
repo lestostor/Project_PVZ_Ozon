@@ -25,9 +25,13 @@ namespace CppCLRWinFormsProject {
     /// Summary for Form1
     /// </summary>
     public ref class Form1 : public System::Windows::Forms::Form {
+        TVector<TVector<std::string>>* workers;
     public:
         Form1(void) {
             InitializeComponent();
+            workers = new TVector<TVector<std::string>>;
+            *workers = read(
+        "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Workers.csv");
         }
 
     protected:
@@ -155,7 +159,6 @@ namespace CppCLRWinFormsProject {
             this->Text = L"Form1";
             this->ResumeLayout(false);
             this->PerformLayout();
-
         }
 #pragma endregion
         TVector<TVector<std::string>> read(std::string file_name) {
@@ -204,7 +207,7 @@ namespace CppCLRWinFormsProject {
             String^ city = gcnew String(worker[6].c_str());
             String^ street = gcnew String(worker[7].c_str());
             String^ building = gcnew String(worker[8].c_str());
-            
+
             String^ address = area + " " + region + " " + city + " " + street +
                 " " + building;
             return address;
@@ -212,8 +215,7 @@ namespace CppCLRWinFormsProject {
 
 private: System::Void login_btn_Click(System::Object^ sender,
     System::EventArgs^ e) {
-    TVector<TVector<std::string>> workers =
-    read("C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Workers.csv");
+
 
     std::string mail = marshal_as<std::string>(_mail->Text);
     std::string password = marshal_as<std::string>(_password->Text);
@@ -223,8 +225,8 @@ private: System::Void login_btn_Click(System::Object^ sender,
     }
 
     int i = 0;
-    for (i; i < workers.size(); i++) {
-        if (!check_account(mail, password, workers[i])) {
+    for (i; i < (*workers).size(); i++) {
+        if (!check_account(mail, password, (*workers)[i])) {
             MessageBox::Show("Wrong mail or password");
             return;
         }
@@ -233,8 +235,8 @@ private: System::Void login_btn_Click(System::Object^ sender,
 
     this->Hide();
     MainWindow^ window = gcnew MainWindow();
-    String^ worker = convert_fio(workers[i]);
-    String^ address = convert_address(workers[i]);
+    String^ worker = convert_fio((*workers)[i]);
+    String^ address = convert_address((*workers)[i]);
 
     window->worker = worker;
     window->address = address;

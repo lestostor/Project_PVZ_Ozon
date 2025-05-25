@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
-    <ProjectGuid>{cfab1b1f-d1fe-45fe-9bad-4c7d07e1d47c}</ProjectGuid>
+    <ProjectGuid>{65cabeb8-2427-4070-85f4-5db53a2a3500}</ProjectGuid>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>OzonMainWindow</RootNamespace>
@@ -160,11 +160,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MainWindow.resx">
-      <DependentUpon>MainWindow.h</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Address\Address.vcxproj">
       <Project>{d4bde3a3-ebee-4a33-87ad-d1dca42c4517}</Project>
     </ProjectReference>
@@ -186,6 +181,11 @@
     <ProjectReference Include="..\Worker\Worker.vcxproj">
       <Project>{2d4e3332-fdd9-4cf6-985a-9c45880ff1b8}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

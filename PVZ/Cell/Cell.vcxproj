@@ -135,6 +135,7 @@
     <ClCompile Include="Cell.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\OzonMainWindow\MainWindow.h" />
     <ClInclude Include="Cell.h" />
   </ItemGroup>
   <ItemGroup>
