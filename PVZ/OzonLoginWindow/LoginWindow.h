@@ -13,7 +13,6 @@
 #include "../OzonMainWindow/MainWindow.h"
 
 namespace CppCLRWinFormsProject {
-
     using namespace System;
     using namespace System::ComponentModel;
     using namespace System::Collections;

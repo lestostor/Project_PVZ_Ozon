@@ -62,18 +62,14 @@ namespace CppCLRWinFormsProject {
             this->label1 = (gcnew System::Windows::Forms::Label());
             this->_list = (gcnew System::Windows::Forms::CheckedListBox());
             this->SuspendLayout();
-            //
-            // groupBox1
-            //
+
             this->groupBox1->BackColor = System::Drawing::Color::Blue;
             this->groupBox1->Location = System::Drawing::Point(0, -13);
             this->groupBox1->Name = L"groupBox1";
             this->groupBox1->Size = System::Drawing::Size(263, 630);
             this->groupBox1->TabIndex = 0;
             this->groupBox1->TabStop = false;
-            //
-            // _code
-            //
+
             this->_code->Font = (gcnew System::Drawing::Font
             (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
                 Regular, System::Drawing::GraphicsUnit::Point,
@@ -84,9 +80,7 @@ namespace CppCLRWinFormsProject {
             this->_code->TabIndex = 1;
             this->_code->KeyDown += gcnew System::Windows::Forms::
                 KeyEventHandler(this, &MainWindow::code_KeyDown);
-            //
-            // label1
-            //
+
             this->label1->AutoSize = true;
             this->label1->Font = (gcnew System::Drawing::Font
             (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
@@ -97,9 +91,7 @@ namespace CppCLRWinFormsProject {
             this->label1->Size = System::Drawing::Size(82, 35);
             this->label1->TabIndex = 2;
             this->label1->Text = L"Code";
-            // 
-            // _list
-            // 
+
             this->_list->Font = (gcnew System::Drawing::Font
             (L"Microsoft YaHei UI", 15.75F, System::Drawing::FontStyle::Bold,
                 System::Drawing::GraphicsUnit::Point,
@@ -109,9 +101,7 @@ namespace CppCLRWinFormsProject {
             this->_list->Name = L"_list";
             this->_list->Size = System::Drawing::Size(927, 498);
             this->_list->TabIndex = 3;
-            //
-            // MainWindow
-            //
+
             this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::SystemColors::Control;
@@ -208,7 +198,7 @@ namespace CppCLRWinFormsProject {
                bool prepay = product.get_prepay();
                if (prepay)
                    new_product += "Paid: yes   ";
-               else 
+               else
                    new_product += "Paid: no   ";
 
                bool returnability = product.get_returnability();
@@ -241,7 +231,6 @@ private: System::Void code_KeyDown(System::Object^ sender,
             return;
         }
     }
-    
 }
 };
 }  // namespace CppCLRWinFormsProject
