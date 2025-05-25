@@ -27,7 +27,7 @@ class Cell {
     void delete_product(const Product&);
 
     friend TVector<Product> get_products_by_code(const TVector<Cell>&,
-        const long long int);
+        int64_t);
     friend void give_products(Cell&, TVector<Product>&, const int, const Date);
     friend void return_products(Cell&, TVector<Product>&);
 };

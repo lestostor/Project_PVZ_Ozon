@@ -197,18 +197,38 @@ namespace CppCLRWinFormsProject {
         }
 
         bool check_account(std::string mail, std::string password,
-        TVector<TVector<std::string>> workers) {
-            for (int i = 0; i < workers.size(); i++) {
-                if (mail == workers[i][3] && password == workers[i][9])
-                    return true;
-            }
+        TVector<std::string> workers) {
+            if (mail == workers[3] && password == workers[9])
+                return true;
             return false;
+        }
+
+        String^ convert_fio(TVector<std::string> worker) {
+            String^ surname = gcnew String(worker[0].c_str());
+            String^ name = gcnew String(worker[1].c_str());
+            String^ patronymic = gcnew String(worker[2].c_str());
+
+            String^ fio = surname + " " + name + " " + patronymic;
+            return fio;
+        }
+
+        String^ convert_address(TVector<std::string> worker) {
+            String^ area = gcnew String(worker[4].c_str());
+            String^ region = gcnew String(worker[5].c_str());
+            String^ city = gcnew String(worker[6].c_str());
+            String^ street = gcnew String(worker[7].c_str());
+            String^ building = gcnew String(worker[8].c_str());
+            
+            String^ address = area + " " + region + " " + city + " " + street +
+                " " + building;
+            return address;
         }
 
 private: System::Void login_btn_Click(System::Object^ sender,
     System::EventArgs^ e) {
     TVector<TVector<std::string>> workers =
     read("C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Workers.csv");
+
     std::string mail = marshal_as<std::string>(_mail->Text);
     std::string password = marshal_as<std::string>(_password->Text);
     if (mail == "" || password == "") {
@@ -216,13 +236,23 @@ private: System::Void login_btn_Click(System::Object^ sender,
         return;
     }
 
-    if (!check_account(mail, password, workers)) {
-        MessageBox::Show("Wrong mail or password");
-        return;
+    int i = 0;
+    for (i; i < workers.size(); i++) {
+        if (!check_account(mail, password, workers[i])) {
+            MessageBox::Show("Wrong mail or password");
+            return;
+        }
+        else break;
     }
 
     this->Hide();
     MainWindow^ window = gcnew MainWindow();
+    String^ worker = convert_fio(workers[i]);
+    String^ address = convert_address(workers[i]);
+
+    window->worker = worker;
+    window->address = address;
+    window->mail = _mail->Text;
     window->ShowDialog(this);
 }
 };

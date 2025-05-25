@@ -24,6 +24,9 @@ namespace CppCLRWinFormsProject {
     /// </summary>
     public ref class MainWindow : public System::Windows::Forms::Form {
     public:
+        String^ worker;
+        String^ mail;
+        String^ address;
         MainWindow(void) {
             InitializeComponent();
         }
@@ -59,30 +62,35 @@ namespace CppCLRWinFormsProject {
             this->label1 = (gcnew System::Windows::Forms::Label());
             this->_list = (gcnew System::Windows::Forms::CheckedListBox());
             this->SuspendLayout();
-            // 
+            //
             // groupBox1
-            // 
+            //
             this->groupBox1->BackColor = System::Drawing::Color::Blue;
             this->groupBox1->Location = System::Drawing::Point(0, -13);
             this->groupBox1->Name = L"groupBox1";
             this->groupBox1->Size = System::Drawing::Size(263, 630);
             this->groupBox1->TabIndex = 0;
             this->groupBox1->TabStop = false;
-            // 
+            //
             // _code
-            // 
-            this->_code->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            //
+            this->_code->Font = (gcnew System::Drawing::Font
+            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
+                Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_code->Location = System::Drawing::Point(357, 9);
             this->_code->Name = L"_code";
             this->_code->Size = System::Drawing::Size(424, 42);
             this->_code->TabIndex = 1;
-            this->_code->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainWindow::code_KeyDown);
-            // 
+            this->_code->KeyDown += gcnew System::Windows::Forms::
+                KeyEventHandler(this, &MainWindow::code_KeyDown);
+            //
             // label1
-            // 
+            //
             this->label1->AutoSize = true;
-            this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->label1->Font = (gcnew System::Drawing::Font
+            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
+                Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->label1->Location = System::Drawing::Point(269, 9);
             this->label1->Name = L"label1";
@@ -92,16 +100,18 @@ namespace CppCLRWinFormsProject {
             // 
             // _list
             // 
-            this->_list->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+            this->_list->Font = (gcnew System::Drawing::Font
+            (L"Microsoft YaHei UI", 15.75F, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_list->FormattingEnabled = true;
             this->_list->Location = System::Drawing::Point(275, 89);
             this->_list->Name = L"_list";
             this->_list->Size = System::Drawing::Size(927, 498);
             this->_list->TabIndex = 3;
-            // 
+            //
             // MainWindow
-            // 
+            //
             this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::SystemColors::Control;
@@ -111,9 +121,11 @@ namespace CppCLRWinFormsProject {
             this->Controls->Add(this->_code);
             this->Controls->Add(this->groupBox1);
             this->Name = L"MainWindow";
-            this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+            this->StartPosition = System::Windows::Forms::
+                FormStartPosition::CenterScreen;
             this->Text = L"Ozon";
-            this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
+            this->FormClosed += gcnew System::Windows::Forms::
+            FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
             this->ResumeLayout(false);
             this->PerformLayout();
         }
@@ -212,11 +224,11 @@ private: System::Void code_KeyDown(System::Object^ sender,
     System::Windows::Forms::KeyEventArgs^ e) {
 
     if (e->KeyCode == Keys::Enter) {
-        _list->Items->Clear();
         TVector<Cell> cells = create_cells();
         int64_t code = System::Convert::ToInt64(_code->Text);
         try {
             TVector<Product> products = get_products_by_code(cells, code);
+            _list->Items->Clear();
 
             for (int i = 0; i < products.size(); i++) {
                 String^ characteristics = add_product_to_list(products[i]);
@@ -229,6 +241,7 @@ private: System::Void code_KeyDown(System::Object^ sender,
             return;
         }
     }
+    
 }
 };
 }  // namespace CppCLRWinFormsProject
