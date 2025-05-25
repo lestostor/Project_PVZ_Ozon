@@ -1,3 +1,4 @@
+//  Copyright 2025 Shcherbakova Olesya
 #pragma once
 #include "TVector.h"
 #include "FIO.h"
@@ -9,7 +10,6 @@
 #include <fstream>
 #include <string>
 #include <sstream>
-//  Copyright 2025 Shcherbakova Olesya
 
 namespace CppCLRWinFormsProject {
     using namespace System;

@@ -1,3 +1,4 @@
+//  Copyright 2025 Shcherbakova Olesya
 #pragma once
 #include <fstream>
 #include <string>
@@ -10,7 +11,6 @@
 #include "Product.h"
 #include "Cell.h"
 #include "../OzonMainWindow/MainWindow.h"
-// Copyright 2025 Shcherbakova Olesya
 
 namespace CppCLRWinFormsProject {
 
@@ -68,39 +68,33 @@ namespace CppCLRWinFormsProject {
             this->label3 = (gcnew System::Windows::Forms::Label());
             this->login_btn = (gcnew System::Windows::Forms::Button());
             this->SuspendLayout();
-            //
-            // _mail
-            //
-            this->_mail->BorderStyle = System::Windows::Forms::BorderStyle::
-                FixedSingle;
+
+            this->_mail->BorderStyle = System::Windows::Forms::
+                BorderStyle::FixedSingle;
             this->_mail->Font = (gcnew System::Drawing::Font
             (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
                 Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_mail->Location = System::Drawing::Point(180, 180);
             this->_mail->Name = L"_mail";
-            this->_mail->Size = System::Drawing::Size(236, 42);
+            this->_mail->Size = System::Drawing::Size(341, 42);
             this->_mail->TabIndex = 0;
-            //
-            // _password
-            //
-            this->_password->BorderStyle = System::Windows::Forms::
-                BorderStyle::FixedSingle;
+
+            this->_password->BorderStyle = System::Windows::Forms::BorderStyle::
+                FixedSingle;
             this->_password->Font = (gcnew System::Drawing::Font
             (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
                 Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_password->Location = System::Drawing::Point(180, 289);
             this->_password->Name = L"_password";
-            this->_password->Size = System::Drawing::Size(236, 42);
+            this->_password->Size = System::Drawing::Size(341, 42);
             this->_password->TabIndex = 1;
-            //
-            // label1
-            //
+
             this->label1->AutoSize = true;
             this->label1->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 36, System::Drawing::FontStyle::
-                Bold, System::Drawing::GraphicsUnit::Point,
+            (L"Microsoft YaHei UI", 36, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->label1->ForeColor = System::Drawing::Color::White;
             this->label1->Location = System::Drawing::Point(200, 67);
@@ -108,13 +102,11 @@ namespace CppCLRWinFormsProject {
             this->label1->Size = System::Drawing::Size(177, 64);
             this->label1->TabIndex = 2;
             this->label1->Text = L"OZON";
-            //
-            // label2
-            //
+
             this->label2->AutoSize = true;
             this->label2->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
-                Bold, System::Drawing::GraphicsUnit::Point,
+            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->label2->ForeColor = System::Drawing::Color::White;
             this->label2->Location = System::Drawing::Point(29, 186);
@@ -122,13 +114,11 @@ namespace CppCLRWinFormsProject {
             this->label2->Size = System::Drawing::Size(75, 36);
             this->label2->TabIndex = 3;
             this->label2->Text = L"Mail";
-            //
-            // label3
-            //
+
             this->label3->AutoSize = true;
             this->label3->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
-                Bold, System::Drawing::GraphicsUnit::Point,
+            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->label3->ForeColor = System::Drawing::Color::White;
             this->label3->Location = System::Drawing::Point(29, 295);
@@ -136,12 +126,10 @@ namespace CppCLRWinFormsProject {
             this->label3->Size = System::Drawing::Size(145, 36);
             this->label3->TabIndex = 4;
             this->label3->Text = L"Password";
-            //
-            // login_btn
-            //
+
             this->login_btn->Font = (gcnew System::Drawing::Font
-            (L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::
-                Bold, System::Drawing::GraphicsUnit::Point,
+            (L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->login_btn->Location = System::Drawing::Point(226, 367);
             this->login_btn->Name = L"login_btn";
@@ -149,11 +137,9 @@ namespace CppCLRWinFormsProject {
             this->login_btn->TabIndex = 5;
             this->login_btn->Text = L"Login";
             this->login_btn->UseVisualStyleBackColor = true;
-            this->login_btn->Click += gcnew System::EventHandler
-            (this, &Form1::login_btn_Click);
-            //
-            // Form1
-            //
+            this->login_btn->Click += gcnew System::EventHandler(this,
+                &Form1::login_btn_Click);
+
             this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::Color::Blue;
@@ -165,11 +151,12 @@ namespace CppCLRWinFormsProject {
             this->Controls->Add(this->_password);
             this->Controls->Add(this->_mail);
             this->Name = L"Form1";
-            this->StartPosition = System::Windows::Forms::FormStartPosition::
-                CenterScreen;
+            this->StartPosition = System::Windows::Forms::
+                FormStartPosition::CenterScreen;
             this->Text = L"Form1";
             this->ResumeLayout(false);
             this->PerformLayout();
+
         }
 #pragma endregion
         TVector<TVector<std::string>> read(std::string file_name) {
