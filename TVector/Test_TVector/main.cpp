@@ -1027,8 +1027,8 @@ bool test88_try_insert_into_an_empty_vector() {
     vec3.insert(0, 88);
     TVector<int> res3({ 88 });
     bool expected_result = true;
-    bool actual_result = true;
-    if (vec1 == res1)
+    bool actual_result = false;
+    if ((vec1 == res1) && (vec2 == res2) && (vec3 == res3))
         actual_result = true;
 
     return TestSystem::check(expected_result, actual_result);
