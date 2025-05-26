@@ -52,7 +52,7 @@ TVector<Product> Cell::get_products() {
     return _products;
 }
 
-TVector<Product> get_products_by_code(const TVector<Cell>& cells,
+TVector<Product>& get_products_by_code(const TVector<Cell>& cells,
     const int64_t code) {
     int number = code % 1000;
     int64_t x = pow(10, 12);

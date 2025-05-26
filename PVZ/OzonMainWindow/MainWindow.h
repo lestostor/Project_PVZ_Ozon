@@ -28,6 +28,8 @@ namespace CppCLRWinFormsProject {
         String^ worker;
         String^ mail;
     private: System::Windows::Forms::Button^ _give_out_btn;
+    private: System::Windows::Forms::VScrollBar^ vScrollBar1;
+
     public:
 
     public:
@@ -69,52 +71,52 @@ namespace CppCLRWinFormsProject {
             this->label1 = (gcnew System::Windows::Forms::Label());
             this->_list = (gcnew System::Windows::Forms::CheckedListBox());
             this->_give_out_btn = (gcnew System::Windows::Forms::Button());
+            this->vScrollBar1 = (gcnew System::Windows::Forms::VScrollBar());
             this->SuspendLayout();
-            // 
-            // groupBox1
-            // 
+
             this->groupBox1->BackColor = System::Drawing::Color::Blue;
             this->groupBox1->Location = System::Drawing::Point(0, -13);
             this->groupBox1->Name = L"groupBox1";
             this->groupBox1->Size = System::Drawing::Size(263, 630);
             this->groupBox1->TabIndex = 0;
             this->groupBox1->TabStop = false;
-            // 
-            // _code
-            // 
-            this->_code->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+
+            this->_code->Font = (gcnew System::Drawing::Font
+            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular,
+                System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_code->Location = System::Drawing::Point(357, 9);
             this->_code->Name = L"_code";
             this->_code->Size = System::Drawing::Size(424, 42);
             this->_code->TabIndex = 1;
-            this->_code->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainWindow::code_KeyDown);
-            // 
-            // label1
-            // 
+            this->_code->KeyDown += gcnew System::Windows::Forms::
+                KeyEventHandler(this, &MainWindow::code_KeyDown);
+
             this->label1->AutoSize = true;
-            this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->label1->Font = (gcnew System::Drawing::Font
+            (L"Microsoft YaHei UI", 20.25F, System::Drawing::
+                FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->label1->Location = System::Drawing::Point(269, 9);
             this->label1->Name = L"label1";
             this->label1->Size = System::Drawing::Size(82, 35);
             this->label1->TabIndex = 2;
             this->label1->Text = L"Code";
-            // 
-            // _list
-            // 
-            this->_list->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+
+            this->_list->Font = (gcnew System::Drawing::Font
+            (L"Microsoft YaHei UI", 15.75F, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_list->FormattingEnabled = true;
             this->_list->Location = System::Drawing::Point(275, 89);
             this->_list->Name = L"_list";
-            this->_list->Size = System::Drawing::Size(927, 410);
+            this->_list->Size = System::Drawing::Size(927, 439);
             this->_list->TabIndex = 3;
-            // 
-            // _give_out_btn
-            // 
+
             this->_give_out_btn->BackColor = System::Drawing::Color::Blue;
-            this->_give_out_btn->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+            this->_give_out_btn->Font = (gcnew System::Drawing::Font
+            (L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_give_out_btn->ForeColor = System::Drawing::Color::White;
             this->_give_out_btn->Location = System::Drawing::Point(630, 537);
@@ -123,23 +125,30 @@ namespace CppCLRWinFormsProject {
             this->_give_out_btn->TabIndex = 4;
             this->_give_out_btn->Text = L"Give out";
             this->_give_out_btn->UseVisualStyleBackColor = false;
-            this->_give_out_btn->Click += gcnew System::EventHandler(this, &MainWindow::_give_out_btn_Click);
-            // 
-            // MainWindow
-            // 
+            this->_give_out_btn->Click += gcnew System::EventHandler
+            (this, &MainWindow::_give_out_btn_Click);
+
+            this->vScrollBar1->Location = System::Drawing::Point(1167, 89);
+            this->vScrollBar1->Name = L"vScrollBar1";
+            this->vScrollBar1->Size = System::Drawing::Size(35, 439);
+            this->vScrollBar1->TabIndex = 5;
+
             this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::SystemColors::Control;
             this->ClientSize = System::Drawing::Size(1214, 617);
+            this->Controls->Add(this->vScrollBar1);
             this->Controls->Add(this->_give_out_btn);
             this->Controls->Add(this->_list);
             this->Controls->Add(this->label1);
             this->Controls->Add(this->_code);
             this->Controls->Add(this->groupBox1);
             this->Name = L"MainWindow";
-            this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+            this->StartPosition = System::Windows::Forms::
+                FormStartPosition::CenterScreen;
             this->Text = L"Ozon";
-            this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
+            this->FormClosed += gcnew System::Windows::Forms::
+            FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
             this->ResumeLayout(false);
             this->PerformLayout();
 
@@ -156,7 +165,6 @@ namespace CppCLRWinFormsProject {
                    throw std::runtime_error("File isn't open");
 
                std::string line;
-               std::getline(file, line);
                int i = 0, j = 0;
                TVector<TVector<std::string>> table;
 
@@ -171,6 +179,7 @@ namespace CppCLRWinFormsProject {
                    table.push_back(row);
                    i++;
                }
+               file.close();
 
                return table;
            }
@@ -192,7 +201,7 @@ namespace CppCLRWinFormsProject {
                }
            }
 
-           TVector<Cell> create_cells() {
+           TVector<Cell> read_cells() {
                TVector<Cell> cells(100);
                TVector<TVector<std::string>> products = read(
                    "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Products.csv");
@@ -227,7 +236,7 @@ namespace CppCLRWinFormsProject {
                    new_product += "Paid: no   ";
 
                bool returnability = product.get_returnability();
-               if (prepay)
+               if (returnability)
                    new_product += "Returnability: yes";
                else
                    new_product += "Returnability: no";
@@ -237,12 +246,13 @@ namespace CppCLRWinFormsProject {
 
     private: System::Void code_KeyDown(System::Object^ sender,
         System::Windows::Forms::KeyEventArgs^ e) {
-
+        if (_code->Text == "") return;
         if (e->KeyCode == Keys::Enter) {
-            *all_cells = create_cells();
+            *all_cells = read_cells();
             int64_t code = System::Convert::ToInt64(_code->Text);
             try {
-                TVector<Product> products = get_products_by_code(*all_cells, code);
+                TVector<Product> products = 
+                    get_products_by_code(*all_cells, code);
                 _list->Items->Clear();
 
                 for (int i = 0; i < products.size(); i++) {
@@ -257,16 +267,39 @@ namespace CppCLRWinFormsProject {
             }
         }
     }
-    private: System::Void _give_out_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+
+            void delete_row(std::string file_name, int code) {
+                TVector<TVector<std::string>> table = read(file_name);
+
+                std::ofstream file(file_name);
+                for (int i = 0; i < table.size(); i++) {
+                    if (find(table[i], std::to_string(code)) != -1)  // found
+                        continue;
+                    std::string row = "";
+                    for (int j = 0; j < table[i].size(); j++) {
+                        if (j == table[i].size() - 1)
+                            row += table[i][j] + "\n";
+                        else row += table[i][j] + ";";
+                    }
+
+                    file << row;
+                }
+                file.close();
+            }
+
+    private: System::Void _give_out_btn_Click(System::Object^ sender,
+        System::EventArgs^ e) {
         if (_list->Items->Count == 0) return;
         int64_t code = System::Convert::ToInt64(_code->Text);
-        TVector<Product> all_products = get_products_by_code(*all_cells, code);
-        TVector<Product> products(all_products.size());
-        TVector<Product> returned_products(all_products.size());
+        TVector<Product> all_products =
+            get_products_by_code(*all_cells, code);
+        TVector<Product> products;
+        TVector<Product> returned_products;
 
         for (int i = 0; i < _list->Items->Count; i++) {
             if (_list->GetItemChecked(i))
                 products.push_back(all_products[i]);
+            else returned_products.push_back(all_products[i]);
         }
 
         int number = code % 1000;
@@ -274,6 +307,12 @@ namespace CppCLRWinFormsProject {
         _strdate_s(today);
         Date date(today);
         give_products((*all_cells)[number - 1], products, 123, date);
+        return_products((*all_cells)[number - 1], returned_products);
+        for (int i = 0; i < returned_products.size(); i++) {
+            delete_row(
+        "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Products.csv",
+            all_products[i].get_code());
+        }
         _list->Items->Clear();
     }
 };

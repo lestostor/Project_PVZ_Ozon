@@ -26,7 +26,7 @@ class Cell {
     void add_new_product(const Product&);
     void delete_product(const Product&);
 
-    friend TVector<Product> get_products_by_code(const TVector<Cell>&,
+    friend TVector<Product>& get_products_by_code(const TVector<Cell>&,
         int64_t);
     friend void give_products(Cell&, TVector<Product>&, const int, const Date);
     friend void return_products(Cell&, TVector<Product>&);

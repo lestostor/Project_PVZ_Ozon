@@ -167,7 +167,6 @@ namespace CppCLRWinFormsProject {
                 throw std::runtime_error("File isn't open");
 
             std::string line;
-            std::getline(file, line);
             int i = 0, j = 0;
             TVector<TVector<std::string>> table;
             while (std::getline(file, line)) {
@@ -181,6 +180,7 @@ namespace CppCLRWinFormsProject {
                 table.push_back(row);
                 i++;
             }
+            file.close();
 
             return table;
         }
