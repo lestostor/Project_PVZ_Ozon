@@ -10,7 +10,7 @@ class Date {
  public:
      Date();
      Date(const int, const int, const int);
-     explicit Date(const std::string&);
+     Date(const std::string, const std::string);
      Date(const Date&);
 
      bool operator == (const Date&);
@@ -27,4 +27,6 @@ class Date {
      int get_year() const;
 
      bool if_leap_year(const int year);
+ private:
+    Date parse(const std::string, const std::string);
 };

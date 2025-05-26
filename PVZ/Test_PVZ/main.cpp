@@ -253,7 +253,7 @@ bool test4_try_date_constructors() {
         actual_result4 = false;
     }
     try {
-        Date date5("20.02.2025");
+        Date date5("20.02.2025", "DD.MM.YYYY");
         actual_result5 = true;
     }
     catch (const std::exception& ex) {

@@ -19,25 +19,7 @@ Date::Date(const int day, const int month, const int year) {
     _year = year;
 }
 
-Date::Date(const std::string& date) {
-    std::string day = "", month = "", year = "";
-    if (date[0] == '0') {
-        day += date[1];
-    } else {
-        day += date[0];
-        day += date[1];
-    }
-    if (date[3] == '0') {
-        month += date[4];
-    } else {
-        month += date[3];
-        month += date[4];
-    }
-    for (int i = 6; date[i] != '\0'; i++)
-        year += date[i];
-    _day = std::atoi(day.c_str());
-    _month = std::atoi(month.c_str());
-    _year = std::atoi(year.c_str());
+Date::Date(const std::string date_str, const std::string format) :Date(parse(date_str,format)) {
 }
 
 Date::Date(const Date& other_date) {
@@ -101,4 +83,28 @@ int Date::get_month() const {
 
 int Date::get_year() const {
     return _year;
+}
+
+Date Date::parse(const std::string date_str, const std::string format) {
+    std::string day = "", month = "", year = "";
+    for (int i = 0; date_str[i] != '\0'; i++) {
+        if (format[i] == 'D')
+            day += date_str[i];
+        else if (format[i] == 'M')
+            month += date_str[i];
+        else if (format[i] == 'Y')
+            year += date_str[i];
+        else if (date_str[i] == format[i])
+            continue;
+    }
+
+    if (day[0] == '0')
+        day = day[1];
+    if (month[0] == '0')
+        month = month[1];
+    if (year.size() != 4)
+        year = "20" + year;
+
+    return Date(std::atoi(day.c_str()), std::atoi(month.c_str()),
+        std::atoi(year.c_str()));
 }

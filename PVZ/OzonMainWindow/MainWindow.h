@@ -193,7 +193,7 @@ namespace CppCLRWinFormsProject {
                    bool prepay = std::atoi(products[i][3].c_str());
                    int limit = std::atoi(products[i][4].c_str());
                    bool returnability = std::atoi(products[i][5].c_str());
-                   Date date(products[i][6]);
+                   Date date(products[i][6], "DD.MM.YYYY");
                    Product product(code, price, prepay, limit,
                        returnability, date);
 
@@ -303,16 +303,16 @@ namespace CppCLRWinFormsProject {
         }
 
         int number = code % 1000;
-        char today[9];
+        char today[10];
         _strdate_s(today);
-        Date date(today);
-        give_products((*all_cells)[number - 1], products, 123, date);
-        return_products((*all_cells)[number - 1], returned_products);
-        for (int i = 0; i < returned_products.size(); i++) {
+        Date date(today, "MM/DD/YY");
+        for (int i = 0; i < all_products.size(); i++) {
             delete_row(
         "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Products.csv",
-            all_products[i].get_code());
+                all_products[i].get_code());
         }
+        give_products((*all_cells)[number - 1], products, 123, date);
+        return_products((*all_cells)[number - 1], returned_products);
         _list->Items->Clear();
     }
 };
