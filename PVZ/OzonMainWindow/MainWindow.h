@@ -7,6 +7,7 @@
 #include "Date.h"
 #include "Product.h"
 #include "Cell.h"
+#include "../OzonReturnWindow/ReturnWindow.h"
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -29,6 +30,15 @@ namespace CppCLRWinFormsProject {
         String^ mail;
     private: System::Windows::Forms::Button^ _give_out_btn;
     private: System::Windows::Forms::VScrollBar^ vScrollBar1;
+    private: System::Windows::Forms::GroupBox^ groupBox2;
+    private: System::Windows::Forms::Label^ give_label;
+
+    private: System::Windows::Forms::Label^ label5;
+    private: System::Windows::Forms::Label^ return_label;
+
+
+
+
 
     public:
 
@@ -49,7 +59,7 @@ namespace CppCLRWinFormsProject {
             }
             delete all_cells;
         }
-    private: System::Windows::Forms::GroupBox^ groupBox1;
+
     private: System::Windows::Forms::TextBox^ _code;
     private: System::Windows::Forms::Label^ label1;
     private: System::Windows::Forms::CheckedListBox^ _list;
@@ -66,89 +76,137 @@ namespace CppCLRWinFormsProject {
         /// the contents of this method with the code editor.
         /// </summary>
         void InitializeComponent(void) {
-            this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
             this->_code = (gcnew System::Windows::Forms::TextBox());
             this->label1 = (gcnew System::Windows::Forms::Label());
             this->_list = (gcnew System::Windows::Forms::CheckedListBox());
             this->_give_out_btn = (gcnew System::Windows::Forms::Button());
             this->vScrollBar1 = (gcnew System::Windows::Forms::VScrollBar());
+            this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+            this->give_label = (gcnew System::Windows::Forms::Label());
+            this->label5 = (gcnew System::Windows::Forms::Label());
+            this->return_label = (gcnew System::Windows::Forms::Label());
+            this->groupBox2->SuspendLayout();
             this->SuspendLayout();
-
-            this->groupBox1->BackColor = System::Drawing::Color::Blue;
-            this->groupBox1->Location = System::Drawing::Point(0, -13);
-            this->groupBox1->Name = L"groupBox1";
-            this->groupBox1->Size = System::Drawing::Size(263, 630);
-            this->groupBox1->TabIndex = 0;
-            this->groupBox1->TabStop = false;
-
-            this->_code->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular,
-                System::Drawing::GraphicsUnit::Point,
+            // 
+            // _code
+            // 
+            this->_code->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->_code->Location = System::Drawing::Point(357, 9);
+            this->_code->Location = System::Drawing::Point(378, 10);
             this->_code->Name = L"_code";
             this->_code->Size = System::Drawing::Size(424, 42);
             this->_code->TabIndex = 1;
-            this->_code->KeyDown += gcnew System::Windows::Forms::
-                KeyEventHandler(this, &MainWindow::code_KeyDown);
-
+            this->_code->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainWindow::code_KeyDown);
+            // 
+            // label1
+            // 
             this->label1->AutoSize = true;
-            this->label1->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 20.25F, System::Drawing::
-                FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+            this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->label1->Location = System::Drawing::Point(269, 9);
+            this->label1->Location = System::Drawing::Point(290, 10);
             this->label1->Name = L"label1";
             this->label1->Size = System::Drawing::Size(82, 35);
             this->label1->TabIndex = 2;
             this->label1->Text = L"Code";
-
-            this->_list->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 15.75F, System::Drawing::FontStyle::Bold,
-                System::Drawing::GraphicsUnit::Point,
+            // 
+            // _list
+            // 
+            this->_list->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_list->FormattingEnabled = true;
-            this->_list->Location = System::Drawing::Point(275, 89);
+            this->_list->Location = System::Drawing::Point(291, 87);
             this->_list->Name = L"_list";
-            this->_list->Size = System::Drawing::Size(927, 439);
+            this->_list->Size = System::Drawing::Size(910, 439);
             this->_list->TabIndex = 3;
-
+            // 
+            // _give_out_btn
+            // 
             this->_give_out_btn->BackColor = System::Drawing::Color::Blue;
-            this->_give_out_btn->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold,
-                System::Drawing::GraphicsUnit::Point,
+            this->_give_out_btn->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_give_out_btn->ForeColor = System::Drawing::Color::White;
-            this->_give_out_btn->Location = System::Drawing::Point(630, 537);
+            this->_give_out_btn->Location = System::Drawing::Point(629, 535);
             this->_give_out_btn->Name = L"_give_out_btn";
             this->_give_out_btn->Size = System::Drawing::Size(173, 47);
             this->_give_out_btn->TabIndex = 4;
             this->_give_out_btn->Text = L"Give out";
             this->_give_out_btn->UseVisualStyleBackColor = false;
-            this->_give_out_btn->Click += gcnew System::EventHandler
-            (this, &MainWindow::_give_out_btn_Click);
-
-            this->vScrollBar1->Location = System::Drawing::Point(1167, 89);
+            this->_give_out_btn->Click += gcnew System::EventHandler(this, &MainWindow::_give_out_btn_Click);
+            // 
+            // vScrollBar1
+            // 
+            this->vScrollBar1->Location = System::Drawing::Point(1166, 87);
             this->vScrollBar1->Name = L"vScrollBar1";
             this->vScrollBar1->Size = System::Drawing::Size(35, 439);
             this->vScrollBar1->TabIndex = 5;
-
+            // 
+            // groupBox2
+            // 
+            this->groupBox2->BackColor = System::Drawing::Color::Blue;
+            this->groupBox2->Controls->Add(this->give_label);
+            this->groupBox2->Controls->Add(this->label5);
+            this->groupBox2->Controls->Add(this->return_label);
+            this->groupBox2->Location = System::Drawing::Point(0, -13);
+            this->groupBox2->Name = L"groupBox2";
+            this->groupBox2->Size = System::Drawing::Size(286, 630);
+            this->groupBox2->TabIndex = 8;
+            this->groupBox2->TabStop = false;
+            // 
+            // give_label
+            // 
+            this->give_label->AutoSize = true;
+            this->give_label->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(204)));
+            this->give_label->ForeColor = System::Drawing::Color::White;
+            this->give_label->Location = System::Drawing::Point(6, 152);
+            this->give_label->Name = L"give_label";
+            this->give_label->Size = System::Drawing::Size(279, 39);
+            this->give_label->TabIndex = 8;
+            this->give_label->Text = L"Give out products";
+            // 
+            // label5
+            // 
+            this->label5->AutoSize = true;
+            this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(204)));
+            this->label5->ForeColor = System::Drawing::Color::White;
+            this->label5->Location = System::Drawing::Point(12, 25);
+            this->label5->Name = L"label5";
+            this->label5->Size = System::Drawing::Size(114, 39);
+            this->label5->TabIndex = 7;
+            this->label5->Text = L"Profile";
+            // 
+            // return_label
+            // 
+            this->return_label->AutoSize = true;
+            this->return_label->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(204)));
+            this->return_label->ForeColor = System::Drawing::Color::White;
+            this->return_label->Location = System::Drawing::Point(12, 217);
+            this->return_label->Name = L"return_label";
+            this->return_label->Size = System::Drawing::Size(254, 39);
+            this->return_label->TabIndex = 6;
+            this->return_label->Text = L"Return products";
+            this->return_label->Click += gcnew System::EventHandler(this, &MainWindow::return_label_Click);
+            // 
+            // MainWindow
+            // 
             this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->BackColor = System::Drawing::SystemColors::Control;
             this->ClientSize = System::Drawing::Size(1214, 617);
+            this->Controls->Add(this->groupBox2);
             this->Controls->Add(this->vScrollBar1);
             this->Controls->Add(this->_give_out_btn);
             this->Controls->Add(this->_list);
             this->Controls->Add(this->label1);
             this->Controls->Add(this->_code);
-            this->Controls->Add(this->groupBox1);
             this->Name = L"MainWindow";
-            this->StartPosition = System::Windows::Forms::
-                FormStartPosition::CenterScreen;
+            this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"Ozon";
-            this->FormClosed += gcnew System::Windows::Forms::
-            FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
+            this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
+            this->groupBox2->ResumeLayout(false);
+            this->groupBox2->PerformLayout();
             this->ResumeLayout(false);
             this->PerformLayout();
 
@@ -315,5 +373,12 @@ namespace CppCLRWinFormsProject {
         return_products((*all_cells)[number - 1], returned_products);
         _list->Items->Clear();
     }
+
+private: System::Void return_label_Click(System::Object^ sender, System::EventArgs^ e) {
+    ReturnWindow^ window = gcnew ReturnWindow();
+    window->Owner = this;
+    this->Hide();
+    window->ShowDialog(this);
+}
 };
 }  // namespace CppCLRWinFormsProject
