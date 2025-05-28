@@ -169,6 +169,8 @@ namespace CppCLRWinFormsProject {
             std::string line;
             int i = 0, j = 0;
             TVector<TVector<std::string>> table;
+
+            std::getline(file, line);
             while (std::getline(file, line)) {
                 TVector<std::string> row;
                 std::string cell;
@@ -215,8 +217,6 @@ namespace CppCLRWinFormsProject {
 
 private: System::Void login_btn_Click(System::Object^ sender,
     System::EventArgs^ e) {
-
-
     std::string mail = marshal_as<std::string>(_mail->Text);
     std::string password = marshal_as<std::string>(_password->Text);
     if (mail == "" || password == "") {

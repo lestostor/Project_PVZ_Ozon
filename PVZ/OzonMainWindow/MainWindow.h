@@ -8,9 +8,12 @@
 #include "Product.h"
 #include "Cell.h"
 #include "../OzonReturnWindow/ReturnWindow.h"
+#include <msclr/marshal_cppstd.h>
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <cstdlib>
+#include <ctime>
 
 namespace CppCLRWinFormsProject {
     using namespace System;
@@ -19,12 +22,14 @@ namespace CppCLRWinFormsProject {
     using namespace System::Windows::Forms;
     using namespace System::Data;
     using namespace System::Drawing;
+    using namespace msclr::interop;
 
     /// <summary>
     /// Summary for Form1
     /// </summary>
     public ref class MainWindow : public System::Windows::Forms::Form {
         TVector<Cell>* all_cells;
+        TVector<Product>* given_products;
     public:
         String^ worker;
         String^ mail;
@@ -41,6 +46,7 @@ namespace CppCLRWinFormsProject {
         MainWindow(void) {
             InitializeComponent();
             all_cells = new TVector<Cell>(100);
+            srand(time(0));
         }
 
     protected:
@@ -237,7 +243,7 @@ namespace CppCLRWinFormsProject {
 
            void add_products(TVector<Cell>& cells,
                TVector<TVector<std::string>> products) {
-               for (int i = 0; i < products.size(); i++) {
+               for (int i = 1; i < products.size(); i++) {
                    int cell_num = std::atoi(products[i][0].c_str());
                    int code = std::atoi(products[i][1].c_str());
                    int price = std::atoi(products[i][2].c_str());
@@ -321,8 +327,8 @@ namespace CppCLRWinFormsProject {
 
             void delete_row(std::string file_name, int code) {
                 TVector<TVector<std::string>> table = read(file_name);
+                std::ofstream products(file_name);
 
-                std::ofstream file(file_name);
                 for (int i = 0; i < table.size(); i++) {
                     if (find(table[i], std::to_string(code)) != -1)  // found
                         continue;
@@ -333,14 +339,63 @@ namespace CppCLRWinFormsProject {
                         else row += table[i][j] + ";";
                     }
 
-                    file << row;
+                    products << row;
                 }
+                products.close();
+            }
+
+            std::string convert_product(Product product) {
+                std::string product_str = "";
+                product_str += std::to_string(product.get_code()) + ';';
+                product_str += std::to_string(product.get_price()) + ';';
+                product_str += std::to_string(product.get_prepay()) + ';';
+                product_str += std::to_string(product.get_age_limit()) + ';';
+                product_str += std::to_string(product.get_returnability()) + ';';
+                product_str += product.get_date().convert_to_string();
+
+                return product_str;
+            }
+
+            void write_in_table(std::string file_name,
+                std::string row) {
+                std::ofstream file;
+                file.open(file_name, std::ios::app);
+                if (!file.is_open())
+                    throw std::invalid_argument("File isn't opened");
+                file << row;
                 file.close();
+            }
+
+            void give_out(TVector<Product> all_products, int number,
+                TVector<Product> products, TVector<Product> returned_products,
+                int rand_code, Date date) {
+                for (int i = 0; i < all_products.size(); i++) {
+                    delete_row(
+                        "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Products.csv",
+                        all_products[i].get_code());
+                }
+                give_products((*all_cells)[number - 1], products, rand_code, date);
+
+                // write given products
+                std::string products_str = "";
+                for (int i = 0; i < products.size(); i++)
+                    products_str += convert_product(products[i]) + '\n';
+                try {
+                    write_in_table(
+                        "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Given_products.csv",
+                        products_str);
+                } catch (const std::exception& ex) {
+                    String^ error = gcnew String(ex.what());
+                    MessageBox::Show(error, "Error");
+                    return;
+                }
+                return_products((*all_cells)[number - 1], returned_products);
             }
 
     private: System::Void _give_out_btn_Click(System::Object^ sender,
         System::EventArgs^ e) {
         if (_list->Items->Count == 0) return;
+
         int64_t code = System::Convert::ToInt64(_code->Text);
         TVector<Product> all_products =
             get_products_by_code(*all_cells, code);
@@ -350,20 +405,17 @@ namespace CppCLRWinFormsProject {
         for (int i = 0; i < _list->Items->Count; i++) {
             if (_list->GetItemChecked(i))
                 products.push_back(all_products[i]);
-            else returned_products.push_back(all_products[i]);
+            else
+                returned_products.push_back(all_products[i]);
         }
 
         int number = code % 1000;
         char today[10];
         _strdate_s(today);
         Date date(today, "MM/DD/YY");
-        for (int i = 0; i < all_products.size(); i++) {
-            delete_row(
-        "C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Products.csv",
-                all_products[i].get_code());
-        }
-        give_products((*all_cells)[number - 1], products, 123, date);
-        return_products((*all_cells)[number - 1], returned_products);
+        int rand_code = 100 + rand() % 999;
+
+        give_out(all_products, number, products, returned_products, rand_code, date);
         _list->Items->Clear();
     }
 

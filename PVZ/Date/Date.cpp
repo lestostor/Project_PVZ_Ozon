@@ -85,6 +85,22 @@ int Date::get_year() const {
     return _year;
 }
 
+std::string Date::convert_to_string() const {
+    std::string date_str = "";
+    if (_day < 10)
+        date_str += "0" + std::to_string(_day) + '.';
+    else
+        date_str += std::to_string(_day) + '.';
+
+    if (_month < 10)
+        date_str += "0" + std::to_string(_month) + '.';
+    else
+        date_str += std::to_string(_month) + '.';
+
+    date_str += std::to_string(_year);
+    return date_str;
+}
+
 Date Date::parse(const std::string date_str, const std::string format) {
     std::string day = "", month = "", year = "";
     for (int i = 0; date_str[i] != '\0'; i++) {

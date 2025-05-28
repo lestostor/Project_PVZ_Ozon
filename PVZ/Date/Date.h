@@ -26,6 +26,8 @@ class Date {
      int get_month() const;
      int get_year() const;
 
+     std::string convert_to_string() const;
+
      bool if_leap_year(const int year);
  private:
     Date parse(const std::string, const std::string);
