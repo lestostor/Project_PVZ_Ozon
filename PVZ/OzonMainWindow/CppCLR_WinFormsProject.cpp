@@ -1,3 +1,4 @@
+//  Copyright 2025 Shcherbakova Olesya
 #include "pch.h"
 
 using namespace System;

@@ -23,8 +23,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OzonLoginWindow", "OzonLogi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OzonMainWindow", "OzonMainWindow\OzonMainWindow.vcxproj", "{65CABEB8-2427-4070-85F4-5DB53A2A3500}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OzonReturnWindow", "OzonReturnWindow\OzonReturnWindow.vcxproj", "{1B978562-696C-458A-9EFC-C66A560BB382}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -113,14 +111,6 @@ Global
 		{65CABEB8-2427-4070-85F4-5DB53A2A3500}.Release|x64.Build.0 = Release|x64
 		{65CABEB8-2427-4070-85F4-5DB53A2A3500}.Release|x86.ActiveCfg = Release|Win32
 		{65CABEB8-2427-4070-85F4-5DB53A2A3500}.Release|x86.Build.0 = Release|Win32
-		{1B978562-696C-458A-9EFC-C66A560BB382}.Debug|x64.ActiveCfg = Debug|x64
-		{1B978562-696C-458A-9EFC-C66A560BB382}.Debug|x64.Build.0 = Debug|x64
-		{1B978562-696C-458A-9EFC-C66A560BB382}.Debug|x86.ActiveCfg = Debug|Win32
-		{1B978562-696C-458A-9EFC-C66A560BB382}.Debug|x86.Build.0 = Debug|Win32
-		{1B978562-696C-458A-9EFC-C66A560BB382}.Release|x64.ActiveCfg = Release|x64
-		{1B978562-696C-458A-9EFC-C66A560BB382}.Release|x64.Build.0 = Release|x64
-		{1B978562-696C-458A-9EFC-C66A560BB382}.Release|x86.ActiveCfg = Release|Win32
-		{1B978562-696C-458A-9EFC-C66A560BB382}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

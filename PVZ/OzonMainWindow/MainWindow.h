@@ -7,8 +7,6 @@
 #include "Date.h"
 #include "Product.h"
 #include "Cell.h"
-#include "../OzonReturnWindow/ReturnWindow.h"
-#include <msclr/marshal_cppstd.h>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -33,7 +31,9 @@ namespace CppCLRWinFormsProject {
     public:
         String^ worker;
         String^ mail;
-    private: System::Windows::Forms::Button^ _give_out_btn;
+    private: System::Windows::Forms::Button^ _give_return_btn;
+    public:
+
     private: System::Windows::Forms::VScrollBar^ vScrollBar1;
     private: System::Windows::Forms::GroupBox^ groupBox2;
     private: System::Windows::Forms::Label^ give_label;
@@ -79,7 +79,7 @@ namespace CppCLRWinFormsProject {
             this->_code = (gcnew System::Windows::Forms::TextBox());
             this->label1 = (gcnew System::Windows::Forms::Label());
             this->_list = (gcnew System::Windows::Forms::CheckedListBox());
-            this->_give_out_btn = (gcnew System::Windows::Forms::Button());
+            this->_give_return_btn = (gcnew System::Windows::Forms::Button());
             this->vScrollBar1 = (gcnew System::Windows::Forms::VScrollBar());
             this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
             this->give_label = (gcnew System::Windows::Forms::Label());
@@ -88,8 +88,8 @@ namespace CppCLRWinFormsProject {
             this->groupBox2->SuspendLayout();
             this->SuspendLayout();
 
-            this->_code->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
+            this->_code->Font = (gcnew System::Drawing::Font(
+                L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
                 Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_code->Location = System::Drawing::Point(378, 10);
@@ -100,8 +100,8 @@ namespace CppCLRWinFormsProject {
                 KeyEventHandler(this, &MainWindow::code_KeyDown);
 
             this->label1->AutoSize = true;
-            this->label1->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
+            this->label1->Font = (gcnew System::Drawing::Font(
+                L"Microsoft YaHei UI", 20.25F, System::Drawing::FontStyle::
                 Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->label1->Location = System::Drawing::Point(290, 10);
@@ -110,9 +110,9 @@ namespace CppCLRWinFormsProject {
             this->label1->TabIndex = 2;
             this->label1->Text = L"Code";
 
-            this->_list->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 15.75F, System::Drawing::FontStyle::Bold,
-                System::Drawing::GraphicsUnit::Point,
+            this->_list->Font = (gcnew System::Drawing::Font(
+                L"Microsoft YaHei UI", 15.75F, System::Drawing::FontStyle::
+                Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->_list->FormattingEnabled = true;
             this->_list->Location = System::Drawing::Point(291, 87);
@@ -120,20 +120,20 @@ namespace CppCLRWinFormsProject {
             this->_list->Size = System::Drawing::Size(910, 439);
             this->_list->TabIndex = 3;
 
-            this->_give_out_btn->BackColor = System::Drawing::Color::Blue;
-            this->_give_out_btn->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold,
-                System::Drawing::GraphicsUnit::Point,
+            this->_give_return_btn->BackColor = System::Drawing::Color::Blue;
+            this->_give_return_btn->Font = (gcnew System::Drawing::Font(
+                L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::
+                Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
-            this->_give_out_btn->ForeColor = System::Drawing::Color::White;
-            this->_give_out_btn->Location = System::Drawing::Point(629, 535);
-            this->_give_out_btn->Name = L"_give_out_btn";
-            this->_give_out_btn->Size = System::Drawing::Size(173, 47);
-            this->_give_out_btn->TabIndex = 4;
-            this->_give_out_btn->Text = L"Give out";
-            this->_give_out_btn->UseVisualStyleBackColor = false;
-            this->_give_out_btn->Click += gcnew System::EventHandler
-            (this, &MainWindow::_give_out_btn_Click);
+            this->_give_return_btn->ForeColor = System::Drawing::Color::White;
+            this->_give_return_btn->Location = System::Drawing::Point(629, 535);
+            this->_give_return_btn->Name = L"_give_return_btn";
+            this->_give_return_btn->Size = System::Drawing::Size(173, 47);
+            this->_give_return_btn->TabIndex = 4;
+            this->_give_return_btn->Text = L"Give out";
+            this->_give_return_btn->UseVisualStyleBackColor = false;
+            this->_give_return_btn->Click += gcnew System::EventHandler(
+                this, &MainWindow::_give_return_btn_Click);
 
             this->vScrollBar1->Location = System::Drawing::Point(1166, 87);
             this->vScrollBar1->Name = L"vScrollBar1";
@@ -151,9 +151,9 @@ namespace CppCLRWinFormsProject {
             this->groupBox2->TabStop = false;
 
             this->give_label->AutoSize = true;
-            this->give_label->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold,
-                System::Drawing::GraphicsUnit::Point,
+            this->give_label->Font = (gcnew System::Drawing::Font(
+                L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::
+                Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->give_label->ForeColor = System::Drawing::Color::White;
             this->give_label->Location = System::Drawing::Point(6, 152);
@@ -161,11 +161,13 @@ namespace CppCLRWinFormsProject {
             this->give_label->Size = System::Drawing::Size(279, 39);
             this->give_label->TabIndex = 8;
             this->give_label->Text = L"Give out products";
+            this->give_label->Click += gcnew System::EventHandler(
+                this, &MainWindow::give_label_Click);
 
             this->label5->AutoSize = true;
-            this->label5->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold,
-                System::Drawing::GraphicsUnit::Point,
+            this->label5->Font = (gcnew System::Drawing::Font(
+                L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::
+                Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->label5->ForeColor = System::Drawing::Color::White;
             this->label5->Location = System::Drawing::Point(12, 25);
@@ -175,9 +177,9 @@ namespace CppCLRWinFormsProject {
             this->label5->Text = L"Profile";
 
             this->return_label->AutoSize = true;
-            this->return_label->Font = (gcnew System::Drawing::Font
-            (L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::Bold,
-                System::Drawing::GraphicsUnit::Point,
+            this->return_label->Font = (gcnew System::Drawing::Font(
+                L"Microsoft YaHei UI", 21.75F, System::Drawing::FontStyle::
+                Bold, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(204)));
             this->return_label->ForeColor = System::Drawing::Color::White;
             this->return_label->Location = System::Drawing::Point(12, 217);
@@ -185,8 +187,8 @@ namespace CppCLRWinFormsProject {
             this->return_label->Size = System::Drawing::Size(254, 39);
             this->return_label->TabIndex = 6;
             this->return_label->Text = L"Return products";
-            this->return_label->Click += gcnew System::EventHandler
-            (this, &MainWindow::return_label_Click);
+            this->return_label->Click += gcnew System::EventHandler(
+                this, &MainWindow::return_label_Click);
 
             this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -194,13 +196,13 @@ namespace CppCLRWinFormsProject {
             this->ClientSize = System::Drawing::Size(1214, 617);
             this->Controls->Add(this->groupBox2);
             this->Controls->Add(this->vScrollBar1);
-            this->Controls->Add(this->_give_out_btn);
+            this->Controls->Add(this->_give_return_btn);
             this->Controls->Add(this->_list);
             this->Controls->Add(this->label1);
             this->Controls->Add(this->_code);
             this->Name = L"MainWindow";
-            this->StartPosition = System::Windows::Forms::FormStartPosition::
-                CenterScreen;
+            this->StartPosition = System::Windows::Forms::
+                FormStartPosition::CenterScreen;
             this->Text = L"Ozon";
             this->FormClosed += gcnew System::Windows::Forms::
             FormClosedEventHandler(this, &MainWindow::MainWindow_FormClosed);
@@ -301,26 +303,83 @@ namespace CppCLRWinFormsProject {
                return new_product;
            }
 
+           String^ add_product_to_list( TVector<std::string> product_str) {
+               std::string new_product = "";
+               new_product += "Code: " + product_str[0] + "   ";
+
+               new_product += "Price: " +
+                   product_str[1] + "   ";
+
+               if (product_str[2] == "1")
+                   new_product += "Prepay: yes   ";
+               else
+                   new_product += "Prepay: no   ";
+
+               if (product_str[3] != "0")
+                   new_product += "Age limit: " +
+                   product_str[3] + "   ";
+               else
+                   new_product += "Age limit: no   ";
+
+               if (product_str[4] == "1")
+                   new_product += "Returnability: yes";
+               else
+                   new_product += "Returnability: no";
+
+               return gcnew String(new_product.c_str());
+           }
+
+           TVector<TVector<std::string>> get_returned_products(
+               TVector<TVector<std::string>> given_products, int code) {
+               TVector<TVector<std::string>> products;
+
+               for (int i = 1; i < given_products.size(); i++) {
+                   if (find(given_products[i], std::to_string(code)) != -1)
+                       products.push_back(given_products[i]);
+               }
+               return products;
+           }
+
     private: System::Void code_KeyDown(System::Object^ sender,
         System::Windows::Forms::KeyEventArgs^ e) {
         if (_code->Text == "") return;
         if (e->KeyCode == Keys::Enter) {
-            *all_cells = read_cells();
             int64_t code = System::Convert::ToInt64(_code->Text);
-            try {
-                TVector<Product> products = 
-                    get_products_by_code(*all_cells, code);
-                _list->Items->Clear();
+
+            if (_give_return_btn->Text == "Give out") {
+                *all_cells = read_cells();
+                try {
+                    TVector<Product> products =
+                        get_products_by_code(*all_cells, code);
+                    _list->Items->Clear();
+
+                    for (int i = 0; i < products.size(); i++) {
+                        String^ characteristics = 
+                            add_product_to_list(products[i]);
+                        _list->Items->Add(characteristics);
+                    }
+                }
+                catch (std::exception& ex) {
+                    String^ error = gcnew String(ex.what());
+                    MessageBox::Show(error, "Error");
+                    return;
+                }
+            }
+            else {
+                TVector<TVector<std::string>> given_products = read(
+"C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Given_products.csv");
+                int code_return = code % 1000;
+                TVector<TVector<std::string>> products = get_returned_products(
+                    given_products, code_return);
+                if (products.size() == 0) {
+                    MessageBox::Show("Prodcuts isn't found", "Error");
+                    return;
+                }
 
                 for (int i = 0; i < products.size(); i++) {
                     String^ characteristics = add_product_to_list(products[i]);
                     _list->Items->Add(characteristics);
                 }
-            }
-            catch (std::exception& ex) {
-                String^ error = gcnew String(ex.what());
-                MessageBox::Show(error, "Error");
-                return;
             }
         }
     }
@@ -392,39 +451,51 @@ namespace CppCLRWinFormsProject {
                 return_products((*all_cells)[number - 1], returned_products);
             }
 
-    private: System::Void _give_out_btn_Click(System::Object^ sender,
+    private: System::Void _give_return_btn_Click(System::Object^ sender,
         System::EventArgs^ e) {
         if (_list->Items->Count == 0) return;
 
         int64_t code = System::Convert::ToInt64(_code->Text);
-        TVector<Product> all_products =
-            get_products_by_code(*all_cells, code);
-        TVector<Product> products;
-        TVector<Product> returned_products;
+        if (_give_return_btn->Text == "Give out") {
+            TVector<Product> all_products =
+                get_products_by_code(*all_cells, code);
+            TVector<Product> products;
+            TVector<Product> returned_products;
 
-        for (int i = 0; i < _list->Items->Count; i++) {
-            if (_list->GetItemChecked(i))
-                products.push_back(all_products[i]);
-            else
-                returned_products.push_back(all_products[i]);
+            for (int i = 0; i < _list->Items->Count; i++) {
+                if (_list->GetItemChecked(i))
+                    products.push_back(all_products[i]);
+                else
+                    returned_products.push_back(all_products[i]);
+            }
+
+            int number = code % 1000;
+            char today[10];
+            _strdate_s(today);
+            Date date(today, "MM/DD/YY");
+            int rand_code = 100 + rand() % 999;
+
+            give_out(all_products, number, products,
+                returned_products,rand_code, date);
         }
-
-        int number = code % 1000;
-        char today[10];
-        _strdate_s(today);
-        Date date(today, "MM/DD/YY");
-        int rand_code = 100 + rand() % 999;
-
-        give_out(all_products, number, products, returned_products, rand_code, date);
+        else {
+            int code_return = code % 1000;
+            TVector<TVector<std::string>> given_products = read(
+"C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Given_products.csv");
+            TVector<TVector<std::string>> products = get_returned_products(
+                given_products, code_return);
+            for (int i = 0; i < products.size(); i++)
+                delete_row("C:/Users/user/Project_PVZ_Ozon/Project_PVZ_Ozon/source/Given_products.csv", code_return);
+        }
         _list->Items->Clear();
     }
 
 private: System::Void return_label_Click(System::Object^ sender,
     System::EventArgs^ e) {
-    ReturnWindow^ window = gcnew ReturnWindow();
-    window->Owner = this;
-    this->Hide();
-    window->ShowDialog(this);
+    _give_return_btn->Text = "Return";
+}
+private: System::Void give_label_Click(System::Object^ sender, System::EventArgs^ e) {
+    _give_return_btn->Text = "Give out";
 }
 };
 }  // namespace CppCLRWinFormsProject
